@@ -1,0 +1,16 @@
+@import '../../styles/_variables';
+
+.cell{
+  min-width: 90px;
+  max-height: 90px;
+  background: $color-6;
+  border-radius: 3%;
+  border: solid 3px $color-7;
+
+}
+
+@media (max-width: 768px){
+  .cell{
+
+  }
+}

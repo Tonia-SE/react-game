@@ -1,0 +1,17 @@
+@import '../../styles/_variables';
+
+.my-navbar{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between !important;
+}
+.btn-primary{
+  background: none !important;
+  border: none;
+}
+.btn-primary:hover,
+.btn-primary:focus{
+  outline: none !important;
+  box-shadow: none !important;
+}

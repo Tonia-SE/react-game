@@ -1,0 +1,30 @@
+@import '../../styles/_variables';
+
+.score-wrapper{
+  max-width: 100%;
+  position: relative;
+  top: -2vh;
+}
+.score-title{
+  font-weight: bold;
+  font-size: 25px;
+  color: $color-4;
+}
+.wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.score-main{
+  font-weight: bold;
+  font-size: 20px;
+  color: $color-4;
+}
+.score-add{
+  color: $color-4;
+}
+// .score{
+//   border: solid 2px rgb(73, 73, 65);
+//   border-radius: 7%;
+//   padding: 3px 15px 3px 15px;
+// }

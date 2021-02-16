@@ -1,0 +1,63 @@
+//@import '../components/Album/Album.scss';
+@import '_variables';
+@import '../components/Footer/Footer.scss';
+@import '../components/Navbar/Navbar.scss';
+@import '../components/Score/Score.scss';
+@import '../components/Field/Field.scss';
+@import '../components/Cell/Cell.scss';
+
+body{
+  box-sizing: border-box;
+  @include center();
+  margin: 0 auto;
+  width: 100vw;
+  height: 100vh;
+}
+p{
+  margin-bottom: 0 !important
+}
+.app{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 60vw;
+  height: 80vh;
+  min-width: 341px;
+  min-height: 650px;
+  background-color: $background-color-5;
+}
+.my-btn{
+  border: none;
+  background: none;
+  margin: 0 5% 3% 5%;
+}
+.my-btn:hover,
+.my-btn:focus,
+.my-btn:active{
+  border: none;
+  background: none;
+  margin: 0 5% 3% 5%;
+  outline: none !important;
+  box-shadow: none !important;
+}
+.my-img:hover,
+.my-img:focus{
+  opacity: 1;
+}
+.my-img{
+  height: 5vh;
+  opacity: 0.6;
+}
+// @media (max-width: 768px){
+//   .app{
+//     width: 100vw;
+//     height: 100vh;
+//   }
+// }
+// @media (max-height: 900px){
+//   .app{
+//     width: 100vw;
+//     height: 100vh;
+//   }
+// }

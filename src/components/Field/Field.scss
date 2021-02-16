@@ -1,0 +1,22 @@
+@import '../../styles/_variables';
+
+.field-wrapper{
+  @include center();
+}
+
+.field{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  height: 375px;
+  width: 375px;
+  background-color: $color-3;
+  padding: 4px 3px 3px 3px;
+}
+
+@media (max-width: 768px){
+  .field{
+    height: 280px;
+    width: 280px;
+  }
+}
