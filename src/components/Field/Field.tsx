@@ -1,5 +1,6 @@
 import React from 'react';
 import { Cell } from '../Cell/Cell';
+import { SideMenu } from '../SideMenu/SideMenu';
 
 export const Field: React.FC = () => {
   return (
@@ -22,6 +23,7 @@ export const Field: React.FC = () => {
         <Cell />
         <Cell />
       </div>
+      <SideMenu />
     </div>
   );
 };

@@ -1,14 +1,6 @@
 // @import '../../_variables';
 @import '../../styles/_variables';
 
-.list-unstyled a{
-  text-decoration: none !important;
-  color: rgba(44, 138, 138, 1) !important;
-}
-.list-unstyled a:hover{
-  text-decoration: none !important;
-  color: rgb(255, 255, 255) !important;
-}
 .footer-copyright{
   display: flex;
   justify-content: space-between;
@@ -45,6 +37,14 @@
   width: 100%;
   @include center();
   justify-content: space-between;
+}
+.footer-link{
+  color: $color-6;
+}
+.footer-link:hover,
+.footer-link:focus,
+.footer-link:active{
+  color: $color-1 !important;
 }
 
 @media (max-width: 768px){

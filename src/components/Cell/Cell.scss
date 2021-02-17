@@ -1,16 +1,14 @@
 @import '../../styles/_variables';
 
 .cell{
-  min-width: 90px;
-  max-height: 90px;
+  min-width: 24.5%;
+  max-height: 24.5%;
   background: $color-6;
   border-radius: 3%;
   border: solid 3px $color-7;
-
-}
-
-@media (max-width: 768px){
-  .cell{
-
-  }
+  @include center();
+  justify-content: center;
+  color: $color-5;
+  font-size: 2.5rem;
+  font-weight: 500;
 }

@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Dropdown, DropdownButton, Nav } from 'react-bootstrap';
 import { Navbar } from 'react-bootstrap';
 
-export const NavBar: React.FC = () => {
+type NavBarProps = {
+  handleShowLoginForm: () => void
+  handleShowSignUp: () => void
+}
+
+export const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
   return (
     <Navbar bg="dark" variant="dark">
       <div className="my-navbar">
@@ -10,12 +15,10 @@ export const NavBar: React.FC = () => {
           2048
         </Navbar.Brand>
         <Nav>
-          <div>
-            <DropdownButton className="navbar-btn" menuAlign={{ lg: 'right' }} title="Auth" id="dropdown-menu-align-responsive-1">
-              <Dropdown.Item eventKey="1">LOGIN</Dropdown.Item>
-              <Dropdown.Item eventKey="2">SIGN UP</Dropdown.Item>
-            </DropdownButton>
-          </div>
+          <DropdownButton className="navbar-btn" menuAlign='right' title={<img className="auth-img" src="./assets/images/auth.ico" alt="authorization" />} id="dropdown-menu-align-responsive-1">
+            <Dropdown.Item className="my-dropdown" eventKey="1" id="555" onClick={() => props.handleShowLoginForm()}>LOGIN</Dropdown.Item>
+            <Dropdown.Item eventKey="2" id="666" onClick={() => props.handleShowSignUp()}>SIGN UP</Dropdown.Item>
+          </DropdownButton>
         </Nav>
       </div>
     </Navbar>

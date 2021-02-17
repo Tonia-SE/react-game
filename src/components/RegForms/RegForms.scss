@@ -1,0 +1,33 @@
+@import '../../styles/_variables';
+
+.modal-header {
+  border-bottom: 0 none;
+  padding-bottom: 0;
+}
+.modal-body{
+  padding-top: 0;
+}
+.pull-right{
+  margin-left: 70%;
+  background-color: $color-6;
+  border-color: $color-6;
+}
+.pull-right:hover{
+  background-color: $color-10;
+  border-color: $color-10;
+}
+.modal{
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
+}
+.modal-backdrop{
+  max-height: 730px !important;
+  max-width: 730px !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
