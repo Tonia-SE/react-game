@@ -1,18 +1,49 @@
 @import '../../styles/_variables';
 
+.game-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 6%
+}
 .field-wrapper{
   @include center();
-  justify-content: space-between;
+  justify-content: center;
+  align-items: flex-start;
 }
-
 .field{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  height: 500px;
-  width: 500px;
+  height: 400px;
+  width: 400px;
   background-color: $color-3;
   padding: 4px 3px 3px 3px;
   margin-left: 15%;
 }
-
+.start-game{
+  @include center();
+  justify-content: center;
+}
+// .start-game-btn{
+//   background-color: $color-5;
+//   color: $color-1;
+//   font-weight: bold;
+//   padding: 10px 15px
+// }
+.start-game-btn{
+  background-color: none;
+  color: $color-2;
+  font-weight: bold;
+  padding: 10px 15px;
+  transition: all 0.5s;
+}
+.start-game-btn:hover,
+.start-game-btn:focus{
+  background-color: $color-5;
+  color: $color-1 !important;
+  //transition-delay: 0;
+  transition: all 1.5s;
+  // font-weight: bold;
+  // padding: 10px 15px
+}

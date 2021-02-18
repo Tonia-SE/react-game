@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { ApplicationState } from '../../store/rootReducer';
 
 interface SignUpFormProps  {
   show: boolean
@@ -8,23 +10,26 @@ interface SignUpFormProps  {
 
 export const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) => {
 
+  const isFullScreen = useSelector((state: ApplicationState) => state.game.isFullScreen);
+  const modalBackdropClassName = !isFullScreen ? "my-backdrop" : "";
+
   return (
-    <Modal show ={props.show} onHide={props.onHide}>
+    <Modal backdropClassName={modalBackdropClassName} show ={props.show} onHide={props.onHide}>
       <Modal.Header closeButton>
       </Modal.Header>
       <Modal.Body>
         <Form>
           <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" /> 
+            <Form.Label>NICK NAME</Form.Label>
+            <Form.Control type="email" placeholder="nick name" /> 
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
+            <Form.Label>PASSWORD</Form.Label>
+            <Form.Control type="password" placeholder="password" />
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
-          <Form.Label>Confirm password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
+          <Form.Label>CONFIRM PASSWORD</Form.Label>
+            <Form.Control type="password" placeholder="password" />
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
             </Form.Text>

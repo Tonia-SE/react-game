@@ -1,6 +1,6 @@
 @import '../../styles/_variables';
 
-.modal-header {
+.modal-header{
   border-bottom: 0 none;
   padding-bottom: 0;
 }
@@ -24,10 +24,17 @@
   // left: 50%;
   // transform: translate(-50%, -50%);
 }
-.modal-backdrop{
-  max-height: 730px !important;
-  max-width: 730px !important;
+.my-backdrop{
+  max-height: 700px !important;
+  max-width: 700px !important;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
+// .modal-backdrop{
+//   max-height: 700px !important;
+//   max-width: 700px !important;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+// }

@@ -4,9 +4,14 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { compose, createStore, applyMiddleware } from 'redux';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
-
-import { Main } from './Main';
 import { rootReducer } from './store/rootReducer';
+import { Main } from './Main';
+import { BestResultsPage } from './components/Pages/BestResultsPage/BestResultsPage';
+import { HowToPlayPage } from './components/Pages/HowToPlayPage/HowToPlayPage';
+import { SettingsPage } from './components/Pages/SettingsPage/SettingsPage';
+import { AutoPlayPage } from './components/Pages/AutoPlayPage/AutoPlayPage';
+
+
 
 declare global {
   interface Window {
@@ -24,6 +29,10 @@ const routing = (
       <div className="body">
         <Switch>
           <Route exact path="/" component={Main} />
+          <Route exact path="/best_results" component={BestResultsPage} />
+          <Route exact path="/how_to_play" component={HowToPlayPage} />
+          <Route exact path="/settings" component={SettingsPage} />
+          <Route exact path="/autoplay" component={AutoPlayPage} />
         </Switch>
       </div>
     </Provider>

@@ -1,11 +1,15 @@
 @import '../../styles/variables';
 
 .indicators-wrapper{
-  max-width: 71.5%;
+  width: 430px;
   @include center();
   justify-content: space-between;
-  margin-left: 12%;
+  margin: 0 auto;
   margin-top: 2%;
+  //padding: 0% 6.7% 0 2.1%;
+  height: 10%;
+  padding-right: 3.5%;
+  // padding-left: 2.1%;
 }
 .indicator-wrapper{
   display: flex;
@@ -40,3 +44,4 @@
   width: 30px;
   opacity: 0.6;
 }
+
