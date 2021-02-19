@@ -5,6 +5,8 @@
 // }
 .navbar-expand{
   justify-content: space-between !important;
+  height: 60px;
+  //min-width: 768px;
 }
 // }
 .my-navbar{
@@ -12,7 +14,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between !important;
+  margin: 0 2%;
 }
+.navbar-nav{
+  width: 30%;
+  flex-wrap: wrap;
+  justify-content: flex-end !important;
+  //margin-right: 3%;
+}
+// .max{
+//   margin: 1vh 3vw;
+// }
 .navbar-brand{
   font-weight: 500;
   font-size: 25px;
@@ -28,9 +40,9 @@
 }
 .nav-btn{
   padding: 0 !important;
-  margin: 0 !important;
+  margin: 0 3% 0 0!important;
   height: 40px;
-
+  //margin-right: 3%;
 }
 // .sc-bdfBwQ{
 //   margin-top: 8px;
@@ -44,17 +56,16 @@
 }
 .maximize-img{
   width: 25px !important;
-  margin-left: 10px;
 }
 .active{
-  color: $color-1 !important;
-  background-color: $color-2;
+  color: $font-color-dark !important;
+  background-color: $font-color-light;
 }
 .dropdown-item:hover,
 .dropdown-item:focus,
 .dropdown-item:active{
-  background-color: $color-5;
-  color: $color-1;
+  background-color: $bg-color-light;
+  color: $font-color-dark;
 }
 
 

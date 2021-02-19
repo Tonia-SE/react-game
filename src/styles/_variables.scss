@@ -1,20 +1,29 @@
-$background-color-1:  rgba(44, 138, 138, 1) !important;
-$background-color-2: #73bd49 !important;
-$background-color-3:  #9CEAEF !important;
-$background-color-4: rgb(224, 253, 245);
+$font-color-dark: rgb(33, 37, 41);
+$font-color-light: rgb(255, 255, 255) !important;
+$bg-color-dark: rgb(52, 58, 64) !important;
+$bg-color-light: rgb(250, 248, 239) !important;
+$overlay-light:  rgba(0, 0, 0, 0.05);
+$overlay-medium: rgba(0, 0, 0, 0.08); ;
+$border-dark: #432818;
+$border-light: #ddbea9;
+// $background-color-3:  #9CEAEF !important;
+// $background-color-4: rgb(224, 253, 245);
 $background-color-5: rgb(250, 248, 239) !important;
+$color-6: #343a40 !important;
+$color-7: #343a40 !important;
 
-$color-1: rgb(33, 37, 41);
-$color-2: rgb(255, 255, 255) !important;
-$color-3: #343a40 !important;
-$color-4: #63676b !important;
-$color-5: rgb(250, 248, 239) !important;
-$color-6: #696b6b !important;
-$color-7: #ddd7cf !important;
-$color-8: #97c56c;
-$color-9: #e9adb7;
-$color-10: rgb(52, 58, 64) !important;
-//$primary: red !important;
+$color-2: #2e3338 !important;
+$color-4: #343a40 !important;
+$color-8: #495057 !important;
+$color-16: #6c757d !important;
+$color-32: #979dac !important;
+$color-64: #7d8597 !important;
+$color-128: #c3cecd !important;
+$color-256: #9ca3a8!important;
+$color-512: #f8f9fa !important;
+$color-1024: #e1e7e6 !important;
+$color-2048: #d3d3d3 !important;
+
 
 @mixin id_album(){
     border-radius: 0;
@@ -35,10 +44,10 @@ $color-10: rgb(52, 58, 64) !important;
     display: flex;
     flex-direction: column;
 }
-@mixin card-btn(){
-    max-width: 20vw;
-    height: 40px;
-    color: $color-1;
-    padding-right: 17px;
-    padding-left: 17px;
-}
+// @mixin card-btn(){
+//     max-width: 20vw;
+//     height: 40px;
+//     color: $font-color-dark;
+//     padding-right: 17px;
+//     padding-left: 17px;
+// }

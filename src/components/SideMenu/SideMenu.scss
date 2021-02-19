@@ -5,36 +5,55 @@
   @include center();
   flex-direction: column;
   height: 80%;
-  padding-top: 30px;
+  padding-top: 33px;
+}
+.side-menu-wrapper-max{
+  //width: 40vh;
+  @include center();
+  flex-direction: column;
+  height: 60vh;
+  padding-right: 3vw;
+  //padding-top: 30px;
 }
 .menu-img{
   padding: 22px 0;
   width: 40px;
   opacity: 0.7;
-  transform: rotate(360deg);
-  transition: all 0.5s;
-  transition-timing-function: cubic-bezier(1, 0.8, 0.5, 1);
+  // transform: rotate(360deg);
+  // transition: all 0.5s;
+  //transition-timing-function: cubic-bezier(1, 0.8, 0.5, 1);
   margin-right: 10px;
 }
-.menu-img:hover{
+.menu-img-max{
+  padding: 3vh 0;
+  width: 5vh;
+  opacity: 0.7;
+  // transform: scale(1.3);
+  // transition: all 0.5s;
+  //transition-timing-function: cubic-bezier(1, 0.8, 0.5, 1);
+  margin-left: 5vw;
+}
+.menu-img:hover,
+.menu-img-max:hover{
   transform: rotate(0deg) scale(1.3);
   transition-delay: 0;
   transition: all 0.5s;
   opacity: 1;
 }
-.rise{
-  //transform: scale(1.3);
+.rotate:hover{
+  transform: rotate(360deg) scale(1.3);
   transition: all 0.5s;
-  transition-timing-function: cubic-bezier(1, 0.8, 0.5, 1);
+  //transition-timing-function: cubic-bezier(1, 0.8, 0.5, 1);
 }
-.rise:hover{
-  transform: scale(1.3);
-  transition-delay: 0;
-  transition: all 0.5s;
-}
+// .rise:hover{
+//   transform: scale(1.3);
+//   transition-delay: 0;
+//   transition: all 0.5s;
+// }
 #full_screen{
   width: 36px;
 }
+
 // .tooltip {
 //   position: relative;
 //   display: inline-block;

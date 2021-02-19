@@ -13,8 +13,25 @@ export const SettingsPage: React.FC = () => {
       <NavBar />
       <div className="settings-page-wrapper">
         <div className="lang-colors-controls-wrapper">
-        <Card className="my-card m-3 mt-5" style={{ width: '18rem' }}>
-          <Card.Header>Color themes</Card.Header>
+        <Card className="my-card m-2" style={{ width: '18rem' }}>
+          <Card.Header>Difficulty</Card.Header>
+          <ListGroup variant="flush"> 
+            <ListGroup.Item>
+              4 x 4
+              <input type="radio" id="english" value="english"/>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              5 x 5
+              <input type="radio" id="russian" value="russian"/>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              6 x 6
+              <input type="radio" id="chinese" value="chinese"/>
+            </ListGroup.Item>
+          </ListGroup>
+        </Card>
+        <Card className="my-card m-2" style={{ width: '18rem' }}>
+          <Card.Header>Theme</Card.Header>
           <ListGroup variant="flush">
             <ListGroup.Item>
               Shadow
@@ -30,9 +47,9 @@ export const SettingsPage: React.FC = () => {
             </ListGroup.Item>
           </ListGroup>
         </Card>
-        <Card className="my-card m-3 mt-5" style={{ width: '18rem' }}>
-          <Card.Header>Languages</Card.Header>
-          <ListGroup variant="flush">
+        <Card className="my-card m-2" style={{ width: '18rem' }}>
+          <Card.Header>Language</Card.Header>
+          <ListGroup variant="flush"> 
             <ListGroup.Item>
               English
               <input type="radio" id="english" value="english"/>
@@ -49,12 +66,12 @@ export const SettingsPage: React.FC = () => {
         </Card>
         </div>
         <div className="sound-controls-wrapper">
-          <Card className="my-card text-center m-3">
-            <Card.Body>
+          <Card className="my-card text-center m-2">
+            <Card.Body className="my-card-body">
               <Card.Title>Sounds</Card.Title>
               <Card.Text>
               <Form>
-                <Form.Group controlId="formBasicRange">
+                <Form.Group className="range-group" controlId="formBasicRange">
                   <img className="control-img mr-3" src="./assets/images/sounds_off.ico" alt="sounds off"/>
                     <Form.Control type="range" />
                   <img className="control-img ml-3" src="./assets/images/sounds_max.ico" alt="sounds max"/>
@@ -63,12 +80,12 @@ export const SettingsPage: React.FC = () => {
               </Card.Text>
             </Card.Body>
           </Card>
-          <Card className="my-card text-center m-3">
-            <Card.Body>
+          <Card className="my-card text-center m-2">
+            <Card.Body className="my-card-body">
               <Card.Title>Music</Card.Title>
               <Card.Text>
               <Form>
-                <Form.Group controlId="formBasicRange">
+                <Form.Group className="range-group" controlId="formBasicRange">
                   <img className="control-img mr-3" src="./assets/images/music_off.ico" alt="music off"/>
                     <Form.Control type="range" />
                   <img className="control-img ml-3" src="./assets/images/music_max.ico" alt="music max"/>
@@ -81,5 +98,6 @@ export const SettingsPage: React.FC = () => {
       </div>  
       <Footer />
     </div>
+
   );
 };

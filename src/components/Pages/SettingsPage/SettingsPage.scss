@@ -4,7 +4,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 80%;
+  width: 90%;
+  max-height: 500px;
+  height: 80vh;
+  max-width: 1000px;
   margin: 0 auto;
 }
 .lang-colors-controls-wrapper{
@@ -15,9 +18,9 @@
   
 }
 .my-card{
-  background:rgba(0, 0, 0, 0.05); 
+  background: $overlay-light; 
 }
-.form-group{
+.range-group{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -29,11 +32,16 @@
 }
 .card-header{
   text-align: center;
-  background: rgba(0, 0, 0, 0.08);
+  background: $overlay-medium;
+  padding: 1.5vh 1vh;
 }
 .list-group-item{
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: none !important;
+  padding: 1.5vh 1vh;
+}
+.my-card-body{
+  padding: 1.5vh 1vh;
 }

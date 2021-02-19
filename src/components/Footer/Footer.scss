@@ -11,7 +11,7 @@
   margin-right: 2vw;
 }
 .inline{
-  width: 80vw;
+  width: 75vw;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -44,7 +44,7 @@
 .footer-link:hover,
 .footer-link:focus,
 .footer-link:active{
-  color: $color-1 !important;
+  color: $font-color-dark !important;
 }
 
 @media (max-width: 768px){
@@ -52,7 +52,7 @@
     margin-top: 20px;
   }
   .container-fluid{
-    padding: 20px 20px 0 20px !important;
+    padding: 0px 20px 0 20px !important;
   }
   .font-16{
     font-size: 14px;
