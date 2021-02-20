@@ -12,8 +12,8 @@ import { useEffect } from 'react';
 
 export const Main: React.FC = () => {
   const dispatch = useDispatch();
-  const isFullScreen = useSelector((state: ApplicationState) => state.game.isFullScreen);
   const field = useSelector((state: ApplicationState) => state.game.field);
+  const isFullScreen = useSelector((state: ApplicationState) => state.game.isFullScreen);
   const [showLoginForm, setShowLoginForm] = useState(false);
   const handleCloseLoginForm = () => setShowLoginForm(false);
   const handleShowLoginForm = () => setShowLoginForm(true);
@@ -21,24 +21,21 @@ export const Main: React.FC = () => {
   const handleCloseSignUpForm = () => setShowSignUpForm(false);
   const handleShowSignUpForm = () => setShowSignUpForm(true);
   const appClassName = isFullScreen ? "app-max": "app";
+  let rootDiv: HTMLElement = null
 
-  function handleKeyPress(keyEvent: KeyboardEvent) {
-    keyEvent.preventDefault();
-    console.log(keyEvent.key);
+  useEffect(() => {
+    rootDiv.focus();
+  })
+
+  function handleKeyPress(keyEvent: React.KeyboardEvent) {
     const arrowKeyEvents = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight']
     if (arrowKeyEvents.indexOf(keyEvent.key) !== -1) {
       dispatch(handleMove(field, keyEvent.key))
     }
-  }
-
-  useEffect(() => {
-    window.addEventListener('keydown', handleKeyPress)
-  },[])
-
+  }  
   
-
   return (
-    <div className={appClassName} >
+    <div className={appClassName}  tabIndex={1} onKeyDown={handleKeyPress} ref={(c:HTMLElement) => {rootDiv = c}}>
       <NavBar handleShowLoginForm={handleShowLoginForm} handleShowSignUp={handleShowSignUpForm}/>
       <SignUpForm show={showSignUpForm} onHide={handleCloseSignUpForm}/>
       <LoginForm show={showLoginForm} onHide={handleCloseLoginForm}  />

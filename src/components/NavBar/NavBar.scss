@@ -1,11 +1,13 @@
 @import '../../styles/_variables';
 
-// .navbar{
-//   width: 100%;
-// }
+.navbar{
+  width: 100%;
+  padding: 0 30px
+  //height: 60px;
+}
 .navbar-expand{
-  justify-content: space-between !important;
-  height: 60px;
+  //justify-content: space-between !important;
+  
   //min-width: 768px;
 }
 // }
@@ -17,7 +19,7 @@
   margin: 0 2%;
 }
 .navbar-nav{
-  width: 30%;
+  //width: 30%;
   flex-wrap: wrap;
   justify-content: flex-end !important;
   //margin-right: 3%;
@@ -38,24 +40,14 @@
   outline: none !important;
   box-shadow: none !important;
 }
-.nav-btn{
-  padding: 0 !important;
-  margin: 0 3% 0 0!important;
-  height: 40px;
-  //margin-right: 3%;
+.phone-img{
+  width: 25px;
 }
-// .sc-bdfBwQ{
-//   margin-top: 8px;
-//   margin-left: 10px;
-// }
-// .sc-gsTCUz{
-//   //min-height: 604px;
-// }
 .auth-img{
   width: 30px;
 }
 .maximize-img{
-  width: 25px !important;
+  width: 25px;
 }
 .active{
   color: $font-color-dark !important;
@@ -67,7 +59,48 @@
   background-color: $bg-color-light;
   color: $font-color-dark;
 }
+@media (max-width: 768px){
+  .navbar{
+    width: 100vw !important;
+    height: 10vh !important;
+  }
+  .maximize-btn{
+    display: none;
+  }
 
+  // .navbar-brand{
+  //   font-size: 5vh;
+  // }
+  // .auth-img{
+  //   width: 5vh;
+  // }
+  // .maximize-img{
+  //   width: 5vh;
+  // }
+}
+@media (max-height: 768px){
+  .navbar{
+    width: 100vw !important;
+    height: 10vh !important;
+  }
+  .maximize-btn{
+    display: none;
+  }
+  // .container-fluid {
+  //   height: 7vh;
+  // }
+  // .navbar-brand{
+  //   font-size: 5vh;
+  // }
+  // .auth-img{
+  //   width: 5vh;
+  //   max-width: 30px !important;
+  // }
+  // .maximize-img{
+  //   width: 5vh;
+  //   max-width: 25px !important;
+  // }
+}
 
 
 

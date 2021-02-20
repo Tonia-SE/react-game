@@ -1,4 +1,5 @@
-import { FINISH_GAME, START_GAME, TOGGLE_FULLSCREEN, UPDATE_GAME_FIELD, RESTART_GAME } from './actionTypes';
+import { generateInitalField } from './actions';
+import { FINISH_GAME, START_GAME, TOGGLE_FULLSCREEN, UPDATE_GAME_FIELD, RESTART_GAME, SET_GAME_SIZE } from './actionTypes';
 
 export interface IGameState {
   isGameStarted: boolean;
@@ -11,25 +12,8 @@ interface IGameAction {
   type: string;
   isGameStarted?: boolean;
   isFullScreen?: boolean;
+  gameSize?: number;
   field?: Array<Array<number>>
-}
-
-function generateInitalField(size = 4) {
-  const res = Array(size).fill([]).map(() => Array(size).fill(0));
-  const cellPos1 = [ Math.floor(Math.random()*size), Math.floor(Math.random()*size) ]
-  let cellPos2 = [ Math.floor(Math.random()*size), Math.floor(Math.random()*size) ]
-
-  while (true) {
-    if (JSON.stringify(cellPos1) === JSON.stringify(cellPos2)) {
-      cellPos2 = [ Math.floor(Math.random()*size), Math.floor(Math.random()*size) ]
-    } else {
-      break
-    }
-  }
-
-  res[cellPos1[0]][cellPos1[1]] = 2
-  res[cellPos2[0]][cellPos2[1]] = 2
-  return res;
 }
 
 let initialState: IGameState = {
@@ -50,13 +34,14 @@ export type DispatchGame = (args: IGameAction) => IGameAction;
 export const gameReducer = (state: IGameState = initialState, action: IGameAction) => {
   switch (action.type) {
     case START_GAME:
-      const newGameField = [...generateInitalField()]
-      localStorage.setItem('gameState', JSON.stringify({ ...state, field: [... newGameField], isGameStarted: action.isGameStarted }));
-      return { ...state, field: [...newGameField], isGameStarted: action.isGameStarted };
+      const newGameField = [...generateInitalField(state.gameSize)]
+      localStorage.setItem('gameState', JSON.stringify({ ...state, field: newGameField, isGameStarted: true }));
+      return { ...state, field: [...newGameField], isGameStarted: true };
     case RESTART_GAME:
       const toggleGameStarted = !state.isGameStarted;
-      localStorage.setItem('gameState', JSON.stringify({ ...state, isGameStarted: toggleGameStarted}));
-      return { ...state, isGameStarted: toggleGameStarted};
+      const newGameField2 = [...generateInitalField(state.gameSize)]
+      localStorage.setItem('gameState', JSON.stringify({ ...state, field: newGameField2, isGameStarted: toggleGameStarted}));
+      return { ...state, field: newGameField2, isGameStarted: toggleGameStarted};
     case FINISH_GAME:
       return { ...state, isGameStarted: action.isGameStarted };
     case TOGGLE_FULLSCREEN:
@@ -64,8 +49,11 @@ export const gameReducer = (state: IGameState = initialState, action: IGameActio
       localStorage.setItem('gameState', JSON.stringify({ ...state, isFullScreen: toggleFullScreen}));
       return { ...state, isFullScreen: toggleFullScreen};
     case UPDATE_GAME_FIELD:
-      localStorage.setItem('gameState', JSON.stringify({ ...state, field: [...action.field] }));
-      return { ...state, field: [...action.field]};
+      localStorage.setItem('gameState', JSON.stringify({ ...state, field: action.field }));
+      return { ...state, field: action.field};
+    case SET_GAME_SIZE:
+      localStorage.setItem('gameState', JSON.stringify({ ...state, gameSize: action.gameSize }));
+      return { ...state, gameSize: action.gameSize};      
     default:
       return state;
   }

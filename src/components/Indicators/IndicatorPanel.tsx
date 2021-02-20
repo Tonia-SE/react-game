@@ -12,17 +12,17 @@ export const IndicatorPanel: React.FC = () => {
   return (
     <div className={indicatorPanelClassName + none}>
 
-        <div className="indicator-wrapper mr-3">
+        <div className="indicator-wrapper">
           {/* <img className="sideMenu-img score-img mb-2" src="./assets/images/score.ico" alt="score"/> */}
           {/* <h5 className="indicator-title">Score</h5> */}
           <div className="score-wrapper">
-            <p className={`${fontSize} mr-1`}>100</p>
-            <p className="indicator-add mt-1"> + 5</p>
+            <p className={fontSize}>100</p>
+            <p className="indicator-add"> + 5</p>
           </div>
         </div>
 
 
-        <div className="indicator-wrapper mr-3">
+        <div className="indicator-wrapper">
           {/* <img className="sideMenu-img timer-img mb-1" src="./assets/images/timer.ico" alt="timer"/> */}
           <p className={fontSize}>00:00</p>
         </div>

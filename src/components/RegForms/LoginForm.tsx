@@ -21,20 +21,21 @@ export const LoginForm: React.FC<LoginFormProps> = (props: LoginFormProps) => {
       <Modal.Body>
         <Form>
           <Form.Group controlId="formBasicEmail">
-            <Form.Label>NICK NAME</Form.Label>
+            <Form.Label>
+              <p>NICK NAME</p>
+            </Form.Label>
             <Form.Control type="email" placeholder="nick name" />
           </Form.Group>
-
           <Form.Group controlId="formBasicPassword">
-            <Form.Label>PASSWORD</Form.Label>
-            <Form.Control type="password" placeholder="password" />
+            <Form.Label><p>PASSWORD</p></Form.Label>
+            <Form.Control type="password" placeholder="password" autoComplete="on"/>
             <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
+              <p>We'll never share your email with anyone else.</p>
             </Form.Text>
           </Form.Group>
 
           <Button variant="danger" type="submit" className="pull-right" onClick={props.onHide}>
-            Submit
+            <p>Submit</p>
           </Button>
         </Form>
       </Modal.Body>
