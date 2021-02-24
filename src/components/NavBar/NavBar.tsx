@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, ButtonGroup, Dropdown, DropdownButton, Nav, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { Navbar } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { TOGGLE_BTNS_VISABILITY, TOGGLE_FULLSCREEN } from '../../store/actionTypes';
@@ -14,16 +15,19 @@ type NavBarProps = {
 export const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
   const dispatch = useDispatch();
   const isFullScreen = useSelector((state: ApplicationState) => state.game.isFullScreen);
+  const theme = useSelector((state: ApplicationState) => state.settings.theme);
   //const RightSideMenuClassName = 'none';
 
   const miximizeImgSrc = isFullScreen? "./assets/images/off_screen.ico" : "./assets/images/full_screen.ico" 
   if(window.location.pathname === '/') {
     return (
-      <Navbar bg="dark" variant="dark" style={{width: '100%'}} >
+      <Navbar className={`bg-dark-${theme}`} bg="dark" variant="dark">
         {/* <div className="my-navbar"> */}
-          <Navbar.Brand href="/">
-            2048
-          </Navbar.Brand>
+          <LinkContainer to="/" activeClassName="brand">
+            <Navbar.Brand >
+              2048
+            </Navbar.Brand>
+          </LinkContainer>
           <Nav className="ml-auto">
           <ButtonGroup>
           <OverlayTrigger placement="bottom" overlay={<Tooltip className="display-none" id="tooltip-disabled">push to play<br/>without keyboard</Tooltip>}>
@@ -47,13 +51,15 @@ export const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
     );
   } else {
     return (
-      <Navbar bg="dark" variant="dark">
+      <Navbar className={`bg-dark-${theme}`} bg="dark" variant="dark" >
         <div className="my-navbar">
-          <Navbar.Brand className="brand" href="/">
-            2048
-          </Navbar.Brand>
+          <LinkContainer to="/" activeClassName="brand">
+            <Navbar.Brand className="brand">
+              2048
+            </Navbar.Brand>
+          </LinkContainer>  
           <Nav>
-            <Button className="nav-btn" onClick={() => dispatch({type: TOGGLE_FULLSCREEN})}>
+            <Button className="nav-btn maximize-btn" onClick={() => dispatch({type: TOGGLE_FULLSCREEN})}>
               <img className="maximize-img" id="full_screen" src={miximizeImgSrc} alt="full screen"/>
             </Button>
           </Nav>

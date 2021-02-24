@@ -14,8 +14,8 @@ interface ISettingsAction {
 }
 
 let initialState: ISettingsState = {
-  theme: 'Shadow',
-  language: 'English',
+  theme: 'shadow',
+  language: 'english',
   isGameBtnsVisible: false,
 };
 

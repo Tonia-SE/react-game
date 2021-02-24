@@ -16,8 +16,6 @@
 }
 .my-card{
   background: $overlay-light; 
-  //align-items: center;
-  //justify-content: center;
 }
 .range-group{
   display: flex;
@@ -29,6 +27,18 @@
 .control-img{
   width: 30px;
   opacity: 0.7;
+  transform: scale(1);
+  transition: transform 0.3s ease-in-out;
+}
+.off-img{
+  opacity: 0.4;
+  transform: scale(0.8);
+  transition: transform 0.3s ease-in-out;
+}
+.on-img{
+  opacity: 1;
+  transform: scale(1.2);
+  transition: transform 0.3s ease-in-out;
 }
 .card-header{
   text-align: center;
@@ -54,39 +64,74 @@
   @include center();
   padding: 5px;
 }
+input[type='range'] {
+  overflow: hidden;
+  height: 10px;
+  -webkit-appearance: none;
+  background-color: $font-color-light;
+  border-radius: 5px;
+  border: solid 1px $color-8;
+}
+input[type='range']:active,
+input[type='range']:focus {
+  border: solid 1px $color-8 !important;
+}
+input[type='range']::-webkit-slider-thumb {
+  width: 15px;
+  -webkit-appearance: none;
+  height: 15px;
+  cursor: pointer;
+  background: $color-6;
+  border: solid 2px $color-6;
+  box-shadow: -80vw 0 0 80vw $color-8;
+}
+input[type='radio'] {
+  -webkit-appearance: none;
+  background-color: $font-color-light;
+  border-radius: 50%;
+  border: solid 1px $color-8;
+}
+input[type="radio"]:after {
+  border-radius: 25px;
+  border: solid 1px $color-8;
+  content: '';
+  display: block;
+  height: 70%;
+  width: 70%;
+  position: relative;
+  left: 15%;
+  right: 15%;
+  top: 15%;
+  bottom: 15%;
+}
+input[type="radio"]:checked:after {
+  background-color: $color-9;
+}
+
 @media (max-height: 768px){
   .card-title{
     display: none;
   }
-}
-
-@media(max-width: 768px) and (min-height: 601px){
-  .card-title{
-    display: none;
+  .my-card{
+    font-size: 14px;
   }
 }
 
-@media (max-width: 768px) and (max-height: 600px){
+@media(max-width: 768px) and (min-height: 651px){
   .card-title{
     display: none;
   }
+  .my-card{
+    font-size: 14px;
+  }
 }
-// @media(max-width: 768px) and (orientation: portrait){
-//   .settings-page-wrapper{
-//     justify-content: center;
-//     //height: 85vh;
-//   }
-//   .my-card{
-//     font-size: 14px;
-//   }
-//   .my-card-body{
-//     height: 8vh;
-//   }
-//   .card-title{
-//     display: none;
-//   }
-// }
-// @media (max-width: 768px) and (orientation: landscape){
-  
-  
-// }
+
+@media (max-width: 768px) and (max-height: 650px){
+  .card-title{
+    display: none;
+  }
+  .my-card{
+    font-size: 14px;
+  }
+}
+

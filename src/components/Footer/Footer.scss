@@ -3,8 +3,6 @@
 .container-fluid {
   @include center();
   height: 7%;
-  //justify-content: space-between;
-  //justify-content: center;
 }
 .footer-copyright{
   
@@ -12,38 +10,29 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1vh;
 }
 #logo{
   width: 50px;
 }
 .inline{
-  //width: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
-
 .font-16{
   font-size: 16px;
 }
-// .wrapper-btn{
-//   width: 100%;
-//   @include center();
-//   justify-content: space-between;
-// }
 .footer-link{
   color: $color-6;
-}
-.footer-link:hover,
-.footer-link:focus,
-.footer-link:active{
-  color: $font-color-dark !important;
 }
 
 @media (max-height: 768px){
   .container-fluid {
     height: 7vh;
+  }
+  .font-16{
+    font-size: 14px;
   }
 }
 

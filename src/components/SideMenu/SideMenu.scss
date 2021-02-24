@@ -1,25 +1,17 @@
 @import '../../styles/_variables';
 
 .side-menu-wrapper{
-  //width: 18%;
   @include center();
   flex-direction: column;
   max-height: 400px;
-  //min-height: 350px;
-  //margin-right: 10px;
 }
 .side-menu-wrapper-max{
-  //width: 18%;
   max-width: 150px;
   @include center();
   flex-direction: column;
   height: 50vw;
   max-height: 500px;
-  //min-height: 350px;
   max-height: 500px;
-  
-  //flex-wrap: wrap;
-  //margin-left: 5vw;
 }
 .menu-img{
   padding: 15px 0;
@@ -31,7 +23,6 @@
   width: 5vw;
   opacity: 0.7;
   max-width: 45px;
-  //min-width: 40px;
 }
 .menu-img:hover,
 .menu-img-max:hover{
@@ -49,7 +40,6 @@
   padding: 15px 0;
   width: 50px;
   opacity: 0.7;
-  //transition: all 3s;
 }
 .arrow-max{
   cursor: pointer;
@@ -57,25 +47,19 @@
   width: 7vw;
   opacity: 0.7;
   max-width: 65px;
-  //min-width: 50px;
-  //transition: all 3s;
 }
 .arrow:hover,
 .arrow-max:hover{
   transition: all 0.5s;
   opacity: 1;
 }
-// #full_screen{
-//   width: 36px;
-// }
+
 @media (max-height: 768px){
   .side-menu-wrapper,
   .side-menu-wrapper-max{
     flex-direction: column;
     align-items: center !important;
     justify-content: center;
-    //width: 50px !important;
-    //height: 300px;
   }
   .arrow,
   .arrow-max{
@@ -92,7 +76,8 @@
     margin: 2vh;
   }
 }
-@media(max-width: 768px) and (min-height: 601px){
+
+@media(max-width: 768px) and (orientation: portrait){
   .display-none{
     display: none !important;
   }
@@ -108,7 +93,6 @@
   .arrow,
   .arrow-max{
     margin-top: 3vh;
-    //padding: 15px 0;
     width: 9vw;
     opacity: 0.7;;
   }
@@ -124,14 +108,12 @@
   }
 }
 
-@media (max-width: 768px) and (max-height: 600px){
+@media (max-width: 768px) and (orientation: landscape){
   .side-menu-wrapper,
   .side-menu-wrapper-max{
     flex-direction: column;
     align-items: center !important;
     justify-content: center;
-    // width: 50px !important;
-    // height: 300px;
   }
   .arrow,
   .arrow-max{
@@ -140,33 +122,10 @@
     opacity: 0.7;
     margin: 2vh;
   }
-
   .menu-img,
   .menu-img-max{
     padding: 0;
     width: 5.5vh;
     margin: 2.5vh;
-  }
-}
-
-//@media (max-width: 768px) and (max-height: 768px) {
-@media (max-width: 768px) and (max-height: 600px){
-  .game-wrapper{
-    height: 83vh;
-    //padding-top: 5vh;
-  }
-  .field,
-  .field-max{
-  //  max-height: 50vh;
-   // max-width: 50vh;
-    min-height: 50vh;
-    min-width: 50vh;
-    max-height: 50vh;
-    max-width: 50vh;
-    // min-height: 300px;
-    // min-width: 300px;
-  }
-  .field-wrapper{
-    max-height: 50vh !important;
   }
 }

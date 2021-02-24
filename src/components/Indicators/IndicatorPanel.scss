@@ -5,43 +5,21 @@
   @include center();
   justify-content: space-between;
   margin: 0 auto;
-  //padding-bottom: 20px;
-  padding: 20px 0;
-  //margin-top: 2%;
-  //padding: 0% 6.7% 0 2.1%;
-  //height: 10%;
-  // padding-right: 3.5%;
-  
-  // padding-left: 2.1%;
+  padding: 0 10px 3vh 0;
 }
 .indicators-wrapper-max{
   width: 50vw;
-  //min-width: 300px;
-  max-width: 530px;
+  max-width: 500px;
   @include center();
   justify-content: space-between;
   margin: 0 auto;
-  padding: 20px 0;
-  //margin-top: 3vh;
-  //margin-right: 3vh;
-  //padding: 0% 6.7% 0 2.1%;
-  //height: 10%;
-  // padding-right: 2vh;
-  // padding-left: 0%;
+  padding: 0 1vw 0 0; 
 }
 .indicator-wrapper{
   display: flex;
   flex-direction: column;
   align-items: center;
-  //margin: 0 5% 3% 5%;
-  color: $color-4;
-  padding-top: 2vh;
-  //text-align: end;
 }
-// .indicator-title{
-//   font-weight: bold;
-//   font-size: 25px;
-// }
 .indicator{
   display: flex;
   align-items: center;
@@ -60,14 +38,7 @@
   align-items: center;
   justify-content: space-between;
 }
-// .sideMenu-img{
-//   width: 35px;
-//   opacity: 0.7;
-// }
-// .score-img{
-//   width: 30px;
-//   opacity: 0.6;
-// }
+
 @media (max-height: 768px){
   .indicators-wrapper,
   .indicators-wrapper-max{
@@ -75,30 +46,37 @@
   }
   .indicator-main,
   .indicator-main-max{
-    font-size: 20px;
+    font-size: 18px;
   } 
 }
 
-@media(max-width: 768px) and (min-height: 601px){
+@media(max-width: 768px) and (orientation: portrait){
   .indicators-wrapper,
   .indicators-wrapper-max{
     width: 50vw;
-  }
-  .indicator-main,
-  .indicator-main-max{
-    //font-weight: bold;
-    font-size: 23px;
+    padding: 0;
+    margin-bottom: 4vh;
   }
 }
 
-@media (max-width: 768px) and (max-height: 600px){
+@media(max-width: 650px) and (orientation: portrait){
+  .indicators-wrapper,
+  .indicators-wrapper-max{
+    margin-bottom: 1vh;
+  }
+}
+
+@media(max-width: 500px) and (orientation: portrait){
+  .indicators-wrapper,
+  .indicators-wrapper-max{
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 768px) and (orientation: landscape){
   .indicators-wrapper,
   .indicators-wrapper-max{
     width: 50vh;
+    
   }
-  .indicator-main,
-  .indicator-main-max{
-    //font-weight: bold;
-    font-size: 23px;
-  }
-}
+} 

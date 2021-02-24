@@ -13,6 +13,7 @@ export const Field: React.FC = () => {
   const isGameStarted = useSelector((state: ApplicationState) => state.game.isGameStarted);
   const isFullScreen = useSelector((state: ApplicationState) => state.game.isFullScreen);
   const field = useSelector((state: ApplicationState) => state.game.field);
+  const theme = useSelector((state: ApplicationState) => state.settings.theme);
   const fieldClassName = isFullScreen ? "field-max": "field";
   const dispatch = useDispatch();
 
@@ -22,7 +23,7 @@ export const Field: React.FC = () => {
         <IndicatorPanel />
         <div className="field-wrapper">
         <LeftSideMenu />
-        <div className={`${fieldClassName} bg-dark`}>
+        <div className={`${fieldClassName} bg-dark-${theme} border-color-${theme}`}>
           <div className="start-game">
             <Button className="start-game-btn" onClick={() => {dispatch({type: START_GAME })}}>
               START GAME
@@ -39,7 +40,7 @@ export const Field: React.FC = () => {
         <IndicatorPanel />
         <div className="field-wrapper">
         <LeftSideMenu />
-        <div className={fieldClassName}>
+        <div className={`${fieldClassName} border-color-${theme}`} >
           {field.map((row: Array<number>) => {
             return row.map((value: number) => {
               return <Cell value={value} key={Math.random()*1000}/>

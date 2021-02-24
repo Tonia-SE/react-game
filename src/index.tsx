@@ -1,10 +1,10 @@
 import React from 'react';
 import thunk from 'redux-thunk';
 import { render } from 'react-dom';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import { compose, createStore, applyMiddleware } from 'redux';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
-import { rootReducer } from './store/rootReducer';
+import { ApplicationState, rootReducer } from './store/rootReducer';
 import { Main } from './Main';
 import { BestResultsPage } from './components/Pages/BestResultsPage/BestResultsPage';
 import { HowToPlayPage } from './components/Pages/HowToPlayPage/HowToPlayPage';
@@ -23,10 +23,17 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(rootReducer, compose(applyMiddleware(thunk), composeEnhancers()));
 
+export const musicPlayer:HTMLAudioElement = new Audio("./assets/sounds/music.mp3")
+
+function handleAutoplay() {  
+  musicPlayer.play();
+  removeEventListener('click', handleAutoplay);
+}
+document.addEventListener('click', handleAutoplay)
+
 const routing = (
   <Router>
     <Provider store={store}>
-      <div className="body">
         <Switch>
           <Route exact path="/" component={Main} />
           <Route exact path="/best_results" component={BestResultsPage} />
@@ -34,7 +41,6 @@ const routing = (
           <Route exact path="/settings" component={SettingsPage} />
           <Route exact path="/autoplay" component={AutoPlayPage} />
         </Switch>
-      </div>
     </Provider>
   </Router>
 );

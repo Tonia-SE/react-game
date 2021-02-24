@@ -28,6 +28,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 @media (max-width: 768px){
   .my-backdrop{
     min-height: 100vh !important;
@@ -37,6 +38,7 @@
     transform: none;
   }
 }
+
 @media (max-height: 768px) and (orientation: landscape){
   .my-backdrop{
     min-height: 100vh !important;
