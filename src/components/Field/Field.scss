@@ -38,17 +38,31 @@
   @include center();
   justify-content: center;
 }
-.start-game-btn{
+.start-game-btn-shadow,
+.start-game-btn-sweet,
+.start-game-btn-deep{
   background-color: none;
-  color: $font-color-light;
   font-weight: bold;
   padding: 10px 15px;
   transition: all 0.5s;
+  color: $font-color-light;
 }
-.start-game-btn:hover,
-.start-game-btn:focus{
-  background-color: $bg-color-light;
+.start-game-btn-shadow:hover,
+.start-game-btn-shadow:focus{
   color: $font-color-dark !important;
+  background-color: $bg-color-light;
+  transition: all 1.5s;
+}
+.start-game-btn-sweet:hover,
+.start-game-btn-sweet:focus{
+  color: $bg-dark-sweet;
+  background-color: $bg-color-light;
+  transition: all 1.5s;
+}
+.start-game-btn-deep:hover,
+.start-game-btn-deep:focus{
+  color: $bg-dark-deep;
+  background-color: $bg-color-light;
   transition: all 1.5s;
 }
 

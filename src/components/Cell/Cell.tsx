@@ -14,7 +14,7 @@ export const Cell: React.FC<CellProps> = (props: CellProps) => {
   //const isVisibleClass = props.value ? '' : "none"
 
   return (
-    <div className={`cell cell-${props.value}-${theme} size-${+gameSize} ${maxClassName}`}>
+    <div className={`cell cell-${props.value}-${theme} size-${+gameSize}${maxClassName}`}>
       {/* <div className={`cell-${props.value}`}> */}
         {props.value}
       {/* </div> */}

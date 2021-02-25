@@ -1,11 +1,13 @@
 import { generateInitalField } from './actions';
-import { FINISH_GAME, START_GAME, TOGGLE_FULLSCREEN, UPDATE_GAME_FIELD, RESTART_GAME, SET_GAME_SIZE } from './actionTypes';
+import { FINISH_GAME, START_GAME, TOGGLE_FULLSCREEN, UPDATE_GAME_FIELD, RESTART_GAME, SET_GAME_SIZE, GAME_FAILED, GAME_WON } from './actionTypes';
 
 export interface IGameState {
   isGameStarted: boolean;
   isFullScreen: boolean;
   field: Array<Array<number>>
   gameSize: number
+  isFail: boolean;
+  isWin: boolean;
 }
 
 interface IGameAction {
@@ -13,6 +15,8 @@ interface IGameAction {
   isGameStarted?: boolean;
   isFullScreen?: boolean;
   gameSize?: number;
+  isFail?: boolean;
+  isWin?: boolean;
   field?: Array<Array<number>>
 }
 
@@ -20,6 +24,8 @@ let initialState: IGameState = {
   isGameStarted: false,
   isFullScreen: false,
   field: generateInitalField(),
+  isFail: false,
+  isWin: false,
   gameSize: 4
 };
 
@@ -38,10 +44,10 @@ export const gameReducer = (state: IGameState = initialState, action: IGameActio
       localStorage.setItem('gameState', JSON.stringify({ ...state, field: newGameField, isGameStarted: true }));
       return { ...state, field: [...newGameField], isGameStarted: true };
     case RESTART_GAME:
-      const toggleGameStarted = !state.isGameStarted;
+      //const toggleGameStarted = !state.isGameStarted;
       const newGameField2 = [...generateInitalField(state.gameSize)]
-      localStorage.setItem('gameState', JSON.stringify({ ...state, field: newGameField2, isGameStarted: toggleGameStarted}));
-      return { ...state, field: newGameField2, isGameStarted: toggleGameStarted};
+      localStorage.setItem('gameState', JSON.stringify({ ...state, field: newGameField2, isGameStarted: false}));
+      return { ...state, field: newGameField2, isGameStarted: false};
     case FINISH_GAME:
       return { ...state, isGameStarted: action.isGameStarted };
     case TOGGLE_FULLSCREEN:
@@ -54,6 +60,12 @@ export const gameReducer = (state: IGameState = initialState, action: IGameActio
     case SET_GAME_SIZE:
       localStorage.setItem('gameState', JSON.stringify({ ...state, gameSize: action.gameSize }));
       return { ...state, gameSize: action.gameSize};      
+    case GAME_FAILED:
+      localStorage.setItem('gameState', JSON.stringify({ ...state, isFail: action.isFail, isGameStarted: action.isGameStarted }));
+      return { ...state, isFail: action.isFail, isGameStarted: action.isGameStarted };
+    case GAME_WON:
+      localStorage.setItem('gameState', JSON.stringify({ ...state, isWin: action.isWin, isGameStarted: action.isGameStarted }));
+      return { ...state, isWin: action.isWin, isGameStarted: action.isGameStarted };
     default:
       return state;
   }

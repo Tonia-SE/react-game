@@ -2,6 +2,7 @@
 @import '_variables';
 @import '../components/Footer/Footer.scss';
 @import '../components/NavBar/NavBar.scss';
+@import '../components/Modal/Modal.scss';
 @import '../components/Indicators/IndicatorPanel.scss';
 @import '../components/Field/Field.scss';
 @import '../components/Cell/Cell.scss';
@@ -108,6 +109,9 @@ div:focus{
 }
 .none{
   opacity: 0 !important;
+  // top: 0%;
+  // left: 50%;
+  transform: translate(-50%, 0%);
 }
 
 @media (max-width: 768px){

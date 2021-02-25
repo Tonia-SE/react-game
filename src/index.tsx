@@ -24,12 +24,18 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, compose(applyMiddleware(thunk), composeEnhancers()));
 
 export const musicPlayer:HTMLAudioElement = new Audio("./assets/sounds/music.mp3")
+export const btnSoundsPlayer:HTMLAudioElement = new Audio("./assets/sounds/btn_sound.mp3")
+
+export const winPlayer:HTMLAudioElement = new Audio("./assets/sounds/win_sound.mp3")
+export const failPlayer:HTMLAudioElement = new Audio("./assets/sounds/fail_sound.mp3")
 
 function handleAutoplay() {  
   musicPlayer.play();
+  //musicPlayer.volume = 0;
   removeEventListener('click', handleAutoplay);
 }
 document.addEventListener('click', handleAutoplay)
+
 
 const routing = (
   <Router>

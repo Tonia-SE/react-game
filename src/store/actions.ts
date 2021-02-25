@@ -1,4 +1,5 @@
-import { RESTART_GAME, UPDATE_GAME_FIELD } from './actionTypes';
+import { failPlayer, winPlayer } from '..';
+import { GAME_FAILED, GAME_WON, RESTART_GAME, UPDATE_GAME_FIELD } from './actionTypes';
 import {DispatchGame} from './gameReducer'
 
 
@@ -15,8 +16,8 @@ export function generateInitalField(size = 4) {
     }
   }
 
-  res[cellPos1[0]][cellPos1[1]] = 2048
-  res[cellPos2[0]][cellPos2[1]] = 2048
+  res[cellPos1[0]][cellPos1[1]] = 1024
+  res[cellPos2[0]][cellPos2[1]] = 1024
   return res;
 }
 
@@ -154,8 +155,19 @@ function checkForNextMove(field: Array<Array<number>>) {
   return isPossible
 }
 
+function checkIsWin (field: Array<Array<number>>) {
+  let res = false;
+  field.forEach((row: Array<number>) => {
+    row.forEach((value: number) => {
+      if (value === 2048) {
+        res = true;
+      }
+    })
+  })
+  return res;
+}
 
-export function handleMove(curentGameField: Array<Array<number>>, move: string) {
+export function handleMove(curentGameField: Array<Array<number>>, move: string, cellSoundsPlayer: HTMLAudioElement) {
   const newGameField = [...curentGameField];
   switch(move) {
     case 'ArrowUp':
@@ -174,14 +186,39 @@ export function handleMove(curentGameField: Array<Array<number>>, move: string) 
       break
   }
 
-  generateNewCell(newGameField)
-  if (checkForNextMove(newGameField)) {
-    return (dispatch: DispatchGame) => {
-      dispatch ({type: UPDATE_GAME_FIELD, field: newGameField})
+  if (checkIsWin(newGameField)) {    
+    return (dispatch: DispatchGame) => {      
+      dispatch ({type: GAME_WON, isWin: true, isGameStarted: false})
+      winPlayer.play();
     };
   } else {
-    return (dispatch: DispatchGame) => {
-      dispatch ({type: RESTART_GAME})
-    };
+    generateNewCell(newGameField)
+    if (checkForNextMove(newGameField)) {
+      return (dispatch: DispatchGame) => {      
+        dispatch ({type: UPDATE_GAME_FIELD, field: newGameField})
+        cellSoundsPlayer.play()
+      };
+    } else {
+      return (dispatch: DispatchGame) => {
+        dispatch ({type: GAME_FAILED, isFail: true, isGameStarted: false})
+        // Звук когда проиграли
+        failPlayer.play();
+      };
+    }
+  }
+
+}
+
+export function closeFailModal() {
+  return (dispatch: DispatchGame) => {
+    dispatch ({type: GAME_FAILED, isFail: false, isGameStarted: false})
+    dispatch ({type: RESTART_GAME})
+  }
+}
+
+export function closeWinModal() {
+  return (dispatch: DispatchGame) => {
+    dispatch ({type: GAME_WON, isWin: false, isGameStarted: false})
+    dispatch ({type: RESTART_GAME})
   }
 }

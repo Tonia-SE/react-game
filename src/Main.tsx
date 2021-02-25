@@ -11,6 +11,8 @@ import { ApplicationState } from './store/rootReducer';
 import { handleMove } from './store/actions';
 import { useEffect } from 'react';
 import { musicPlayer } from './index';
+import { FailModal } from './components/Modal/FailModal';
+import { WinModal } from './components/Modal/WinModal';
 
 export const Main: React.FC = () => {
   const dispatch = useDispatch();
@@ -19,47 +21,40 @@ export const Main: React.FC = () => {
   const theme = useSelector((state: ApplicationState) => state.settings.theme);
   const soundsVolume = useSelector((state: ApplicationState) => state.sounds.soundsVolume);
   const musicVolume = useSelector((state: ApplicationState) => state.sounds.musicVolume);
+  
   const [showLoginForm, setShowLoginForm] = useState(false);
   const handleCloseLoginForm = () => setShowLoginForm(false);
   const handleShowLoginForm = () => setShowLoginForm(true);
   const [showSignUpForm, setShowSignUpForm] = useState(false);
   const handleCloseSignUpForm = () => setShowSignUpForm(false);
   const handleShowSignUpForm = () => setShowSignUpForm(true);
+
   const appClassName = isFullScreen ? "app-max": "app";
   let rootDiv: HTMLElement = null
-  let cellSoundsPlayer:HTMLAudioElement = new Audio("./assets/sounds/cell_sound.mp3")
+  const cellSoundsPlayer:HTMLAudioElement = new Audio("./assets/sounds/cell_sound.mp3");
 
   useEffect(() => {
     rootDiv.focus();
     if (musicVolume === 0) {
-      console.log(musicVolume);
-      console.log(musicPlayer);
       musicPlayer.autoplay = false;
       musicPlayer.loop = false;
       musicPlayer.pause;
       musicPlayer.volume = musicVolume;
     } else {
-      console.log(musicVolume);
-      console.log(musicPlayer);
       musicPlayer.autoplay = true;
       musicPlayer.loop = true;
       musicPlayer.volume = musicVolume;
     }
   })
 
-  useEffect(() => {
-
-  }, [])
-
-  
-
   cellSoundsPlayer.volume = soundsVolume;
+  
 
   function handleKeyPress(keyEvent: React.KeyboardEvent) {
     const arrowKeyEvents = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight']
     if (arrowKeyEvents.indexOf(keyEvent.key) !== -1) {
-      dispatch(handleMove(field, keyEvent.key))      
-      cellSoundsPlayer.play();
+      dispatch(handleMove(field, keyEvent.key, cellSoundsPlayer))      
+      //cellSoundsPlayer.play();
     }
   }  
   
@@ -67,7 +62,9 @@ export const Main: React.FC = () => {
     <div className={`${appClassName} bg-light-${theme} fc-${theme}`}  tabIndex={1} onKeyDown={handleKeyPress} ref={(c:HTMLElement) => {rootDiv = c}}>
       <NavBar handleShowLoginForm={handleShowLoginForm} handleShowSignUp={handleShowSignUpForm}/>
       <SignUpForm show={showSignUpForm} onHide={handleCloseSignUpForm}/>
-      <LoginForm show={showLoginForm} onHide={handleCloseLoginForm}  />
+      <LoginForm show={showLoginForm} onHide={handleCloseLoginForm}/>
+      <FailModal />
+      <WinModal />
       <Field />
       <Footer />
     </div>

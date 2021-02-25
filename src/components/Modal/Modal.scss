@@ -1,0 +1,74 @@
+@import '../../styles/_variables';
+
+// .modal-header{
+//   border-bottom: 0 none;
+//   padding-bottom: 0;
+// }
+// .modal-body{
+//   padding-top: 0;
+// }
+// .pull-right{
+//   margin-left: 70%;
+//   background-color: $color-6;
+//   border-color: $color-6;
+// }
+// .pull-right:hover{
+//   background-color: $bg-color-dark;
+//   border-color: $bg-color-dark;
+// }
+// .modal{
+//   display: flex !important;
+//   align-items: center;
+//   justify-content: center;
+// }
+// .my-backdrop{
+//   max-height: 700px !important;
+//   max-width: 700px !important;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+// }
+// .m-auoto{
+//   margin: 0 auto;
+// }
+.modal-game-title{
+  font-size: 35px;
+}
+.modal-game-text{
+  font-size: 24px;
+}
+
+
+@media (max-width: 768px){
+  .my-backdrop{
+    min-height: 100vh !important;
+    min-width: 100vw !important;
+    top: 0%;
+    left: 0%;
+    transform: none;
+  }
+  .modal-game-title{
+    font-size: 25px !important;
+  }
+  .modal-game-text{
+    font-size: 16px !important;
+    margin: 0 !important;
+  }
+}
+
+@media (max-height: 768px) and (orientation: landscape){
+  .my-backdrop{
+    min-height: 100vh !important;
+    min-width: 100vw !important;
+    top: 0%;
+    left: 0%;
+    transform: none;
+  }
+  .modal-game-title{
+    font-size: 25px !important;
+  }
+  .modal-game-text{
+    font-size: 16px !important;
+    margin: 0 !important;
+  }
+}

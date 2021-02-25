@@ -4,6 +4,7 @@
   @include center();
   flex-direction: column;
   max-height: 400px;
+  transition: transform 1s ease-in-out;
 }
 .side-menu-wrapper-max{
   max-width: 150px;
@@ -12,6 +13,7 @@
   height: 50vw;
   max-height: 500px;
   max-height: 500px;
+  transition: transform 0.3s ease-in-out;
 }
 .menu-img{
   padding: 15px 0;

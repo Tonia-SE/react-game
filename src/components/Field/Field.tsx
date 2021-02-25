@@ -6,16 +6,19 @@ import { LeftSideMenu } from '../SideMenu/LeftSideMenu';
 import { ApplicationState } from '../../store/rootReducer';
 import { Button } from 'react-bootstrap';
 import { START_GAME, UPDATE_GAME_FIELD } from '../../store/actionTypes';
-import { handleMove } from '../../store/actions';
 import { RightSideMenu } from '../SideMenu/RightSideMenu';
+import { btnSoundsPlayer } from '../../index'
 
 export const Field: React.FC = () => {
+  const dispatch = useDispatch();
   const isGameStarted = useSelector((state: ApplicationState) => state.game.isGameStarted);
   const isFullScreen = useSelector((state: ApplicationState) => state.game.isFullScreen);
   const field = useSelector((state: ApplicationState) => state.game.field);
   const theme = useSelector((state: ApplicationState) => state.settings.theme);
+  const soundsVolume = useSelector((state: ApplicationState) => state.sounds.soundsVolume);
   const fieldClassName = isFullScreen ? "field-max": "field";
-  const dispatch = useDispatch();
+  const startBtnClassName = `btn-fc-${theme}`;
+  btnSoundsPlayer.volume = soundsVolume;
 
   if(!isGameStarted) {
     return (
@@ -25,7 +28,10 @@ export const Field: React.FC = () => {
         <LeftSideMenu />
         <div className={`${fieldClassName} bg-dark-${theme} border-color-${theme}`}>
           <div className="start-game">
-            <Button className="start-game-btn" onClick={() => {dispatch({type: START_GAME })}}>
+            <Button className={`start-game-btn-${theme}`} onClick={() => {
+                dispatch({type: START_GAME })
+                btnSoundsPlayer.play();
+              }}>
               START GAME
             </Button>
           </div>

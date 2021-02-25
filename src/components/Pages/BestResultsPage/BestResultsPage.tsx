@@ -4,11 +4,14 @@ import { Footer } from '../../Footer/Footer'
 import { NavBar } from '../../NavBar/NavBar';
 import { ApplicationState } from '../../../store/rootReducer';
 import { useSelector } from 'react-redux';
+import { musicPlayer } from '../../../index';
 
 export const BestResultsPage: React.FC = () => {
   const isFullScreen = useSelector((state: ApplicationState) => state.game.isFullScreen);
   const theme = useSelector((state: ApplicationState) => state.settings.theme);
   const appClassName = isFullScreen ? "app-max": "app";
+  const musicVolume = useSelector((state: ApplicationState) => state.sounds.musicVolume);
+  musicPlayer.volume = musicVolume;
   return (
     <div className={`${appClassName} bg-light-${theme} fc-${theme}`}>
       <NavBar />
