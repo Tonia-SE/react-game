@@ -5,6 +5,8 @@ import { ApplicationState } from '../../store/rootReducer';
 export const IndicatorPanel: React.FC = () => {
   const isGameStarted = useSelector((state: ApplicationState) => state.game.isGameStarted);
   const isFullScreen = useSelector((state: ApplicationState) => state.game.isFullScreen);
+  const score = useSelector((state: ApplicationState) => state.game.score);
+  const currentSum = useSelector((state: ApplicationState) => state.game.currentSum);
   const indicatorPanelClassName = isFullScreen ? "indicators-wrapper-max": "indicators-wrapper";
   const fontSize = isFullScreen ? "indicator-main-max": "indicator-main";
   const none = isGameStarted ? "" : " none"
@@ -16,8 +18,8 @@ export const IndicatorPanel: React.FC = () => {
           {/* <img className="sideMenu-img score-img mb-2" src="./assets/images/score.ico" alt="score"/> */}
           {/* <h5 className="indicator-title">Score</h5> */}
           <div className="score-wrapper">
-            <p className={fontSize}>100</p>
-            <p className="indicator-add"> + 5</p>
+            <p className={fontSize}>{score}</p>
+            {currentSum? <p className="indicator-add"> + {currentSum}</p> : <p></p>}
           </div>
         </div>
 

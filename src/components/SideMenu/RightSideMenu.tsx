@@ -10,7 +10,7 @@ import { btnSoundsPlayer } from '../../index'
 
 export const RightSideMenu: React.FC = () => {
   const dispatch = useDispatch();
-  //const isGameStarted = useSelector((state: ApplicationState) => state.game.isGameStarted);
+  const isGameStarted = useSelector((state: ApplicationState) => state.game.isGameStarted);
   const isFullScreen = useSelector((state: ApplicationState) => state.game.isFullScreen);
   const isBtnsVisible = useSelector((state: ApplicationState) => state.settings.isGameBtnsVisible);
   const field = useSelector((state: ApplicationState) => state.game.field);
@@ -26,16 +26,24 @@ export const RightSideMenu: React.FC = () => {
   return (
   <div className={`${menuWrapperClassName} ${visibleClassName}`}> 
     <img className={`${arrowClassName}`} src={`./assets/images/arrow_left_${theme}.ico`} alt="arrow left" onClick={() => {
+      if(isGameStarted){
         dispatch(handleMove(field, 'ArrowLeft', btnSoundsPlayer))
+      }
       }}/>
     <img className={`${arrowClassName}`} src={`./assets/images/arrow_up_${theme}.ico`} alt="arrow up" onClick={() => {
+      if(isGameStarted){
         dispatch(handleMove(field, 'ArrowUp', btnSoundsPlayer))
+      }
       }}/>
     <img className={`${arrowClassName}`} src={`./assets/images/arrow_down_${theme}.ico`} alt="arrow down" onClick={() => {
+      if(isGameStarted){
         dispatch(handleMove(field, 'ArrowDown', btnSoundsPlayer))
+      }
       }}/>
     <img className={`${arrowClassName}`} src={`./assets/images/arrow_right_${theme}.ico`} alt="arrow right" onClick={() => {
+      if(isGameStarted){
         dispatch(handleMove(field, 'ArrowRight', btnSoundsPlayer))
+      }
       }}/>
   </div>
   );

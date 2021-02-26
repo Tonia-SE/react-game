@@ -28,7 +28,7 @@ export const WinModal: React.FC = () => {
           <Card.Body className="px-0">
             <Card.Title className="text-center modal-game-title">Congratulations! <br/>You are win!</Card.Title>
             <Card.Text className="mx-xl-lg-3 p-0 text-center modal-game-text">
-              Now your name in best result's table.<br/> If you've already logged in. 
+              Please login<br/>to see your name in best results table. 
             </Card.Text>
           </Card.Body>
         </Card>

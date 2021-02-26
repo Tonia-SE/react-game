@@ -181,7 +181,7 @@ export const SettingsPage: React.FC = () => {
           <div className="sound-controls-wrapper">
           <Card className="my-card text-center m-2">
             <Card.Body className="my-card-body">
-              <Card.Title>Music</Card.Title>
+              <Card.Title className="my-card-title">Music</Card.Title>
               <Form>
                 <Form.Group className="range-group">
                   <img className={`control-img mr-3 ml-1 ${musicOnImgClassName}`} src="./assets/images/music_off.ico" alt="music off" onClick={()=> {

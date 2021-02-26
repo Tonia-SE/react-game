@@ -30,7 +30,7 @@ export const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
           </LinkContainer>
           <Nav className="ml-auto">
           <ButtonGroup>
-          <OverlayTrigger placement="bottom" overlay={<Tooltip className="display-none" id="tooltip-disabled">push to play<br/>without keyboard</Tooltip>}>
+          <OverlayTrigger placement="bottom" overlay={<Tooltip id="tooltip-disabled">push to play<br/>without keyboard</Tooltip>}>
             <Button className="nav-btn" onClick={() => {dispatch({type: TOGGLE_BTNS_VISABILITY})}}>
               <img className="phone-img" id="full_screen" src="./assets/images/phone.ico" alt="phone"/>
             </Button>

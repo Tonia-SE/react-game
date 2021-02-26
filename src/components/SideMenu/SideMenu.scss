@@ -56,6 +56,12 @@
   opacity: 1;
 }
 
+// @media screen{
+//   .screen-invisible{
+//     opacity: 0;
+//   }
+// }
+
 @media (max-height: 768px){
   .side-menu-wrapper,
   .side-menu-wrapper-max{

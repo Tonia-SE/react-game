@@ -33,7 +33,7 @@ export const FailModal: React.FC = () => {
           <Card.Body className="pt-0">
             <Card.Title className="text-center modal-game-title">Sorry, you're fail...</Card.Title>
             <Card.Text className="mx-xl-lg-3 p-0 text-center modal-game-text">
-              But if you logged in, maybe you'll find your score in best result's table. 
+              But if you logged in, maybe you'll find your name in best result's table. 
             </Card.Text>
           </Card.Body>
         </Card>
