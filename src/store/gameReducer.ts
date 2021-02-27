@@ -1,5 +1,7 @@
 import { generateInitalField } from './actions';
-import { FINISH_GAME, START_GAME, TOGGLE_FULLSCREEN, UPDATE_GAME_FIELD, RESTART_GAME, SET_GAME_SIZE, GAME_FAILED, GAME_WON, UPDATE_SCORE } from './actionTypes';
+import { FINISH_GAME, START_GAME, TOGGLE_FULLSCREEN,
+        UPDATE_GAME_FIELD, RESTART_GAME, SET_GAME_SIZE,
+        GAME_FAILED, GAME_WON, UPDATE_SCORE, SET_TIMER_STATE, RESET_TIMER } from './actionTypes';
 
 export interface IGameState {
   isGameStarted: boolean;
@@ -10,6 +12,8 @@ export interface IGameState {
   isWin: boolean;
   currentSum: number;
   score: number;
+  isTimerOn: boolean;
+  resetTimer: boolean;
 }
 
 interface IGameAction {
@@ -20,7 +24,9 @@ interface IGameAction {
   isFail?: boolean;
   isWin?: boolean;
   field?: Array<Array<number>>
-  currentSum?: number
+  currentSum?: number;
+  isTimerOn?: boolean;
+  resetTimer?: boolean;
 }
 
 let initialState: IGameState = {
@@ -32,6 +38,8 @@ let initialState: IGameState = {
   gameSize: 4,
   currentSum: 0,
   score: 0,
+  isTimerOn: false,
+  resetTimer: false
 };
 
 const savedGameState = localStorage.getItem('gameState')
@@ -46,13 +54,13 @@ export const gameReducer = (state: IGameState = initialState, action: IGameActio
   switch (action.type) {
     case START_GAME:
       const newGameField = [...generateInitalField(state.gameSize)]
-      localStorage.setItem('gameState', JSON.stringify({ ...state, field: newGameField, isGameStarted: true, currentSum: 0, score: 0 }));
-      return { ...state, field: [...newGameField], isGameStarted: true, currentSum: 0, score: 0 };
+      localStorage.setItem('gameState', JSON.stringify({ ...state, field: newGameField, isGameStarted: true, currentSum: 0, score: 0, isTimerOn: true }));
+      return { ...state, field: [...newGameField], isGameStarted: true, currentSum: 0, score: 0, isTimerOn: true };
     case RESTART_GAME:
       //const toggleGameStarted = !state.isGameStarted;
       const newGameField2 = [...generateInitalField(state.gameSize)]
-      localStorage.setItem('gameState', JSON.stringify({ ...state, field: newGameField2, isGameStarted: false, currentSum: 0, score: 0 }));
-      return { ...state, field: newGameField2, isGameStarted: false, currentSum: 0, score: 0 };
+      localStorage.setItem('gameState', JSON.stringify({ ...state, field: newGameField2, isGameStarted: false, currentSum: 0, score: 0, isTimerOn: false, resetTimer: true }));
+      return { ...state, field: newGameField2, isGameStarted: false, currentSum: 0, score: 0, isTimerOn: false, resetTimer: true };
     case FINISH_GAME:
       return { ...state, isGameStarted: action.isGameStarted };
     case TOGGLE_FULLSCREEN:
@@ -73,9 +81,14 @@ export const gameReducer = (state: IGameState = initialState, action: IGameActio
       return { ...state, isWin: action.isWin, isGameStarted: action.isGameStarted };
     case UPDATE_SCORE:
       const newScore = state.score + action.currentSum
-      //const newCurrentSum = !action.currentSum ? action.currentSum: state.currentSum;
       localStorage.setItem('gameState', JSON.stringify({ ...state, currentSum: action.currentSum, score: newScore }));
       return { ...state, currentSum: action.currentSum, score: newScore };
+    case SET_TIMER_STATE:
+      localStorage.setItem('gameState', JSON.stringify({ ...state, isTimerOn: action.isTimerOn }));
+      return { ...state, isTimerOn: action.isTimerOn };
+    case RESET_TIMER:
+      localStorage.setItem('gameState', JSON.stringify({ ...state, resetTimer: action.resetTimer }));
+      return { ...state, resetTimer: action.resetTimer };
     default:
       return state;
   }

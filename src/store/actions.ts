@@ -1,7 +1,6 @@
 import { failPlayer, winPlayer } from '..';
-import { GAME_FAILED, GAME_WON, RESTART_GAME, UPDATE_GAME_FIELD, UPDATE_SCORE } from './actionTypes';
+import { GAME_FAILED, GAME_WON, RESET_TIMER, RESTART_GAME, SET_TIMER_STATE, UPDATE_GAME_FIELD, UPDATE_SCORE } from './actionTypes';
 import {DispatchGame} from './gameReducer'
-
 
 export function generateInitalField(size = 4) {
   const res = Array(size).fill([]).map(() => Array(size).fill(0));
@@ -39,87 +38,6 @@ function generateNewCell(field: Array<Array<number>>) {
   }
   
 }
-
-// export function moveUp(field: Array<Array<number>>):number {
-//   let currentSum = 0;
-//   for(let j = 0; j < field.length; j++) {   
-//     for(let _ = 0; _ < field.length; _++) {
-//       for(let i = 1; i < field.length; i ++) {
-//         if (field[i-1][j] === 0) {
-//           field[i-1][j] = field[i][j];
-//           field[i][j] = 0;
-//         }
-//         if ((field[i-1][j] !== 0) && field[i-1][j] === field[i][j]) {
-//           field[i-1][j] = field[i][j] + field[i-1][j];
-//           currentSum = currentSum + field[i-1][j];
-//           field[i][j] = 0;
-//         }
-//       }
-//     }
-//   }
-//   return currentSum;
-// }
-
-// export function moveDown(field: Array<Array<number>>):number {
-//   let currentSum = 0;
-//   for(let j = 0; j < field.length; j++) {
-//     for(let _ = 0; _ < field.length; _++) {
-//       for(let i = field.length -2; i >= 0; i --) {
-//         if (field[i+1][j] === 0) {
-//           field[i+1][j] = field[i][j];
-//           field[i][j] = 0;
-//         }
-//         if ((field[i+1][j] !== 0) && field[i+1][j] === field[i][j]) {
-//           field[i+1][j] = field[i][j] + field[i+1][j];
-//           currentSum = currentSum + field[i+1][j];
-//           field[i][j] = 0;
-//         }
-//       }
-//     }
-//   }
-//   return currentSum;
-// }
-
-// export function moveLeft(field: Array<Array<number>>) {
-//   let currentSum = 0;
-//   for(let i = 0; i < field.length; i ++) {
-//     for(let _ = 0; _ < field.length; _++) {
-//       for(let j = 1; j < field.length ; j++) {    
-//         if (field[i][j-1] === 0) {
-//           field[i][j-1] = field[i][j];
-//           field[i][j] = 0;
-//         }
-//         if ((field[i][j-1] !== 0) && field[i][j-1] === field[i][j]) {
-//           field[i][j-1] = field[i][j] + field[i][j-1];
-//           currentSum = currentSum + field[i-1][j];
-//           field[i][j] = 0;
-//         }
-//       }
-//     }  
-//   }
-//   return currentSum;
-// }
-
-// export function moveRight(field: Array<Array<number>>) {
-//   let currentSum = 0;
-//   for(let i = 0; i < field.length; i ++) {
-//     for(let _ = 0; _ < field.length; _++) {
-//       for(let j = field.length - 2; j >=0 ; j--) {
-//         if (field[i][j+1] === 0) {
-//           field[i][j+1] = field[i][j];
-//           field[i][j] = 0;
-//         }
-//         if ((field[i][j+1] !== 0) && field[i][j+1] === field[i][j]) {
-//           field[i][j+1] = field[i][j] + field[i][j+1];
-//           currentSum = currentSum + field[i+1][j];
-//           field[i][j] = 0;
-//         }
-//       }
-//     }
-//   }
-//   return currentSum;
-// }
-
 
 export function moveUp(field: Array<Array<number>>):number {
   let currentSum = 0;
@@ -289,7 +207,9 @@ export function handleMove(curentGameField: Array<Array<number>>, move: string, 
   }
 
   if (checkIsWin(newGameField)) {    
-    return (dispatch: DispatchGame) => {      
+    return (dispatch: DispatchGame) => {
+      dispatch({type: SET_TIMER_STATE, isTimerOn: false})
+      dispatch({type: RESET_TIMER, resetTimer: true})
       dispatch ({type: GAME_WON, isWin: true, isGameStarted: false})
       winPlayer.play();
     };
@@ -303,6 +223,8 @@ export function handleMove(curentGameField: Array<Array<number>>, move: string, 
       };
     } else {
       return (dispatch: DispatchGame) => {
+        dispatch({type: SET_TIMER_STATE, isTimerOn: false})
+        dispatch({type: RESET_TIMER, resetTimer: true})
         dispatch ({type: GAME_FAILED, isFail: true, isGameStarted: false})
         // Звук когда проиграли
         failPlayer.play();

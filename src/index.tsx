@@ -36,7 +36,6 @@ function handleAutoplay() {
 }
 document.addEventListener('click', handleAutoplay)
 
-
 const routing = (
   <Router>
     <Provider store={store}>

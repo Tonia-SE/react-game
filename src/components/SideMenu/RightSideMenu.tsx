@@ -1,12 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { ApplicationState } from '../../store/rootReducer';
-import { RESTART_GAME, START_GAME } from '../../store/actionTypes';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { handleMove } from '../../store/actions'
 import { btnSoundsPlayer } from '../../index'
-
 
 export const RightSideMenu: React.FC = () => {
   const dispatch = useDispatch();
@@ -20,8 +16,6 @@ export const RightSideMenu: React.FC = () => {
   const menuWrapperClassName = isFullScreen ? "side-menu-wrapper-max": "side-menu-wrapper";
   const visibleClassName = isBtnsVisible ? "" : "none";
   btnSoundsPlayer.volume = soundsVolume;
-  //const playBtnImgSrc = !isGameStarted ? "./assets/images/start_game.ico" : "./assets/images/restart_game.ico";
-  // const tooltipText = isGameStarted ? "restart game" : "start game";
 
   return (
   <div className={`${menuWrapperClassName} ${visibleClassName}`}> 

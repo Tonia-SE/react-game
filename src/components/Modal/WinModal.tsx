@@ -15,7 +15,6 @@ export const WinModal: React.FC = () => {
 
   winPlayer.volume = soundsVolume;
 
-  // show={props.show}
   return (
     <Modal backdropClassName={modalBackdropClassName} show={isWin} onHide={() => {
       isWin = false
@@ -24,11 +23,11 @@ export const WinModal: React.FC = () => {
       <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
         <Card className="m-auto border-0">
-          <Card.Img className="m-auto pb-3" style={{ width: '50%' }} variant="top" src="./assets/images/win.ico"/>
+          <Card.Img className="m-auto pb-3 win-img" variant="top" src="./assets/images/win.ico"/>
           <Card.Body className="px-0">
             <Card.Title className="text-center modal-game-title">Congratulations! <br/>You are win!</Card.Title>
-            <Card.Text className="mx-xl-lg-3 p-0 text-center modal-game-text">
-              Please login<br/>to see your name in best results table. 
+            <Card.Text className="mx-xl-lg-3 text-center modal-game-text">
+              Please login to see<br/>your name in best results table. 
             </Card.Text>
           </Card.Body>
         </Card>

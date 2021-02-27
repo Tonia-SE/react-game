@@ -1,34 +1,52 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { ApplicationState } from '../../store/rootReducer';
+import { RESET_TIMER } from '../../store/actionTypes';
 
 export const IndicatorPanel: React.FC = () => {
+  const dispatch = useDispatch();
   const isGameStarted = useSelector((state: ApplicationState) => state.game.isGameStarted);
   const isFullScreen = useSelector((state: ApplicationState) => state.game.isFullScreen);
   const score = useSelector((state: ApplicationState) => state.game.score);
-  const currentSum = useSelector((state: ApplicationState) => state.game.currentSum);
+  const points = useSelector((state: ApplicationState) => state.game.currentSum);
+  const isTimerOn = useSelector((state: ApplicationState) => state.game.isTimerOn);
+  const resetTimer = useSelector((state: ApplicationState) => state.game.resetTimer);
   const indicatorPanelClassName = isFullScreen ? "indicators-wrapper-max": "indicators-wrapper";
   const fontSize = isFullScreen ? "indicator-main-max": "indicator-main";
-  const none = isGameStarted ? "" : " none"
+  const none = isGameStarted ? "" : " none";
+  const [seconds, setSeconds] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+
+  if (resetTimer) {
+    setSeconds(0)
+    setMinutes(0)
+    dispatch({type: RESET_TIMER, resetTimer: false})
+  }
+
+  useEffect(()=>{
+    if (isTimerOn) {
+      setTimeout(() => {
+          if (seconds === 59) {
+            setSeconds(0);
+            setMinutes(minutes + 1);
+          } else {
+            setSeconds(seconds + 1)
+          }
+        }, 1000)
+    }
+  });
 
   return (
     <div className={indicatorPanelClassName + none}>
-
-        <div className="indicator-wrapper">
-          {/* <img className="sideMenu-img score-img mb-2" src="./assets/images/score.ico" alt="score"/> */}
-          {/* <h5 className="indicator-title">Score</h5> */}
-          <div className="score-wrapper">
-            <p className={fontSize}>{score}</p>
-            {currentSum? <p className="indicator-add"> + {currentSum}</p> : <p></p>}
-          </div>
+      <div className="indicator-wrapper">
+        <div className="score-wrapper">
+          <p className={fontSize}>{score}</p>
+          <p className="indicator-add ml-2 pt-1">{`+ ${points}`}</p>
         </div>
-
-
-        <div className="indicator-wrapper">
-          {/* <img className="sideMenu-img timer-img mb-1" src="./assets/images/timer.ico" alt="timer"/> */}
-          <p className={fontSize}>00:00</p>
-        </div>
-
+      </div>
+      <div className="indicator-wrapper">
+        <p className={fontSize}>{minutes < 10 ? `0${minutes}`: minutes}:{seconds < 10 ? `0${seconds}`: seconds}</p>
+      </div>
     </div>
   );
 };

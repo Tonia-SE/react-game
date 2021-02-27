@@ -12,7 +12,6 @@ export const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) =>
 
   const isFullScreen = useSelector((state: ApplicationState) => state.game.isFullScreen);
   const modalBackdropClassName = !isFullScreen ? "my-backdrop" : "";
-
   return (
     <Modal backdropClassName={modalBackdropClassName} show ={props.show} onHide={props.onHide}>
       <Modal.Header closeButton>

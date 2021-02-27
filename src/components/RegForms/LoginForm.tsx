@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { ApplicationState } from '../../store/rootReducer';
@@ -14,10 +14,8 @@ export const LoginForm: React.FC<LoginFormProps> = (props: LoginFormProps) => {
 
   return (
     <Modal backdropClassName={modalBackdropClassName} show={props.show} onHide={props.onHide}>
-
       <Modal.Header closeButton>
       </Modal.Header>
-
       <Modal.Body>
         <Form>
           <Form.Group controlId="formBasicEmail">
@@ -33,13 +31,11 @@ export const LoginForm: React.FC<LoginFormProps> = (props: LoginFormProps) => {
               <p>We'll never share your email with anyone else.</p>
             </Form.Text>
           </Form.Group>
-
           <Button variant="danger" type="submit" className="pull-right" onClick={props.onHide}>
             <p>Submit</p>
           </Button>
         </Form>
       </Modal.Body>
-
     </Modal>
   )
 }

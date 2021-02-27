@@ -5,7 +5,7 @@ import { IndicatorPanel } from '../Indicators/IndicatorPanel';
 import { LeftSideMenu } from '../SideMenu/LeftSideMenu';
 import { ApplicationState } from '../../store/rootReducer';
 import { Button } from 'react-bootstrap';
-import { START_GAME, UPDATE_GAME_FIELD } from '../../store/actionTypes';
+import { START_GAME } from '../../store/actionTypes';
 import { RightSideMenu } from '../SideMenu/RightSideMenu';
 import { btnSoundsPlayer } from '../../index'
 
@@ -17,7 +17,6 @@ export const Field: React.FC = () => {
   const theme = useSelector((state: ApplicationState) => state.settings.theme);
   const soundsVolume = useSelector((state: ApplicationState) => state.sounds.soundsVolume);
   const fieldClassName = isFullScreen ? "field-max": "field";
-  const startBtnClassName = `btn-fc-${theme}`;
   btnSoundsPlayer.volume = soundsVolume;
 
   if(!isGameStarted) {

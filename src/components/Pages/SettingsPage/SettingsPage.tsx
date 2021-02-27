@@ -1,11 +1,13 @@
 import React from 'react';
 import { NavBar } from '../../NavBar/NavBar';
 import { Footer } from '../../Footer/Footer'
-import { Button, Card, Form, InputGroup, ListGroup } from 'react-bootstrap';
+import { Card, Form, ListGroup } from 'react-bootstrap';
 import { ApplicationState } from '../../../store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { btnSoundsPlayer, musicPlayer } from '../../../index';
-import { RESTART_GAME, SELECT_LANGUAGE, SELECT_THEME, SET_GAME_SIZE, SET_MUSIC_VOLUME, SET_SOUNDS_VOLUME } from '../../../store/actionTypes';
+import { RESTART_GAME, SELECT_LANGUAGE, SELECT_THEME,
+          SET_GAME_SIZE, SET_MUSIC_VOLUME, 
+          SET_SOUNDS_VOLUME } from '../../../store/actionTypes';
 
 export const SettingsPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -190,13 +192,10 @@ export const SettingsPage: React.FC = () => {
                       dispatch({ type: SET_MUSIC_VOLUME, musicVolume: 0})
                     }
                   }}/>
-                    <Form.Control ref={(element:HTMLInputElement) => {musicVolumeControl = element}} type="range" defaultValue={musicDefaultVolumeLevel} onChange={(event) => {
+                    <Form.Control ref={(element:HTMLInputElement) => {musicVolumeControl = element}} type="range" defaultValue={musicDefaultVolumeLevel} 
+                      onChange={(event) => {
                         dispatch({ type: SET_MUSIC_VOLUME, musicVolume: +event.currentTarget.value })
                         musicPlayer.volume = +event.currentTarget.value / 100;
-                        //btnSoundsPlayer.play()
-                        // if (+event.currentTarget.value === 0) {
-                        //   musicPlayer.play();
-                        // }
                     }}/>
                   <img className={`control-img ml-3 mr-1 ${musicOffImgClassName}`} src="./assets/images/music_max.ico" alt="music max" onClick={()=> {
                     if (musicVolumeControl !== null) {

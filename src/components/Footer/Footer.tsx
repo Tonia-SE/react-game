@@ -3,8 +3,6 @@ import React from 'react';
 export const Footer: React.FC = () => {
   return (
     <div className="container-fluid text-center text-md-left ">
-
-
       <div className="footer-copyright font-16">
         <div className="inline">
           © 2021 Copyright:
@@ -18,7 +16,6 @@ export const Footer: React.FC = () => {
           </a>
         </div>
       </div>
-
     </div>
   );
 };

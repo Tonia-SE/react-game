@@ -6,7 +6,6 @@ import { RESTART_GAME, START_GAME } from '../../store/actionTypes';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { btnSoundsPlayer } from '../../index'
 
-
 export const LeftSideMenu: React.FC = () => {
   const dispatch = useDispatch();
   const isGameStarted = useSelector((state: ApplicationState) => state.game.isGameStarted);
@@ -62,10 +61,3 @@ export const LeftSideMenu: React.FC = () => {
     </div>
   );
 };
-{/* <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Tooltip!</Tooltip>}>
-  <span className="d-inline-block">
-    <Button disabled style={{ pointerEvents: 'none' }}>
-      Disabled button
-    </Button>
-  </span>
-</OverlayTrigger> */}

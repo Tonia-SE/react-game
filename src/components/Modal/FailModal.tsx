@@ -19,8 +19,6 @@ export const FailModal: React.FC = () => {
 
   failPlayer.volume = soundsVolume
 
-  // show={props.show}
-  //const handleOnHide = () => {isFail = false}
   return (
     <Modal backdropClassName={modalBackdropClassName} show={isFail} onHide={() => {
         isFail = false
@@ -29,10 +27,10 @@ export const FailModal: React.FC = () => {
       <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
         <Card className="m-auto border-0">
-          <Card.Img className="m-auto" style={{ width: '70%' }} variant="top" src="./assets/images/fail.jpg"/>
+          <Card.Img className="m-auto" variant="top" src="./assets/images/fail.jpg"/>
           <Card.Body className="pt-0">
             <Card.Title className="text-center modal-game-title">Sorry, you're fail...</Card.Title>
-            <Card.Text className="mx-xl-lg-3 p-0 text-center modal-game-text">
+            <Card.Text className="mx-xl-lg-3 text-center modal-game-text">
               But if you logged in, maybe you'll find your name in best result's table. 
             </Card.Text>
           </Card.Body>
@@ -41,20 +39,3 @@ export const FailModal: React.FC = () => {
     </Modal>
   )
 }
-{/* <Modal backdropClassName={modalBackdropClassName} show={isWin} onHide={() => {
-      isWin = false
-      dispatch(closeWinModal())
-    }}>
-      <Modal.Header closeButton></Modal.Header>
-      <Modal.Body>
-        <Card className="m-auto border-0">
-          <Card.Img className="m-auto pb-3" style={{ width: '50%' }} variant="top" src="./assets/images/win.ico"/>
-          <Card.Body>
-            <Card.Title style={{ fontSize: '33px' }} className="text-center h1">Sorry you're fail...</Card.Title>
-            <Card.Text className="ml-3 mr-3 p-0 text-center h4">
-              But if you logged in, maybe you'll can find your score in best result's table. 
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      </Modal.Body>
-    </Modal> */}
