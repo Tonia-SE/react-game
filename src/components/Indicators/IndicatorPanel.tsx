@@ -14,25 +14,41 @@ export const IndicatorPanel: React.FC = () => {
   const indicatorPanelClassName = isFullScreen ? "indicators-wrapper-max": "indicators-wrapper";
   const fontSize = isFullScreen ? "indicator-main-max": "indicator-main";
   const none = isGameStarted ? "" : " none";
-  const [seconds, setSeconds] = useState(0);
-  const [minutes, setMinutes] = useState(0);
+
+  const initialSeconds = !localStorage.getItem('seconds') ? 0 : JSON.parse(localStorage.getItem('seconds'))
+  const initialMinutes = !localStorage.getItem('minutes') ? 0 : JSON.parse(localStorage.getItem('minutes'))
+
+  const [seconds, setSeconds] = useState(initialSeconds);
+  const [minutes, setMinutes] = useState(initialMinutes);
 
   if (resetTimer) {
     setSeconds(0)
     setMinutes(0)
+    localStorage.setItem('seconds', JSON.stringify(0));
+    localStorage.setItem('minutes', JSON.stringify(0));
     dispatch({type: RESET_TIMER, resetTimer: false})
   }
+
 
   useEffect(()=>{
     if (isTimerOn) {
       setTimeout(() => {
+        if (isTimerOn) {
           if (seconds === 59) {
             setSeconds(0);
             setMinutes(minutes + 1);
           } else {
             setSeconds(seconds + 1)
           }
-        }, 1000)
+        }
+      }, 1000)
+      localStorage.setItem('seconds', JSON.stringify(seconds));
+      localStorage.setItem('minutes', JSON.stringify(minutes));
+    } else {
+      setSeconds(0)
+      setMinutes(0)
+      localStorage.setItem('seconds', JSON.stringify(0));
+      localStorage.setItem('minutes', JSON.stringify(0));
     }
   });
 

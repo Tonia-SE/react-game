@@ -1,22 +1,23 @@
-import React from 'react';
-import { Button, Card, Modal } from 'react-bootstrap';
+import React, { useEffect } from 'react';
+import { getI18n, useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { failPlayer } from '../..';
-import { closeFailModal } from '../../store/actions';
 import { ApplicationState } from '../../store/rootReducer';
+import { Card, Modal } from 'react-bootstrap';
+import { closeFailModal } from '../../store/actions';
+import { failPlayer } from '../..';
 
-// interface FailModalProps  {
-//   show: boolean
-//   onHide: () => void
-// }
 
 export const FailModal: React.FC = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const language = useSelector((state: ApplicationState) => state.settings.language);
+  useEffect(() => {
+    getI18n().changeLanguage(language); 
+  }, [language])
   const isFullScreen = useSelector((state: ApplicationState) => state.game.isFullScreen);
   let isFail = useSelector((state: ApplicationState) => state.game.isFail);
   const modalBackdropClassName = !isFullScreen ? "my-backdrop" : "";
   const soundsVolume = useSelector((state: ApplicationState) => state.sounds.soundsVolume);
-
   failPlayer.volume = soundsVolume
 
   return (
@@ -29,9 +30,9 @@ export const FailModal: React.FC = () => {
         <Card className="m-auto border-0">
           <Card.Img className="m-auto" variant="top" src="./assets/images/fail.jpg"/>
           <Card.Body className="pt-0">
-            <Card.Title className="text-center modal-game-title">Sorry, you're fail...</Card.Title>
+    <Card.Title className="text-center modal-game-title">{t("modal_fail_title")}</Card.Title>
             <Card.Text className="mx-xl-lg-3 text-center modal-game-text">
-              But if you logged in, maybe you'll find your name in best result's table. 
+            {t("modal_fail_text")} 
             </Card.Text>
           </Card.Body>
         </Card>

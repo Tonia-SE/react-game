@@ -1,7 +1,8 @@
-import React from 'react';
-import { Button, Form, Modal } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { getI18n, useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 import { ApplicationState } from '../../store/rootReducer';
+import { Button, Form, Modal } from 'react-bootstrap';
 
 interface LoginFormProps  {
   show: boolean
@@ -9,6 +10,12 @@ interface LoginFormProps  {
 }
 
 export const LoginForm: React.FC<LoginFormProps> = (props: LoginFormProps) => {
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const language = useSelector((state: ApplicationState) => state.settings.language);
+  useEffect(() => {
+    getI18n().changeLanguage(language); 
+  }, [language])
   const isFullScreen = useSelector((state: ApplicationState) => state.game.isFullScreen);
   const modalBackdropClassName = !isFullScreen ? "my-backdrop" : "";
 
@@ -20,19 +27,19 @@ export const LoginForm: React.FC<LoginFormProps> = (props: LoginFormProps) => {
         <Form>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>
-              <p>NICK NAME</p>
+              <p>{t("reg_form_nick_name_label")}</p>
             </Form.Label>
-            <Form.Control type="email" placeholder="nick name" />
+            <Form.Control type="email" placeholder={t("reg_form_nick_name_placeholder")} />
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
-            <Form.Label><p>PASSWORD</p></Form.Label>
-            <Form.Control type="password" placeholder="password" autoComplete="on"/>
+          <Form.Label><p>{t("reg_form_password_label")}</p></Form.Label>
+            <Form.Control type="password" placeholder={t("reg_form_password_placeholder")} autoComplete="on"/>
             <Form.Text className="text-muted">
               <p>We'll never share your email with anyone else.</p>
             </Form.Text>
           </Form.Group>
           <Button variant="danger" type="submit" className="pull-right" onClick={props.onHide}>
-            <p>Submit</p>
+            <pre>{t("reg_form_submit")}</pre>
           </Button>
         </Form>
       </Modal.Body>

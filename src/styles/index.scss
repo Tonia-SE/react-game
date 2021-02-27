@@ -22,6 +22,11 @@ body{
 p{
   margin-bottom: 0 !important
 }
+pre{
+  margin-bottom: 0;
+  color: $font-color-light;
+  font-family: inherit;
+}
 button:hover,
 button:focus,
 button:active{

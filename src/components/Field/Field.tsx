@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Cell } from '../Cell/Cell';
 import { IndicatorPanel } from '../Indicators/IndicatorPanel';
@@ -8,6 +8,7 @@ import { Button } from 'react-bootstrap';
 import { START_GAME } from '../../store/actionTypes';
 import { RightSideMenu } from '../SideMenu/RightSideMenu';
 import { btnSoundsPlayer } from '../../index'
+import { getI18n, useTranslation } from 'react-i18next';
 
 export const Field: React.FC = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,13 @@ export const Field: React.FC = () => {
   const soundsVolume = useSelector((state: ApplicationState) => state.sounds.soundsVolume);
   const fieldClassName = isFullScreen ? "field-max": "field";
   btnSoundsPlayer.volume = soundsVolume;
+  const { t } = useTranslation();
+  const language = useSelector((state: ApplicationState) => state.settings.language);
+  
+  useEffect(() => {
+    getI18n().changeLanguage(language); 
+  }, [language])
+
 
   if(!isGameStarted) {
     return (
@@ -31,7 +39,7 @@ export const Field: React.FC = () => {
                 dispatch({type: START_GAME })
                 btnSoundsPlayer.play();
               }}>
-              START GAME
+              {t('start game')}
             </Button>
           </div>
         </div>

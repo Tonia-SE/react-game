@@ -60,10 +60,6 @@
   width: 15px;
   height: 15px;
 }
-.input-wrapper{
-  @include center();
-  padding: 5px;
-}
 input[type='range'] {
   overflow: hidden;
   height: 10px;

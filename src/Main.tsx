@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+//import i18n from "i18next";
+import { getI18n } from "react-i18next";
 import './styles/index.scss';
 import { NavBar } from './components/NavBar/NavBar';
 import { Field } from './components/Field/Field';
@@ -13,9 +15,11 @@ import { useEffect } from 'react';
 import { musicPlayer } from './index';
 import { FailModal } from './components/Modal/FailModal';
 import { WinModal } from './components/Modal/WinModal';
+//import { translations } from './translations'
 
 export const Main: React.FC = () => {
   const dispatch = useDispatch();
+  //const language = useSelector((state: ApplicationState) => state.settings.language);
   const field = useSelector((state: ApplicationState) => state.game.field);
   const isFullScreen = useSelector((state: ApplicationState) => state.game.isFullScreen);
   const theme = useSelector((state: ApplicationState) => state.settings.theme);
