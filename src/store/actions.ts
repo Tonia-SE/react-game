@@ -200,7 +200,7 @@ function checkIsWin (field: Array<Array<number>>) {
   let res = false;
   field.forEach((row: Array<number>) => {
     row.forEach((value: number) => {
-      if (value >= 2048) {
+      if (value === 2048) {
         res = true;
       }
     })

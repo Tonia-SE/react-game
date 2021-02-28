@@ -87,7 +87,7 @@ export const SettingsPage: React.FC = () => {
       btnSoundsPlayer.play();
     }
 
-    if (keyEvent.ctrlKey && keyEvent.key === 'l')  {
+    if (keyEvent.ctrlKey && keyEvent.key === 'h')  {
       keyEvent.preventDefault();
       history.push("/how_to_play");
       btnSoundsPlayer.play();

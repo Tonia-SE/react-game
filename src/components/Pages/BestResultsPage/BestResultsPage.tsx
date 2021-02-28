@@ -43,7 +43,7 @@ export const BestResultsPage: React.FC = () => {
       btnSoundsPlayer.play();
     }
 
-    if (keyEvent.ctrlKey && keyEvent.key === 'l')  {
+    if (keyEvent.ctrlKey && keyEvent.key === 'h')  {
       keyEvent.preventDefault();
       history.push("/how_to_play");
       btnSoundsPlayer.play();
@@ -75,7 +75,11 @@ export const BestResultsPage: React.FC = () => {
     <div className={`${appClassName} bg-light-${theme} fc-${theme}`} tabIndex={1} onKeyDown={handleKeyPress} ref={(c:HTMLElement) => {rootDiv = c}}>
       <NavBar />
       <div className="best-results page mt-3">
-  <h3><b>{t("best_results_page_table_title")}</b></h3>
+      <h3>
+        <b>
+          {t("best_results_page_table_title")}
+        </b>
+      </h3>
         <div className="table-wrapper">
           <Table className={`mt-3 fc-${theme} hover`}>
             <thead className="thead">

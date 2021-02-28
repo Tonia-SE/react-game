@@ -8,10 +8,58 @@
   align-items: center;
   font-weight: 500;
 }
+
 .up{
   transition: transform 0.3s ease-in-out;
   transform: translate3d(0px, -100%, 0);
 }
+
+.up-appear{
+  transition: transform 0.3s ease-in-out;
+  //transform: translate3d(0px, -100%, 0);
+}
+
+.up-active-appear{
+  transition: transform 0.3s ease-in-out;
+  transform: translate3d(0px, -100%, 0);
+}
+
+.up-done-appear{
+  transition: transform 0.3s ease-in-out;
+  transform: translate3d(0px, -100%, 0);
+}
+
+.up-enter{
+  transition: transform 0.3s ease-in-out;
+  //transform: translate3d(0px, -100%, 0);
+}
+
+.up-active-enter{
+  transition: transform 0.3s ease-in-out;
+  transform: translate3d(0px, -100%, 0);
+}
+
+.up-done-enter{
+  transition: transform 0.3s ease-in-out;
+  transform: translate3d(0px, -100%, 0);
+}
+
+.up-exit{
+  transition: transform 0.3s ease-in-out;
+  //transform: translate3d(0px, -100%, 0);
+}
+
+.up-active-exit{
+  transition: transform 0.3s ease-in-out;
+  //transform: translate3d(0px, -100%, 0);
+}
+
+.up-done-exit{
+  transition: transform 0.3s ease-in-out;
+  //transform: translate3d(0px, -100%, 0);
+}
+
+
 .down{
   transition: transform 0.3s ease-in-out;
   transform: translate3d(0px, 100%, 0);
