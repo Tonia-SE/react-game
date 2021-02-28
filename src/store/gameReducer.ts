@@ -1,7 +1,7 @@
 import { generateInitalField } from './actions';
 import { FINISH_GAME, START_GAME, TOGGLE_FULLSCREEN,
         UPDATE_GAME_FIELD, RESTART_GAME, SET_GAME_SIZE,
-        GAME_FAILED, GAME_WON, UPDATE_SCORE, SET_TIMER_STATE, RESET_TIMER } from './actionTypes';
+        GAME_FAILED, GAME_WON, UPDATE_SCORE, SET_TIMER_STATE, RESET_TIMER, SAVE_GAME_TIME } from './actionTypes';
 
 export interface IGameState {
   isGameStarted: boolean;
@@ -14,6 +14,8 @@ export interface IGameState {
   score: number;
   isTimerOn: boolean;
   resetTimer: boolean;
+  seconds: number;
+  minutes: number;
 }
 
 interface IGameAction {
@@ -27,6 +29,8 @@ interface IGameAction {
   currentSum?: number;
   isTimerOn?: boolean;
   resetTimer?: boolean;
+  seconds?: number;
+  minutes?: number;
 }
 
 let initialState: IGameState = {
@@ -39,7 +43,9 @@ let initialState: IGameState = {
   currentSum: 0,
   score: 0,
   isTimerOn: false,
-  resetTimer: false
+  resetTimer: false,
+  seconds: 0,
+  minutes: 0
 };
 
 const savedGameState = localStorage.getItem('gameState')
@@ -89,6 +95,10 @@ export const gameReducer = (state: IGameState = initialState, action: IGameActio
     case RESET_TIMER:
       localStorage.setItem('gameState', JSON.stringify({ ...state, resetTimer: action.resetTimer }));
       return { ...state, resetTimer: action.resetTimer };
+    case SAVE_GAME_TIME:
+      localStorage.setItem('gameState', JSON.stringify({ ...state, seconds: action.seconds, minutes: action.minutes }));
+      return { ...state, seconds: action.seconds, minutes: action.minutes };
+      
     default:
       return state;
   }

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ApplicationState } from '../../store/rootReducer';
-import { RESET_TIMER } from '../../store/actionTypes';
+import { RESET_TIMER, SAVE_GAME_TIME } from '../../store/actionTypes';
 
 export const IndicatorPanel: React.FC = () => {
   const dispatch = useDispatch();
   const isGameStarted = useSelector((state: ApplicationState) => state.game.isGameStarted);
+  const isWin = useSelector((state: ApplicationState) => state.game.isWin);
+  const isFail = useSelector((state: ApplicationState) => state.game.isFail);
   const isFullScreen = useSelector((state: ApplicationState) => state.game.isFullScreen);
   const score = useSelector((state: ApplicationState) => state.game.score);
   const points = useSelector((state: ApplicationState) => state.game.currentSum);
@@ -21,13 +23,22 @@ export const IndicatorPanel: React.FC = () => {
   const [seconds, setSeconds] = useState(initialSeconds);
   const [minutes, setMinutes] = useState(initialMinutes);
 
-  if (resetTimer) {
-    setSeconds(0)
-    setMinutes(0)
-    localStorage.setItem('seconds', JSON.stringify(0));
-    localStorage.setItem('minutes', JSON.stringify(0));
-    dispatch({type: RESET_TIMER, resetTimer: false})
-  }
+
+  useEffect(() => {
+    if (isWin || isFail) {
+      dispatch({type: SAVE_GAME_TIME, seconds: seconds, minutes: minutes})
+    }
+  }, [isWin, isFail])
+
+  useEffect(() => {
+    if (resetTimer) {
+      setSeconds(0)
+      setMinutes(0)
+      localStorage.setItem('seconds', JSON.stringify(0));
+      localStorage.setItem('minutes', JSON.stringify(0));
+      dispatch({type: RESET_TIMER, resetTimer: false})
+    }
+  }, [resetTimer])
 
 
   useEffect(()=>{

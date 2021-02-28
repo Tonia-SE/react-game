@@ -28,6 +28,10 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+.my-danger{
+  color: rgb(194, 3, 3);
+  opacity: 0.7;
+}
 
 @media (max-width: 768px){
   .my-backdrop{

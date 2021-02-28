@@ -1,5 +1,5 @@
-export const backendServer = 'http://localhost:8000'; // for develop
-//export const backendServer = 'https://kigurumi-backend.herokuapp.com';
+//export const backendServer = 'http://localhost:9999'; // for develop
+export const backendServer = 'https://tonia-se-react-game.herokuapp.com';
 
 export const initialCategoryName = 'adult';
 export const rateUrl = 'https://www.cbr-xml-daily.ru/daily_json.js';

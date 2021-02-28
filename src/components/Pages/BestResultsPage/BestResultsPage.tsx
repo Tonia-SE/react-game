@@ -10,6 +10,7 @@ import { useHistory } from 'react-router-dom';
 import { btnSoundsPlayer } from '../../../index'
 import { getNextDifficulty, getNextLang, getNextTheme } from '../../../store/actions';
 import { RESTART_GAME, SELECT_LANGUAGE, SELECT_THEME, SET_GAME_SIZE, START_GAME } from '../../../store/actionTypes';
+import { getGameResults } from '../../../store/bestResultsReducer';
 
 export const BestResultsPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ export const BestResultsPage: React.FC = () => {
   const { t } = useTranslation();
   const language = useSelector((state: ApplicationState) => state.settings.language)
   const history = useHistory();
+  const results = useSelector((state: ApplicationState) => state.bestResults.results)
   let rootDiv: HTMLElement = null
 
   musicPlayer.volume = musicVolume;
@@ -32,6 +34,10 @@ export const BestResultsPage: React.FC = () => {
   useEffect(() => {
     rootDiv.focus();
   })
+
+  useEffect(() => {
+    dispatch(getGameResults())
+  }, [])
 
   function handleKeyPress(keyEvent: React.KeyboardEvent) {
     if (keyEvent.ctrlKey && keyEvent.key === 'm')  {
@@ -70,66 +76,43 @@ export const BestResultsPage: React.FC = () => {
     }
   }
 
-
   return (
     <div className={`${appClassName} bg-light-${theme} fc-${theme}`} tabIndex={1} onKeyDown={handleKeyPress} ref={(c:HTMLElement) => {rootDiv = c}}>
       <NavBar />
       <div className="best-results page mt-3">
-      <h3>
+      <h3 className="best-results-page-title">
         <b>
           {t("best_results_page_table_title")}
         </b>
       </h3>
-        <div className="table-wrapper">
-          <Table className={`mt-3 fc-${theme} hover`}>
-            <thead className="thead">
-              <tr>
-                <th></th>
-                <th>{t("best_results_page_table_second_column")}</th>
-                <th>{t("best_results_page_table_third_column")}</th>
-                <th>{t("best_results_page_table_fourth_column")}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-            </tbody>
-          </Table>
-        </div>
+        {!results.length ? <div>{t('best_results_page_no_results')}</div> :
+          <div className="table-wrapper">
+            <Table className={`mt-3 fc-${theme} hover`}>
+              <thead className="thead">
+                <tr>
+                  <th></th>
+                  <th>{t("best_results_page_table_second_column")}</th>
+                  <th>{t("best_results_page_table_third_column")}</th>
+                  <th>{t("best_results_page_table_fourth_column")}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {results.map((result, index) => {
+                  const minutes = result.minutes < 10? `0${result.minutes}`: `${result.minutes}`
+                  const seconds = result.seconds < 10? `0${result.seconds}`: `${result.seconds}`
+                  return (
+                    <tr className="tr-hover" key={Math.random()*1000}>
+                      <td>{index + 1}</td>
+                      <td>{result.user}</td>
+                      <td>{result.score}</td>
+                      <td>{`${minutes}:${seconds}`}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          </div>
+        }
       </div>
       <Footer />
     </div>

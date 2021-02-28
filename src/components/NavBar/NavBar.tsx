@@ -7,7 +7,7 @@ import { Button, ButtonGroup,
         Nav, Navbar, 
         OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { TOGGLE_BTNS_VISABILITY, TOGGLE_FULLSCREEN } from '../../store/actionTypes';
+import { LOGOUT_USER, TOGGLE_BTNS_VISABILITY, TOGGLE_FULLSCREEN } from '../../store/actionTypes';
 
 
 type NavBarProps = {
@@ -19,6 +19,7 @@ export const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const language = useSelector((state: ApplicationState) => state.settings.language);
+  const isLoggedIn = useSelector((state: ApplicationState) => state.auth.isLoggedIn);
   useEffect(() => {
     getI18n().changeLanguage(language); 
   }, [language])
@@ -43,7 +44,8 @@ export const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
           </OverlayTrigger>
           <DropdownButton className="navbar-btn" menuAlign='right' id="dropdown-menu-align-responsive-1"
             title={<img className="auth-img" src="./assets/images/auth.ico" alt="authorization" />}>
-            <Dropdown.Item className="my-dropdown" eventKey="1" id="555" onClick={() => props.handleShowLoginForm()}>{t("navBar_auth_login")}</Dropdown.Item>
+            {!isLoggedIn && <Dropdown.Item className="my-dropdown" eventKey="1" id="555" onClick={() => props.handleShowLoginForm()}>{t("navBar_auth_login")}</Dropdown.Item>}
+            {isLoggedIn && <Dropdown.Item className="my-dropdown" eventKey="1" id="555" onClick={() => {dispatch({type: LOGOUT_USER})}}>{t("navBar_auth_logout")}</Dropdown.Item>}
             <Dropdown.Item eventKey="2" id="666" onClick={() => props.handleShowSignUp()}>{t("navBar_auth_sign_up")}</Dropdown.Item>
           </DropdownButton>
           <Button className="nav-btn maximize-btn" onClick={() => dispatch({type: TOGGLE_FULLSCREEN})}>

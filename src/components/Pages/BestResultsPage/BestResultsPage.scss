@@ -15,3 +15,9 @@
 .table{
   text-align: center;
 }
+
+@media(max-width: 450px){
+  .best-results-page-title{
+    font-size: 20px;
+  }
+}

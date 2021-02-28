@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-//import i18n from "i18next";
-import { getI18n } from "react-i18next";
 import './styles/index.scss';
 import { NavBar } from './components/NavBar/NavBar';
 import { Field } from './components/Field/Field';
@@ -17,7 +15,9 @@ import { FailModal } from './components/Modal/FailModal';
 import { WinModal } from './components/Modal/WinModal';
 import { btnSoundsPlayer } from './index'
 import { useHistory } from 'react-router-dom';
-import { RESTART_GAME, SELECT_LANGUAGE, SELECT_THEME, SET_GAME_SIZE, START_GAME } from './store/actionTypes';
+import { RESET_FAILED_ATTEMPT, RESET_TIMER, RESTART_GAME, SAVE_GAME_TIME, SELECT_LANGUAGE, SELECT_THEME, SET_GAME_SIZE, START_GAME } from './store/actionTypes';
+import { saveGameResult } from './store/bestResultsReducer';
+
 //import { translations } from './translations'
 
 export const Main: React.FC = () => {
@@ -26,6 +26,13 @@ export const Main: React.FC = () => {
   const field = useSelector((state: ApplicationState) => state.game.field);
   const isFullScreen = useSelector((state: ApplicationState) => state.game.isFullScreen);
   const isGameStarted = useSelector((state: ApplicationState) => state.game.isGameStarted);
+  const isLoggedIn = useSelector((state: ApplicationState) => state.auth.isLoggedIn);
+  const isWin = useSelector((state: ApplicationState) => state.game.isWin);
+  const isFail = useSelector((state: ApplicationState) => state.game.isFail);
+  const score = useSelector((state: ApplicationState) => state.game.score);
+  const seconds = useSelector((state: ApplicationState) => state.game.seconds);
+  const minutes = useSelector((state: ApplicationState) => state.game.minutes);
+  const userName = useSelector((state: ApplicationState) => state.auth.userName);
   const theme = useSelector((state: ApplicationState) => state.settings.theme);
   const language = useSelector((state: ApplicationState) => state.settings.language);
   const gameSize = useSelector((state: ApplicationState) => state.game.gameSize);
@@ -35,10 +42,16 @@ export const Main: React.FC = () => {
 
   const [showLoginForm, setShowLoginForm] = useState(false);
   const handleCloseLoginForm = () => setShowLoginForm(false);
-  const handleShowLoginForm = () => setShowLoginForm(true);
+  const handleShowLoginForm = () => {
+    dispatch({type: RESET_FAILED_ATTEMPT});
+    setShowLoginForm(true);
+  };
   const [showSignUpForm, setShowSignUpForm] = useState(false);
   const handleCloseSignUpForm = () => setShowSignUpForm(false);
-  const handleShowSignUpForm = () => setShowSignUpForm(true);
+  const handleShowSignUpForm = () => {
+    setShowSignUpForm(true);
+    dispatch({type: RESET_FAILED_ATTEMPT});
+  };
 
   const appClassName = isFullScreen ? "app-max": "app";
   let rootDiv: HTMLElement = null
@@ -61,6 +74,14 @@ export const Main: React.FC = () => {
 
   cellSoundsPlayer.volume = soundsVolume;
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      if (isWin || isFail) {
+        saveGameResult(userName, score, seconds, minutes)      
+      }
+    }
+    dispatch({type: RESET_TIMER, resetTimer: true})
+  }, [isWin, isFail])
 
   function handleKeyPress(keyEvent: React.KeyboardEvent) {
     const arrowKeyEvents = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight']

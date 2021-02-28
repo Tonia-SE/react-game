@@ -1,5 +1,6 @@
-import { runInContext } from 'vm';
+import { isError } from 'util';
 import { failPlayer, winPlayer } from '..';
+import { backendServer } from '../consts';
 import { GAME_FAILED, GAME_WON, RESET_TIMER, RESTART_GAME, SET_TIMER_STATE, UPDATE_GAME_FIELD, UPDATE_SCORE } from './actionTypes';
 import {DispatchGame} from './gameReducer'
 
@@ -16,8 +17,8 @@ export function generateInitalField(size = 4) {
     }
   }
 
-  res[cellPos1[0]][cellPos1[1]] = 2
-  res[cellPos2[0]][cellPos2[1]] = 2
+  res[cellPos1[0]][cellPos1[1]] = 1024
+  res[cellPos2[0]][cellPos2[1]] = 1024
   return res;
 }
 
@@ -231,7 +232,6 @@ export function handleMove(curentGameField: Array<Array<number>>, move: string, 
   if (checkIsWin(newGameField)) {    
     return (dispatch: DispatchGame) => {
       dispatch({type: SET_TIMER_STATE, isTimerOn: false})
-      dispatch({type: RESET_TIMER, resetTimer: true})
       dispatch ({type: GAME_WON, isWin: true, isGameStarted: false})
       winPlayer.play();
     };
