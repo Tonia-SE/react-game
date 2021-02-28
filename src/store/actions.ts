@@ -1,3 +1,4 @@
+import { runInContext } from 'vm';
 import { failPlayer, winPlayer } from '..';
 import { GAME_FAILED, GAME_WON, RESET_TIMER, RESTART_GAME, SET_TIMER_STATE, UPDATE_GAME_FIELD, UPDATE_SCORE } from './actionTypes';
 import {DispatchGame} from './gameReducer'
@@ -18,6 +19,27 @@ export function generateInitalField(size = 4) {
   res[cellPos1[0]][cellPos1[1]] = 2
   res[cellPos2[0]][cellPos2[1]] = 2
   return res;
+}
+
+export function getNextLang (currentLang: string) {
+  const langs = ['en', 'ru', 'fr']
+  let newLangIndex = langs.indexOf(currentLang) + 1;
+  //newLangIndex = 
+  return langs[newLangIndex < langs.length ? newLangIndex : 0]
+}
+
+export function getNextTheme (currentTheme: string) {
+  const themes = ['shadow', 'sweet', 'deep']
+  let newLangIndex = themes.indexOf(currentTheme) + 1;
+  //newLangIndex = 
+  return themes[newLangIndex < themes.length ? newLangIndex : 0]
+}
+
+export function getNextDifficulty (currentDifficulty: number) {
+  const difficulties = [4, 5, 6]
+  let newLangIndex = difficulties.indexOf(currentDifficulty) + 1;
+  //newLangIndex = 
+  return difficulties[newLangIndex < difficulties.length ? newLangIndex : 0]
 }
 
 
@@ -178,7 +200,7 @@ function checkIsWin (field: Array<Array<number>>) {
   let res = false;
   field.forEach((row: Array<number>) => {
     row.forEach((value: number) => {
-      if (value === 2048) {
+      if (value >= 2048) {
         res = true;
       }
     })

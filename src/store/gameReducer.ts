@@ -54,8 +54,8 @@ export const gameReducer = (state: IGameState = initialState, action: IGameActio
   switch (action.type) {
     case START_GAME:
       const newGameField = [...generateInitalField(state.gameSize)]
-      localStorage.setItem('gameState', JSON.stringify({ ...state, field: newGameField, isGameStarted: true, currentSum: 0, score: 0, isTimerOn: true }));
-      return { ...state, field: [...newGameField], isGameStarted: true, currentSum: 0, score: 0, isTimerOn: true };
+      localStorage.setItem('gameState', JSON.stringify({ ...state, field: newGameField, isGameStarted: true, currentSum: 0, score: 0, isTimerOn: true, resetTimer: true }));
+      return { ...state, field: [...newGameField], isGameStarted: true, currentSum: 0, score: 0, isTimerOn: true, resetTimer: true };
     case RESTART_GAME:
       //const toggleGameStarted = !state.isGameStarted;
       const newGameField2 = [...generateInitalField(state.gameSize)]

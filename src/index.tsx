@@ -33,6 +33,7 @@ export const btnSoundsPlayer:HTMLAudioElement = new Audio("./assets/sounds/btn_s
 export const winPlayer:HTMLAudioElement = new Audio("./assets/sounds/win_sound.mp3")
 export const failPlayer:HTMLAudioElement = new Audio("./assets/sounds/fail_sound.mp3")
 
+
 function handleAutoplay() {  
   musicPlayer.play();
   //musicPlayer.volume = 0;

@@ -8,7 +8,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { btnSoundsPlayer, musicPlayer } from '../../../index';
 import { RESTART_GAME, SELECT_LANGUAGE, SELECT_THEME,
           SET_GAME_SIZE, SET_MUSIC_VOLUME, 
-          SET_SOUNDS_VOLUME } from '../../../store/actionTypes';
+          SET_SOUNDS_VOLUME, 
+          START_GAME} from '../../../store/actionTypes';
+import { useHistory } from 'react-router-dom';
+import { getNextDifficulty, getNextLang, getNextTheme } from '../../../store/actions';
 
 export const SettingsPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -21,6 +24,8 @@ export const SettingsPage: React.FC = () => {
   const soundsDefaultVolumeLevel = soundsVolume * 100;
   const musicVolume = useSelector((state: ApplicationState) => state.sounds.musicVolume);
   const musicDefaultVolumeLevel =  musicVolume * 100;
+  let settingPageDiv: HTMLElement = null
+
   let soundsVolumeControl:HTMLInputElement = null
   let musicVolumeControl:HTMLInputElement = null
   let dificultyControl4:HTMLInputElement = null;
@@ -31,7 +36,7 @@ export const SettingsPage: React.FC = () => {
   let themeControlDeep:HTMLInputElement = null;
   let langControlEng:HTMLInputElement = null;
   let langControlRu:HTMLInputElement = null;
-  let langControlChi:HTMLInputElement = null;
+  let langControlFr:HTMLInputElement = null;
 
   let soundOnImgClassName = '';
   let soundOffImgClassName = '';
@@ -61,12 +66,91 @@ export const SettingsPage: React.FC = () => {
   
   const appClassName = isFullScreen ? "app-max": "app";
 
+  const history = useHistory();
+
   useEffect(() => {
     getI18n().changeLanguage(language); 
   }, [language])
 
+  useEffect(() => {
+    settingPageDiv.focus();
+  }, [])
+
+  function handleKeyPress(keyEvent: React.KeyboardEvent) {
+    if (keyEvent.ctrlKey && keyEvent.key === 'm')  {
+      history.push('/') 
+      btnSoundsPlayer.play();
+    }
+
+    if (keyEvent.ctrlKey && keyEvent.key === 'b')  {
+      history.push("/best_results");
+      btnSoundsPlayer.play();
+    }
+
+    if (keyEvent.ctrlKey && keyEvent.key === 'l')  {
+      keyEvent.preventDefault();
+      history.push("/how_to_play");
+      btnSoundsPlayer.play();
+    }
+
+    if (keyEvent.ctrlKey && keyEvent.key === '8')  {
+      keyEvent.preventDefault();
+      const nextSize = getNextDifficulty(gameSize)
+      dispatch({type: SET_GAME_SIZE, gameSize: nextSize})
+      dispatch({type: RESTART_GAME})
+      switch (nextSize) {
+        case 4: 
+          dificultyControl4.checked = true;
+          break;
+        case 5: 
+          dificultyControl5.checked = true;
+          break;
+        case 6:
+          dificultyControl6.checked = true;
+          break;  
+      }
+      btnSoundsPlayer.play();
+    }
+
+    if (keyEvent.ctrlKey && keyEvent.key === '9')  {
+      keyEvent.preventDefault();
+      const nextTheme = getNextTheme(theme)
+      dispatch({type: SELECT_THEME, theme: nextTheme})
+      switch (nextTheme) {
+        case 'sweet': 
+          themeControlSweet.checked = true;
+          break;
+        case 'deep': 
+        themeControlDeep.checked = true;
+          break;
+        case 'shadow':
+          themeControlShadow.checked = true;
+          break;  
+      }
+      btnSoundsPlayer.play();
+    }
+
+    if (keyEvent.ctrlKey && keyEvent.key === '0')  {
+      keyEvent.preventDefault();
+      const nextLang = getNextLang(language)
+      dispatch({type: SELECT_LANGUAGE, language: nextLang})
+      switch (nextLang) {
+        case 'en': 
+          langControlEng.checked = true;
+          break;
+        case 'ru': 
+          langControlRu.checked = true;
+          break;
+        case 'fr':
+          langControlFr.checked = true;
+          break;  
+      }
+      btnSoundsPlayer.play();
+    }
+  }
+
   return (
-    <div className={`${appClassName} bg-light-${theme} fc-${theme}`}>
+    <div className={`${appClassName} bg-light-${theme} fc-${theme}`} tabIndex={1} onKeyDown={handleKeyPress} ref={(c:HTMLElement) => {settingPageDiv = c}}>
       <NavBar />
       <div className="settings-page-wrapper">
         <div className="lang-colors-controls-wrapper">
@@ -210,8 +294,8 @@ export const SettingsPage: React.FC = () => {
                 ref={(element:HTMLInputElement) => {langControlRu = element}}/>
             </ListGroup.Item>
             <ListGroup.Item onClick={() => {
-              if (langControlChi !== null) {
-                langControlChi.checked = true
+              if (langControlFr !== null) {
+                langControlFr.checked = true
                 dispatch({type: SELECT_LANGUAGE, language: 'fr'})
                 btnSoundsPlayer.play()
               }
@@ -222,7 +306,7 @@ export const SettingsPage: React.FC = () => {
                   dispatch({type: SELECT_LANGUAGE, language: 'fr'})
                   btnSoundsPlayer.play()
                 }}
-                ref={(element:HTMLInputElement) => {langControlChi = element}}/>
+                ref={(element:HTMLInputElement) => {langControlFr = element}}/>
             </ListGroup.Item>
           </ListGroup>
         </Card>

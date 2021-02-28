@@ -31,24 +31,21 @@ export const IndicatorPanel: React.FC = () => {
 
 
   useEffect(()=>{
+    let timer:NodeJS.Timer = null;
     if (isTimerOn) {
-      setTimeout(() => {
-        if (isTimerOn) {
+      timer = setTimeout(() => {
           if (seconds === 59) {
             setSeconds(0);
             setMinutes(minutes + 1);
           } else {
             setSeconds(seconds + 1)
           }
-        }
       }, 1000)
       localStorage.setItem('seconds', JSON.stringify(seconds));
       localStorage.setItem('minutes', JSON.stringify(minutes));
-    } else {
-      setSeconds(0)
-      setMinutes(0)
-      localStorage.setItem('seconds', JSON.stringify(0));
-      localStorage.setItem('minutes', JSON.stringify(0));
+    }
+    return () => { 
+      clearTimeout(timer)
     }
   });
 
