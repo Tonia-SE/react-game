@@ -17,8 +17,8 @@ export function generateInitalField(size = 4) {
     }
   }
 
-  res[cellPos1[0]][cellPos1[1]] = 1024
-  res[cellPos2[0]][cellPos2[1]] = 1024
+  res[cellPos1[0]][cellPos1[1]] = 2
+  res[cellPos2[0]][cellPos2[1]] = 2
   return res;
 }
 
@@ -231,6 +231,7 @@ export function handleMove(curentGameField: Array<Array<number>>, move: string, 
 
   if (checkIsWin(newGameField)) {    
     return (dispatch: DispatchGame) => {
+      dispatch ({type: UPDATE_SCORE, currentSum: currentSum})
       dispatch({type: SET_TIMER_STATE, isTimerOn: false})
       dispatch ({type: GAME_WON, isWin: true, isGameStarted: false})
       winPlayer.play();

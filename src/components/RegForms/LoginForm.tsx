@@ -41,10 +41,10 @@ export const LoginForm: React.FC<LoginFormProps> = (props: LoginFormProps) => {
           e.preventDefault();
         }
       }}>
-      <Modal.Header closeButton style={{ width: '280px' }}>
+      <Modal.Header closeButton>
       </Modal.Header>
       <Modal.Body>
-        <Form>
+        <Form className="my-modal-form">
           <Form.Group  controlId="formBasicEmail">
             <Form.Label>
               <p>{t("reg_form_nick_name_label")}</p>

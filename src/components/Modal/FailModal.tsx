@@ -16,9 +16,11 @@ export const FailModal: React.FC = () => {
   }, [language])
   const isFullScreen = useSelector((state: ApplicationState) => state.game.isFullScreen);
   let isFail = useSelector((state: ApplicationState) => state.game.isFail);
-  const modalBackdropClassName = !isFullScreen ? "my-backdrop" : "";
   const soundsVolume = useSelector((state: ApplicationState) => state.sounds.soundsVolume);
+  const isLoggedIn = useSelector((state: ApplicationState) => state.auth.isLoggedIn);
   failPlayer.volume = soundsVolume
+  const modalBackdropClassName = !isFullScreen ? "my-backdrop" : "";
+  const modalFailText = isLoggedIn? t('modal_fail_text_logged_in'): "";
 
   return (
     <Modal backdropClassName={modalBackdropClassName} show={isFail} onHide={() => {
@@ -32,7 +34,7 @@ export const FailModal: React.FC = () => {
           <Card.Body className="pt-0">
     <Card.Title className="text-center modal-game-title">{t("modal_fail_title")}</Card.Title>
             <Card.Text className="mx-xl-lg-3 text-center modal-game-text">
-            {t("modal_fail_text")} 
+              {modalFailText} 
             </Card.Text>
           </Card.Body>
         </Card>

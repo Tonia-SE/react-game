@@ -18,7 +18,6 @@ export const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) =>
   const language = useSelector((state: ApplicationState) => state.settings.language);
   const isFailedAttempt = useSelector((state: ApplicationState) => state.auth.isFailedAttempt);
   const isRegristred = useSelector((state: ApplicationState) => state.auth.isRegristred);
-  const modalHeaderWidth = language === 'fr'? '350px': '280px'
   const isFullScreen = useSelector((state: ApplicationState) => state.game.isFullScreen);
   const modalBackdropClassName = !isFullScreen ? "my-backdrop" : "";
 
@@ -45,10 +44,10 @@ export const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) =>
           e.preventDefault(); 
         }
       }}>
-      <Modal.Header closeButton style={{ width: modalHeaderWidth }}>
+      <Modal.Header closeButton>
       </Modal.Header>
       <Modal.Body>
-        <Form>
+        <Form className="my-modal-form">
           <Form.Group controlId="formBasicEmail">
           <Form.Label><p>{t("reg_form_nick_name_label")}</p></Form.Label>
             <Form.Control type="text" placeholder={t("reg_form_nick_name_placeholder")}
@@ -92,22 +91,21 @@ export const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) =>
             <Form.Text className="text-muted danger">      
             {isFailedAttempt ? <p className="my-danger">{t("sign_up_form_form_username_exist_message")}</p>: <p></p>}
             {!passwordMatch ? <p className="my-danger">{t("sign_up_form_form_different_passwords_message")}</p>: <p></p>}
-            {passwordTooShort ? <p className="my-danger">{t("sign_up_form_form_short_password_message")}</p>: <p></p>}
-            {usernameTooLong ? <p className="my-danger">{t("sign_up_form_form_long_username_message")}</p>: <p></p>}
+            {passwordTooShort ? <p className="my-danger">{t("sign_up_form_form_short_password_message")}<br/>{t("sign_up_form_form_short_password_message_second_part")}</p>: <p></p>}
+            {usernameTooLong ? <p className="my-danger">{t("sign_up_form_form_long_username_message")}<br/>{t("sign_up_form_form_long_username_message_second_part")}</p>: <p></p>}
             </Form.Text>
           </Form.Group>
           <Button variant="danger" type="submit" className="pull-right" onClick={() => {
-            if (username.length < 10) {
               if (password1.length < 6) {
                 setPasswordTooShort(true)
               } else if (password1 !== password2) {
                 setPasswordMatch(false)
-              } else {
+              } else if(username.length > 9) {
+                setUsernameTooLong(true)
+              }
+              else {
                 dispatch(regUser(username, password1))
               }
-            } else {
-              setUsernameTooLong(true)
-            }
           }}>
             <pre>{t("reg_form_submit")}</pre>
           </Button>

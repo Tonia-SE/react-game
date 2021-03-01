@@ -37,15 +37,17 @@ export const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
         </LinkContainer>
         <Nav className="ml-auto">
           <ButtonGroup>
-    <OverlayTrigger placement="bottom" overlay={<Tooltip id="tooltip-disabled">{t("navBar_tooltip_first_line")}<br/>{t("navBar_tooltip_second_line")}</Tooltip>}>
+          <OverlayTrigger placement="bottom" overlay={<Tooltip id="tooltip-disabled">{t("navBar_tooltip_first_line")}<br/>{t("navBar_tooltip_second_line")}</Tooltip>}>
             <Button className="nav-btn" onClick={() => {dispatch({type: TOGGLE_BTNS_VISABILITY})}}>
               <img className="phone-img" id="full_screen" src="./assets/images/phone.ico" alt="phone"/>
             </Button>
           </OverlayTrigger>
           <DropdownButton className="navbar-btn" menuAlign='right' id="dropdown-menu-align-responsive-1"
             title={<img className="auth-img" src="./assets/images/auth.ico" alt="authorization" />}>
-            {!isLoggedIn && <Dropdown.Item className="my-dropdown" eventKey="1" id="555" onClick={() => props.handleShowLoginForm()}>{t("navBar_auth_login")}</Dropdown.Item>}
-            {isLoggedIn && <Dropdown.Item className="my-dropdown" eventKey="1" id="555" onClick={() => {dispatch({type: LOGOUT_USER})}}>{t("navBar_auth_logout")}</Dropdown.Item>}
+            <Dropdown.Item className="my-dropdown" eventKey="1" id="555" 
+            onClick={() => props.handleShowLoginForm()}>{t("navBar_auth_login")}</Dropdown.Item>
+            {/* <Dropdown.Item className="my-dropdown" eventKey="1" id="555" 
+            onClick={() => {dispatch({type: LOGOUT_USER})}}>{t("navBar_auth_logout")}</Dropdown.Item> */}
             <Dropdown.Item eventKey="2" id="666" onClick={() => props.handleShowSignUp()}>{t("navBar_auth_sign_up")}</Dropdown.Item>
           </DropdownButton>
           <Button className="nav-btn maximize-btn" onClick={() => dispatch({type: TOGGLE_FULLSCREEN})}>

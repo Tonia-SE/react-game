@@ -21,15 +21,13 @@ export const LeftSideMenu: React.FC = () => {
   const soundsVolume = useSelector((state: ApplicationState) => state.sounds.soundsVolume) 
   const menuImgClassName = isFullScreen ? "menu-img-max": "menu-img";
   const menuWrapperClassName = isFullScreen ? "side-menu-wrapper-max": "side-menu-wrapper";
-  const playBtnImgSrc = !isGameStarted ? `./assets/images/start_game_${theme}.ico` : `./assets/images/restart_game_${theme}.ico`;
   const dispatchHandler = !isGameStarted ? {type: START_GAME}: {type: RESTART_GAME};
-  const tooltipText = isGameStarted ? t("left_side_menu_tooltip_play_restart") : t("left_side_menu_tooltip_play_start");
   btnSoundsPlayer.volume = soundsVolume;
 
   return (
     <div className={menuWrapperClassName}>
-      <OverlayTrigger placement="left" overlay={<Tooltip className="display-none" id="tooltip-disabled">{tooltipText}</Tooltip>}>
-        <Link to="#"><img className={menuImgClassName} src={playBtnImgSrc} alt="game" onClick={() => {
+      <OverlayTrigger placement="left" overlay={<Tooltip className="display-none" id="tooltip-disabled">{t("left_side_menu_tooltip_play_start")}</Tooltip>}>
+        <Link to="#"><img className={menuImgClassName} src={`./assets/images/start_game_${theme}.ico`} alt="game" onClick={() => {
             dispatch(dispatchHandler)
             btnSoundsPlayer.play();
           }}/></Link>

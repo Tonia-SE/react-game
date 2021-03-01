@@ -8,7 +8,7 @@
   padding-top: 0;
 }
 .pull-right{
-  margin-left: 57%;
+  margin-left: 55.5%;
   background-color: $color-6;
   border-color: $color-6;
 }
@@ -31,6 +31,9 @@
 .my-danger{
   color: rgb(194, 3, 3);
   opacity: 0.7;
+}
+.my-modal-form{
+  width: 248px !important;
 }
 
 @media (max-width: 768px){
