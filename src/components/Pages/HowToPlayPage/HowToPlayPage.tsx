@@ -73,15 +73,26 @@ export const HowToPlayPage: React.FC = () => {
     <div className={`${appClassName} bg-light-${theme} fc-${theme}`} tabIndex={1} onKeyDown={handleKeyPress} ref={(c:HTMLElement) => {rootDiv = c}}>
       <NavBar />
         <div className="page-wrapper">
-  <p className="page-text"><b className="mr-2">{t("how_to_play_page_text_part_1")}</b>{t("how_to_play_page_text_part_2")} 
+          <p className="page-text"><b className="mr-2">{t("how_to_play_page_text_part_1")}</b>{t("how_to_play_page_text_part_2")} 
             <img className="text-img ml-2" src={`./assets/images/arrow_left_${theme}.ico`} alt="arrow left"/>
             <img className="text-img" src={`./assets/images/arrow_up_${theme}.ico`} alt="arrow up"/>
             <img className="text-img" src={`./assets/images/arrow_down_${theme}.ico`} alt="arrow down"/>
             <img className="text-img mr-2" src={`./assets/images/arrow_right_${theme}.ico`} alt="arrow right"/>
-            {t("how_to_play_page_text_part_3")}<b className="ml-1 mr-1">2048</b>{t("how_to_play_page_text_part_5")}
+            {t("how_to_play_page_text_part_3")}<b className="ml-1 mr-1">2048</b>{t("how_to_play_page_text_part_5")}<br/>
+            {t("how_to_play_page_text_part_6")}<b className="mx-2">{t("how_to_play_page_text_part_7")}</b><br/>
+            <b className="mr-2">ctrl + b:</b>{t("how_to_play_page_text_ctrl_b")},<br/>
+            <b className="mr-2">ctrl + h:</b>{t("how_to_play_page_text_ctrl_h")},<br/>
+            <b className="mr-2">ctrl + i:</b>{t("how_to_play_page_text_ctrl_i")},<br/>
+            <b className="mr-2">ctrl + m:</b>{t("how_to_play_page_text_ctrl_m")},<br/>
+            <b className="mr-2">ctrl + q:</b>{t("how_to_play_page_text_ctrl_q")},<br/>
+            <b className="mr-2">ctrl + 0:</b>{t("how_to_play_page_text_ctrl_0")},<br/>
+            <b className="mr-2">ctrl + 8:</b>{t("how_to_play_page_text_ctrl_8")},<br/>
+            <b className="mr-2">ctrl + 9:</b>{t("how_to_play_page_text_ctrl_9")}.<br/>
+            {t("how_to_play_page_text_part_8")}
           </p>
         </div>
       <Footer />
     </div>
   );
 };
+

@@ -15,14 +15,13 @@ export const IndicatorPanel: React.FC = () => {
   const resetTimer = useSelector((state: ApplicationState) => state.game.resetTimer);
   const indicatorPanelClassName = isFullScreen ? "indicators-wrapper-max": "indicators-wrapper";
   const fontSize = isFullScreen ? "indicator-main-max": "indicator-main";
+  const currentSum = isFullScreen ? "current-sum-value-max": "current-sum-value";
   const none = isGameStarted ? "" : " none";
-
   const initialSeconds = !localStorage.getItem('seconds') ? 0 : JSON.parse(localStorage.getItem('seconds'))
   const initialMinutes = !localStorage.getItem('minutes') ? 0 : JSON.parse(localStorage.getItem('minutes'))
 
   const [seconds, setSeconds] = useState(initialSeconds);
   const [minutes, setMinutes] = useState(initialMinutes);
-
 
   useEffect(() => {
     if (isWin || isFail) {
@@ -39,7 +38,6 @@ export const IndicatorPanel: React.FC = () => {
       dispatch({type: RESET_TIMER, resetTimer: false})
     }
   }, [resetTimer])
-
 
   useEffect(()=>{
     let timer:NodeJS.Timer = null;
@@ -65,7 +63,7 @@ export const IndicatorPanel: React.FC = () => {
       <div className="indicator-wrapper">
         <div className="score-wrapper">
           <p className={fontSize}>{score}</p>
-          <p className="indicator-add ml-2 pt-1">{`+ ${points}`}</p>
+          <p className={`${currentSum} ml-2`}>{`+ ${points}`}</p>
         </div>
       </div>
       <div className="indicator-wrapper">

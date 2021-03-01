@@ -17,8 +17,8 @@
 }
 .indicator-wrapper{
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: space-between;
 }
 .indicator{
   display: flex;
@@ -32,6 +32,16 @@
 .indicator-main-max{
   font-weight: bold;
   font-size: 3vh;
+}
+.current-sum-value{
+  font-weight: 300 !important;
+  font-size: 16px;
+  margin-top: 1px;
+}
+.current-sum-value-max{
+  font-weight: 300 !important;
+  font-size: 2.5vh;
+  margin-top: 0.05vh;
 }
 .score-wrapper{
   display: flex;
@@ -48,6 +58,10 @@
   .indicator-main-max{
     font-size: 18px;
   } 
+  .current-sum-value,
+  .current-sum-value-max{
+    font-size: 12px;
+  }
 }
 
 @media(max-width: 768px) and (orientation: portrait){
@@ -77,6 +91,5 @@
   .indicators-wrapper,
   .indicators-wrapper-max{
     width: 50vh;
-    
   }
 } 

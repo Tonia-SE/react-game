@@ -25,6 +25,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) =>
     getI18n().changeLanguage(language); 
   }, [language])
   const [username, setUserName] = useState('');
+  const [emptyUserName, setEmptyUserName] = useState(false);
   const [usernameTooLong, setUsernameTooLong] = useState(false);
   const [password1, setPassword1] = useState('');
   const [password2, setPassword2] = useState('');
@@ -38,7 +39,14 @@ export const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) =>
   },[isRegristred])
 
   return (
-    <Modal backdropClassName={modalBackdropClassName} show ={props.show} onHide={props.onHide}
+    <Modal backdropClassName={modalBackdropClassName} show ={props.show}
+      onHide={()=> {
+        setEmptyUserName(false)
+        setPasswordMatch(true)
+        setPasswordTooShort(false)
+        setUsernameTooLong(false)
+        props.onHide();
+      }}
       onSubmit ={(e: FormEvent ) => {
         if (!isRegristred) {
           e.preventDefault(); 
@@ -75,7 +83,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) =>
               }}            
             />
           </Form.Group>
-          <Form.Group controlId="formBasicPasswordConfirm">
+          <Form.Group id="confirm-password-form-group" controlId="formBasicPasswordConfirm">
           <Form.Label><p>{t("reg_form_confirm_password")}</p></Form.Label>
             <Form.Control type="password" placeholder={t("reg_form_password_placeholder")} autoComplete="on"
               onChange={ (event) => {
@@ -93,17 +101,19 @@ export const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) =>
             {!passwordMatch ? <p className="my-danger">{t("sign_up_form_form_different_passwords_message")}</p>: <p></p>}
             {passwordTooShort ? <p className="my-danger">{t("sign_up_form_form_short_password_message")}<br/>{t("sign_up_form_form_short_password_message_second_part")}</p>: <p></p>}
             {usernameTooLong ? <p className="my-danger">{t("sign_up_form_form_long_username_message")}<br/>{t("sign_up_form_form_long_username_message_second_part")}</p>: <p></p>}
+            {emptyUserName ? <p className="my-danger">{t("reg_form_empty_username")}</p>: <p></p>}
             </Form.Text>
           </Form.Group>
           <Button variant="danger" type="submit" className="pull-right" onClick={() => {
-              if (password1.length < 6) {
+              if (username.length === 0) {
+                setEmptyUserName(true)              
+              } else if (password1.length < 6) {
                 setPasswordTooShort(true)
               } else if (password1 !== password2) {
                 setPasswordMatch(false)
-              } else if(username.length > 9) {
+              } else if (username.length > 9) {
                 setUsernameTooLong(true)
-              }
-              else {
+              } else {
                 dispatch(regUser(username, password1))
               }
           }}>

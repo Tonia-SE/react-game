@@ -34,8 +34,16 @@ export const LoginForm: React.FC<LoginFormProps> = (props: LoginFormProps) => {
     }
   },[isLoggedIn])
 
+  const [emptyUsername, setEmptyUserName] = useState(false);
+  const [emptyPassword, setEmptyPassword] = useState(false);
+
   return (
-    <Modal backdropClassName={modalBackdropClassName} show={props.show} onHide={props.onHide}
+    <Modal backdropClassName={modalBackdropClassName} show={props.show}
+      onHide={()=> {
+        setEmptyUserName(false)
+        setEmptyPassword(false)
+        props.onHide()
+      }}
       onSubmit ={(e: FormEvent )=>{
         if (!isLoggedIn) {
           e.preventDefault();
@@ -55,10 +63,12 @@ export const LoginForm: React.FC<LoginFormProps> = (props: LoginFormProps) => {
               }}
               onFocus={()=>{
                 dispatch({type: RESET_FAILED_ATTEMPT })
+                setEmptyUserName(false)
+                setEmptyPassword(false)
               }}
             />
           </Form.Group>
-          <Form.Group controlId="formBasicPassword">
+          <Form.Group id="enter-password-form-group" controlId="formBasicPassword">
           <Form.Label><p>{t("reg_form_password_label")}</p></Form.Label>
             <Form.Control type="password" placeholder={t("reg_form_password_placeholder")} autoComplete="on"
               onChange={ (event) => {
@@ -66,14 +76,24 @@ export const LoginForm: React.FC<LoginFormProps> = (props: LoginFormProps) => {
               }}
               onFocus={()=>{
                 dispatch({type: RESET_FAILED_ATTEMPT })
+                setEmptyUserName(false)
+                setEmptyPassword(false)
               }}
             />
             <Form.Text>
               {isFailedAttempt ? <p className="my-danger">{t("login_form_failed_login_message")}</p>: <p></p>}
+              {emptyUsername ? <p className="my-danger">{t("reg_form_empty_username")}</p>: <p></p>}
+            {emptyPassword ? <p className="my-danger">{t("reg_form_empty_password")}</p>: <p></p>}
             </Form.Text>
           </Form.Group>
-          <Button variant="danger" type="submit" className="pull-right" onClick={() => {            
-            dispatch(loginUser(username, password))
+          <Button variant="danger" type="submit" className="pull-right" onClick={() => {
+            if (username.length === 0) {
+              setEmptyUserName(true)
+            } else if (password.length === 0) {
+              setEmptyPassword(true)
+            } else {
+              dispatch(loginUser(username, password))
+            }
           }}>
             <pre>{t("reg_form_submit")}</pre>
           </Button>

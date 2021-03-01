@@ -35,6 +35,13 @@
 .my-modal-form{
   width: 248px !important;
 }
+.form-text{
+  height: 19px;
+}
+#confirm-password-form-group,
+#enter-password-form-group{
+  margin-bottom: 0 !important;
+}
 
 @media (max-width: 768px){
   .my-backdrop{

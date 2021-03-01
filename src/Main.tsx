@@ -77,10 +77,10 @@ export const Main: React.FC = () => {
   useEffect(() => {
     if (isLoggedIn) {
       if (isWin || isFail) {
-        saveGameResult(userName, score, seconds, minutes)      
+        saveGameResult(userName, score, seconds, minutes)
+        dispatch({type: RESET_TIMER, resetTimer: true})
       }
     }
-    dispatch({type: RESET_TIMER, resetTimer: true})
   }, [isWin, isFail])
 
   function handleKeyPress(keyEvent: React.KeyboardEvent) {
