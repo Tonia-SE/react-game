@@ -11,10 +11,12 @@
   margin-left: 55.5%;
   background-color: $color-6;
   border-color: $color-6;
+  opacity: 0.8;
 }
 .pull-right:hover{
   background-color: $bg-color-dark;
   border-color: $bg-color-dark;
+  opacity: 1;
 }
 .modal{
   display: flex !important;

@@ -1,49 +1,47 @@
 import { backendServer } from '../consts';
-import { GET_BEST_RESULTS, SHOW_LOADER } from './actionTypes';
+import { GET_BEST_RESULTS } from './actionTypes';
 
 type GameResultsList = Array<{
-  user: string
-  score: number
-  seconds: number
-  minutes: number}>
+  user: string;
+  score: number;
+  seconds: number;
+  minutes: number;
+}>;
 
 export interface IBestResultsState {
-  results: GameResultsList
+  results: GameResultsList;
 }
 
 interface IBestResultsAction {
-  type: string,
-  results: GameResultsList
+  type: string;
+  results: GameResultsList;
 }
 
 const initialState: IBestResultsState = {
-  results: []
+  results: [],
 };
 
 export type DispatchBestResults = (args: IBestResultsAction) => IBestResultsAction;
 
 export const bestResultsReducer = (state: IBestResultsState = initialState, action: IBestResultsAction) => {
   switch (action.type) {
-    case GET_BEST_RESULTS :
+    case GET_BEST_RESULTS:
       return { ...state, results: action.results };
     default:
       return state;
   }
-
 };
 
 export function getGameResults() {
   return async (dispatch: DispatchBestResults) => {
-    //results:GameResultsList = []
     try {
-      //dispatch({ type: SHOW_LOADER, payload: undefined, isLoading: true });
       const response = await fetch(`${backendServer}/results`);
       const json = await response.json();
       console.log(json);
       dispatch({
         type: GET_BEST_RESULTS,
         results: json,
-      });      
+      });
     } catch (e) {
       console.log(e);
     }
@@ -51,7 +49,7 @@ export function getGameResults() {
 }
 
 export function saveGameResult(user: string, score: number, seconds: number, minutes: number) {
-  try {    
+  try {
     fetch(`${backendServer}/results`, {
       method: 'POST',
       cache: 'no-cache',
@@ -61,7 +59,7 @@ export function saveGameResult(user: string, score: number, seconds: number, min
       },
       redirect: 'follow',
       referrerPolicy: 'no-referrer',
-    });     
+    });
   } catch (e) {
     console.log(e);
   }

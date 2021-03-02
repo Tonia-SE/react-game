@@ -7,8 +7,8 @@ export const Footer: React.FC = () => {
   const { t } = useTranslation();
   const language = useSelector((state: ApplicationState) => state.settings.language);
   useEffect(() => {
-    getI18n().changeLanguage(language); 
-  }, [language])
+    getI18n().changeLanguage(language);
+  }, [language]);
   return (
     <div className="container-fluid text-center text-md-left ">
       <div className="footer-copyright font-16">

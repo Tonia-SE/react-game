@@ -1,19 +1,21 @@
 import React from 'react';
-import { Table } from 'react-bootstrap';
-import { Footer } from '../../Footer/Footer'
-import { NavBar } from '../../NavBar/NavBar';
 import { ApplicationState } from '../../../store/rootReducer';
 import { useSelector } from 'react-redux';
+import { Table } from 'react-bootstrap';
+import { Footer } from '../../Footer/Footer';
+import { NavBar } from '../../NavBar/NavBar';
 
 export const AutoPlayPage: React.FC = () => {
   const isFullScreen = useSelector((state: ApplicationState) => state.game.isFullScreen);
   const theme = useSelector((state: ApplicationState) => state.settings.theme);
-  const appClassName = isFullScreen ? "app-max": "app";
+  const appClassName = isFullScreen ? 'app-max' : 'app';
   return (
     <div className={`${appClassName} bg-light-${theme}`}>
       <NavBar />
       <div className="best-results page mt-3">
-        <h3><b>BEST RESULTS</b></h3>
+        <h3>
+          <b>BEST RESULTS</b>
+        </h3>
         <div className="table-wrapper">
           <Table className="mt-3" bordered hover>
             <thead className="thead">

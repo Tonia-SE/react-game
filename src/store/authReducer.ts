@@ -1,6 +1,6 @@
 import { backendServer } from '../consts';
-import { HIDE_LOADER, LOGIN_USER, LOGOUT_USER, REGISTER_USER, RESET_FAILED_ATTEMPT, SHOW_LOADER } from './actionTypes';
-//import { showRegFormMessage } from './regFormsMessageReducer';
+import { LOGIN_USER, LOGOUT_USER, REGISTER_USER, RESET_FAILED_ATTEMPT, SHOW_LOADER } from './actionTypes';
+
 
 export interface IAuthState {
   isRegristred?: boolean;
@@ -25,7 +25,7 @@ const initialState: IAuthState = {
   userName: '',
   isLoggedIn: false,
   isRegristred: false,
-  isFailedAttempt: false
+  isFailedAttempt: false,
 };
 
 let authState = { ...initialState };
@@ -45,7 +45,7 @@ export const authReducer = (state: IAuthState = authState, action: IAuthAction) 
     case REGISTER_USER:
       return { ...action.payload };
     case RESET_FAILED_ATTEMPT:
-      localStorage.setItem('authstate', JSON.stringify({ ...state, isFailedAttempt: false }))
+      localStorage.setItem('authstate', JSON.stringify({ ...state, isFailedAttempt: false }));
       return { ...state, isFailedAttempt: false };
     default:
       return state;
@@ -69,7 +69,6 @@ export function loginUser(user: string, password: string) {
         redirect: 'follow',
         referrerPolicy: 'no-referrer',
       });
-      //const json = await response.json();
       if (response.status === 200) {
         isLoggendIn = true;
         isFailedLogin = false;
@@ -81,7 +80,7 @@ export function loginUser(user: string, password: string) {
         payload: {
           userName: user,
           isLoggedIn: isLoggendIn,
-          isFailedAttempt: isFailedLogin
+          isFailedAttempt: isFailedLogin,
         },
       });
     } catch (e) {
@@ -107,11 +106,10 @@ export function regUser(user: string, password: string) {
         redirect: 'follow',
         referrerPolicy: 'no-referrer',
       });
-      //const json = await response.json();
       if (response.status === 200) {
         isRegistred = true;
       } else {
-        isFailedAttempt = true
+        isFailedAttempt = true;
       }
       dispatch({
         type: REGISTER_USER,
@@ -119,11 +117,10 @@ export function regUser(user: string, password: string) {
           userName: user,
           isLoggedIn: false,
           isRegristred: isRegistred,
-          isFailedAttempt: isFailedAttempt
+          isFailedAttempt: isFailedAttempt,
         },
-      });      
+      });
     } catch (e) {
-      console.log(e);
     }
   };
 }

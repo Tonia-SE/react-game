@@ -7,7 +7,7 @@ export interface ISettingsState {
 }
 
 interface ISettingsAction {
-  type: string,
+  type: string;
   theme?: string;
   language?: string;
   isGameBtnsVisible?: boolean;
@@ -19,9 +19,9 @@ let initialState: ISettingsState = {
   isGameBtnsVisible: false,
 };
 
-const savedSettingsState = localStorage.getItem('settingsState')
+const savedSettingsState = localStorage.getItem('settingsState');
 if (savedSettingsState !== null) {
-  initialState = JSON.parse(savedSettingsState)
+  initialState = JSON.parse(savedSettingsState);
 }
 
 export type DispatchGame = (args: ISettingsAction) => ISettingsAction;
@@ -35,7 +35,7 @@ export const settingsReducer = (state: ISettingsState = initialState, action: IS
       localStorage.setItem('settingsState', JSON.stringify({ ...state, theme: action.theme }));
       return { ...state, theme: action.theme };
     case TOGGLE_BTNS_VISABILITY:
-      const toggleBtnsVisability = !state.isGameBtnsVisible
+      const toggleBtnsVisability = !state.isGameBtnsVisible;
       localStorage.setItem('settingsState', JSON.stringify({ ...state, isGameBtnsVisible: toggleBtnsVisability }));
       return { ...state, isGameBtnsVisible: toggleBtnsVisability };
     default:

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ApplicationState } from '../../store/rootReducer';
-import { handleMove } from '../../store/actions'
-import { btnSoundsPlayer } from '../../index'
+import { handleMove } from '../../store/actions';
+import { btnSoundsPlayer } from '../../index';
 
 export const RightSideMenu: React.FC = () => {
   const dispatch = useDispatch();
@@ -12,33 +12,53 @@ export const RightSideMenu: React.FC = () => {
   const field = useSelector((state: ApplicationState) => state.game.field);
   const theme = useSelector((state: ApplicationState) => state.settings.theme);
   const soundsVolume = useSelector((state: ApplicationState) => state.sounds.soundsVolume);
-  const arrowClassName = isFullScreen ? "arrow-max": "arrow";
-  const menuWrapperClassName = isFullScreen ? "side-menu-wrapper-max": "side-menu-wrapper";
-  const visibleClassName = isBtnsVisible ? "" : "none";
+  const arrowClassName = isFullScreen ? 'arrow-max' : 'arrow';
+  const menuWrapperClassName = isFullScreen ? 'side-menu-wrapper-max' : 'side-menu-wrapper';
+  const visibleClassName = isBtnsVisible ? '' : 'none';
   btnSoundsPlayer.volume = soundsVolume;
 
   return (
-  <div className={`${menuWrapperClassName} ${visibleClassName}`}> 
-    <img className={`${arrowClassName}`} src={`./assets/images/arrow_left_${theme}.ico`} alt="arrow left" onClick={() => {
-      if(isGameStarted){
-        dispatch(handleMove(field, 'ArrowLeft', btnSoundsPlayer))
-      }
-      }}/>
-    <img className={`${arrowClassName}`} src={`./assets/images/arrow_up_${theme}.ico`} alt="arrow up" onClick={() => {
-      if(isGameStarted){
-        dispatch(handleMove(field, 'ArrowUp', btnSoundsPlayer))
-      }
-      }}/>
-    <img className={`${arrowClassName}`} src={`./assets/images/arrow_down_${theme}.ico`} alt="arrow down" onClick={() => {
-      if(isGameStarted){
-        dispatch(handleMove(field, 'ArrowDown', btnSoundsPlayer))
-      }
-      }}/>
-    <img className={`${arrowClassName}`} src={`./assets/images/arrow_right_${theme}.ico`} alt="arrow right" onClick={() => {
-      if(isGameStarted){
-        dispatch(handleMove(field, 'ArrowRight', btnSoundsPlayer))
-      }
-      }}/>
-  </div>
+    <div className={`${menuWrapperClassName} ${visibleClassName}`}>
+      <img
+        className={`${arrowClassName}`}
+        src={`./assets/images/arrow_left_${theme}.ico`}
+        alt="arrow left"
+        onClick={() => {
+          if (isGameStarted) {
+            dispatch(handleMove(field, 'ArrowLeft', btnSoundsPlayer));
+          }
+        }}
+      />
+      <img
+        className={`${arrowClassName}`}
+        src={`./assets/images/arrow_up_${theme}.ico`}
+        alt="arrow up"
+        onClick={() => {
+          if (isGameStarted) {
+            dispatch(handleMove(field, 'ArrowUp', btnSoundsPlayer));
+          }
+        }}
+      />
+      <img
+        className={`${arrowClassName}`}
+        src={`./assets/images/arrow_down_${theme}.ico`}
+        alt="arrow down"
+        onClick={() => {
+          if (isGameStarted) {
+            dispatch(handleMove(field, 'ArrowDown', btnSoundsPlayer));
+          }
+        }}
+      />
+      <img
+        className={`${arrowClassName}`}
+        src={`./assets/images/arrow_right_${theme}.ico`}
+        alt="arrow right"
+        onClick={() => {
+          if (isGameStarted) {
+            dispatch(handleMove(field, 'ArrowRight', btnSoundsPlayer));
+          }
+        }}
+      />
+    </div>
   );
 };

@@ -6,9 +6,9 @@ export interface ISoundsState {
 }
 
 interface ISoundsAction {
-  type: string,
-  musicVolume?: number,
-  soundsVolume?: number
+  type: string;
+  musicVolume?: number;
+  soundsVolume?: number;
 }
 
 let initialState: ISoundsState = {
@@ -16,9 +16,9 @@ let initialState: ISoundsState = {
   soundsVolume: 0,
 };
 
-const savedSoundsState = localStorage.getItem('soundsState')
+const savedSoundsState = localStorage.getItem('soundsState');
 if (savedSoundsState !== null) {
-  initialState = JSON.parse(savedSoundsState)
+  initialState = JSON.parse(savedSoundsState);
 }
 
 export type DispatchGame = (args: ISoundsAction) => ISoundsAction;
@@ -26,13 +26,13 @@ export type DispatchGame = (args: ISoundsAction) => ISoundsAction;
 export const soundsReducer = (state: ISoundsState = initialState, action: ISoundsAction) => {
   switch (action.type) {
     case SET_SOUNDS_VOLUME:
-      const soundsVolume = action.soundsVolume / 100
+      const soundsVolume = action.soundsVolume / 100;
       localStorage.setItem('soundsState', JSON.stringify({ ...state, soundsVolume: soundsVolume }));
       return { ...state, soundsVolume: soundsVolume };
     case SET_MUSIC_VOLUME:
-      const musicVolume = action.musicVolume / 100
+      const musicVolume = action.musicVolume / 100;
       localStorage.setItem('soundsState', JSON.stringify({ ...state, musicVolume: musicVolume }));
-      return { ...state, musicVolume: musicVolume }
+      return { ...state, musicVolume: musicVolume };
     default:
       return state;
   }

@@ -75,6 +75,7 @@
     "i18next": "^19.9.0",
     "react-i18next": "^11.8.8",
     "sass": "^1.32.8",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "video-react": "^0.14.1"
   }
 }
