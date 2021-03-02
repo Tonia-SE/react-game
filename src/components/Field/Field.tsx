@@ -17,6 +17,9 @@ export const Field: React.FC = () => {
   const isGameStarted = useSelector((state: ApplicationState) => state.game.isGameStarted);
   const isFullScreen = useSelector((state: ApplicationState) => state.game.isFullScreen);
   const field = useSelector((state: ApplicationState) => state.game.field);
+  const moves = useSelector((state: ApplicationState) => state.game.moves);
+  const direction = useSelector((state: ApplicationState) => state.game.directionOfLastMove);
+
   const theme = useSelector((state: ApplicationState) => state.settings.theme);
   const soundsVolume = useSelector((state: ApplicationState) => state.sounds.soundsVolume);
   const fieldClassName = isFullScreen ? "field-max": "field";
@@ -27,7 +30,6 @@ export const Field: React.FC = () => {
   useEffect(() => {
     getI18n().changeLanguage(language); 
   }, [language])
-
 
   if(!isGameStarted) {
     return (

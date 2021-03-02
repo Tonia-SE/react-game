@@ -1,7 +1,7 @@
 import { isError } from 'util';
 import { failPlayer, winPlayer } from '..';
 import { backendServer } from '../consts';
-import { GAME_FAILED, GAME_WON, RESET_TIMER, RESTART_GAME, SET_TIMER_STATE, UPDATE_GAME_FIELD, UPDATE_SCORE } from './actionTypes';
+import { GAME_FAILED, GAME_WON, RESET_TIMER, RESTART_GAME, SET_TIMER_STATE, UPDATE_GAME_FIELD, UPDATE_MOVES, UPDATE_SCORE } from './actionTypes';
 import {DispatchGame} from './gameReducer'
 
 export function generateInitalField(size = 4) {
@@ -62,85 +62,159 @@ function generateNewCell(field: Array<Array<number>>) {
   
 }
 
-export function moveUp(field: Array<Array<number>>):number {
+
+export function moveUp(field: Array<Array<number>>, movesArray: Array<Array<{}>>):number {
   let currentSum = 0;
-  for(let j = 0; j < field.length; j++) {
-    for(let _ = 0; _ < field.length; _ ++) {
-      for(let i = 1; i < field.length; i ++) {
-        if (field[i-1][j] === 0) {
-          field[i-1][j] = field[i][j];
+  let empty = 0;
+  let withValue = 0;
+
+  
+  for(let j = 0; j < field.length  ; j++) {
+    empty = 0;
+    withValue = 0;
+      for(let i = 0; i < field.length; i ++) {
+      if (field[i][j] !== 0 && i !=0 ) {
+        if (field[i][j] === field[withValue][j] && i !== 0) {
+          movesArray[i][j] = {kind: 'add', value: field[withValue][j], dest: [withValue, j]}
+          field[withValue][j] = field[withValue][j] * 2;
           field[i][j] = 0;
+          withValue++;
+          currentSum = field[withValue][j];
+        } else {
+          const tmp = field[i][j]
+          field[i][j] = 0;
+          field[empty][j] = tmp
+          withValue = empty;
+          empty++;
+          if (i !== withValue) {
+            movesArray[i][j] = {kind: 'move', value: tmp, dest: [withValue, j]}
+          }
         }
-        if ((field[i-1][j] !== 0) && field[i-1][j] === field[i][j]) {
-          field[i-1][j] = field[i][j] + field[i-1][j];
-          currentSum = currentSum + field[i-1][j];
-          field[i][j] = 0;
-        } 
+      }
+
+      if (field[i][j] !== 0 && i === 0 ) {
+        empty++;
       }
     }
   }
+
   return currentSum;
 }
 
-export function moveDown(field: Array<Array<number>>) {
+export function moveDown(field: Array<Array<number>>, movesArray: Array<Array<{}>>) {
   let currentSum = 0;
+  let empty = 0;
+  let withValue = 0;
+
   for(let j = 0; j < field.length; j++) {
-    for(let _ = 0; _ < field.length; _ ++) {
-      for(let i = field.length -2; i >= 0; i --) {      
-        if (field[i+1][j] === 0) {
-          field[i+1][j] = field[i][j];
+    empty = field.length - 1;
+    withValue = field.length - 1;
+      for(let i = field.length - 1; i >= 0; i --) {
+      if (field[i][j] !== 0 && i != field.length - 1 ) {
+        if (field[i][j] === field[withValue][j] && i !== field.length - 1) {
+          movesArray[i][j] = {kind: 'add', value: field[withValue][j], dest: [withValue, j]}
+          field[withValue][j] = field[withValue][j] * 2;
           field[i][j] = 0;
-        }
-        if ((field[i+1][j] !== 0) && field[i+1][j] === field[i][j]) {
-          field[i+1][j] = field[i][j] + field[i+1][j];
-          currentSum = currentSum + field[i+1][j];
+          withValue--;
+          currentSum = field[withValue][j];
+        } else {
+          const tmp = field[i][j]
           field[i][j] = 0;
+          field[empty][j] = tmp
+          withValue = empty;
+          empty--;
+          if (i !== withValue) {            
+            movesArray[i][j] = {kind: 'move', value: tmp, dest: [withValue, j]}
+          }
         }
+      }
+
+      if (field[i][j] !== 0 && i === field.length - 1 ) {
+        empty--;
       }
     }
   }
+
   return currentSum;
 }
 
-export function moveLeft(field: Array<Array<number>>) {
+export function moveLeft(field: Array<Array<number>>, movesArray: Array<Array<{}>>) {
   let currentSum = 0;
+  let empty = 0;
+  let withValue = 0;
+
   for(let i = 0; i < field.length; i ++) {
-    for(let _ = 0; _ < field.length; _ ++) {
-      for(let j = 1; j < field.length ; j++) {    
-        if (field[i][j-1] === 0) {
-          field[i][j-1] = field[i][j];
+    empty = 0;
+    withValue = 0;
+    for(let j = 0; j < field.length  ; j++) {      
+      if (field[i][j] !== 0 && j !=0 ) {
+        if (field[i][j] === field[i][withValue] && j !== 0) {
+          movesArray[i][j] = {kind: 'add', value:field[i][withValue], dest: [i, withValue]}
+          field[i][withValue] = field[i][withValue] * 2;
           field[i][j] = 0;
-        }
-        if ((field[i][j-1] !== 0) && field[i][j-1] === field[i][j]) {
-          field[i][j-1] = field[i][j] + field[i][j-1];
-          currentSum = currentSum + field[i][j-1];
+          withValue++;
+          currentSum = field[i][withValue];
+        } else {
+          const tmp = field[i][j]
           field[i][j] = 0;
+          field[i][empty] = tmp
+          withValue = empty;
+          empty++;
+          if (j !== withValue) {
+            movesArray[i][j] = {kind: 'move', value: tmp, dest: [i, withValue]}
+          }
         }
       }
-    }  
+
+      if (field[i][j] !== 0 && j === 0 ) {
+        empty++;
+      }
+    }
   }
+
   return currentSum;
 }
 
-export function moveRight(field: Array<Array<number>>) {
+
+
+export function moveRight(field: Array<Array<number>>, movesArray: Array<Array<{}>>) {
   let currentSum = 0;
+  let empty = 0;
+  let withValue = 0;
+
   for(let i = 0; i < field.length; i ++) {
-    for(let _ = 0; _ < field.length; _ ++) {
-      for(let j = field.length - 2; j >=0 ; j--) {    
-        if (field[i][j+1] === 0) {
-          field[i][j+1] = field[i][j];
+    empty = field.length - 1;
+    withValue = field.length -1;
+    for(let j = field.length -1; j >= 0; j--) {      
+      if (field[i][j] !== 0 && j != field.length -1) {
+        if (field[i][j] === field[i][withValue] && j !== field.length -1) {
+          movesArray[i][j] = {kind: 'add', value: field[i][withValue], dest: [i, withValue]}
+          field[i][withValue] = field[i][withValue] * 2;
           field[i][j] = 0;
-        }
-        if ((field[i][j+1] !== 0) && field[i][j+1] === field[i][j]) {
-          field[i][j+1] = field[i][j] + field[i][j+1];
-          currentSum = currentSum + field[i][j+1];
+          withValue--;
+          currentSum = field[i][withValue];          
+        } else {
+          const tmp = field[i][j]
           field[i][j] = 0;
+          field[i][empty] = tmp
+          withValue = empty;
+          empty--;
+          if (j !== withValue) {            
+            movesArray[i][j] = {kind: 'move', value: tmp, dest: [i, withValue]}
+          }
         }
       }
-    }  
+
+      if (field[i][j] !== 0 && j === field.length -1 ) {
+        empty--;
+      }
+    }
+
   }
+
   return currentSum;
 }
+
 
 
 function checkForNextMove(field: Array<Array<number>>) {
@@ -211,19 +285,20 @@ function checkIsWin (field: Array<Array<number>>) {
 
 export function handleMove(curentGameField: Array<Array<number>>, move: string, cellSoundsPlayer: HTMLAudioElement) {
   const newGameField = [...curentGameField];
+  const movesArray = Array(curentGameField.length).fill([]).map(() => Array(curentGameField.length).fill({kind: 'none', value: 0, dest:[]}));
   let currentSum = 0;
   switch(move) {
     case 'ArrowUp':
-      currentSum = moveUp(newGameField);
+      currentSum = moveUp(newGameField, movesArray);
       break
     case 'ArrowDown':
-      currentSum = moveDown(newGameField);
+      currentSum = moveDown(newGameField, movesArray);
       break
     case 'ArrowLeft':
-      currentSum = moveLeft(newGameField)
+      currentSum = moveLeft(newGameField, movesArray)
       break
     case 'ArrowRight':      
-      currentSum = moveRight(newGameField)
+      currentSum = moveRight(newGameField, movesArray)
       break          
     default:
       break
@@ -239,7 +314,8 @@ export function handleMove(curentGameField: Array<Array<number>>, move: string, 
   } else {
     generateNewCell(newGameField)
     if (checkForNextMove(newGameField)) {
-      return (dispatch: DispatchGame) => {      
+      return (dispatch: DispatchGame) => {
+        dispatch ({type: UPDATE_MOVES, moves: movesArray, direction: move})
         dispatch ({type: UPDATE_GAME_FIELD, field: newGameField})
         dispatch ({type: UPDATE_SCORE, currentSum: currentSum})
         cellSoundsPlayer.play()

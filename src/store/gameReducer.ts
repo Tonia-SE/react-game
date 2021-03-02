@@ -1,7 +1,7 @@
 import { generateInitalField } from './actions';
 import { FINISH_GAME, START_GAME, TOGGLE_FULLSCREEN,
         UPDATE_GAME_FIELD, RESTART_GAME, SET_GAME_SIZE,
-        GAME_FAILED, GAME_WON, UPDATE_SCORE, SET_TIMER_STATE, RESET_TIMER, SAVE_GAME_TIME } from './actionTypes';
+        GAME_FAILED, GAME_WON, UPDATE_SCORE, SET_TIMER_STATE, RESET_TIMER, SAVE_GAME_TIME, UPDATE_MOVES } from './actionTypes';
 
 export interface IGameState {
   isGameStarted: boolean;
@@ -16,6 +16,8 @@ export interface IGameState {
   resetTimer: boolean;
   seconds: number;
   minutes: number;
+  moves: Array<Array<{}>>,
+  directionOfLastMove: string;
 }
 
 interface IGameAction {
@@ -31,12 +33,28 @@ interface IGameAction {
   resetTimer?: boolean;
   seconds?: number;
   minutes?: number;
+  moves?: Array<Array<{}>>
+  direction?: string;
 }
+
+
+const initField = generateInitalField();
+const initMoves = Array(initField.length).fill([]).map(() => Array(initField.length).fill({kind: 'none', value: 0, dest:[]}));
+initField.forEach((row, rowIndex) => {
+  row.forEach((value, colIndex) => {
+    if (!value) {
+      initMoves[rowIndex][colIndex].value = value;
+    }
+  })
+})
+
+
 
 let initialState: IGameState = {
   isGameStarted: false,
   isFullScreen: false,
-  field: generateInitalField(),
+  moves: initMoves,
+  field: initField,
   isFail: false,
   isWin: false,
   gameSize: 4,
@@ -45,7 +63,8 @@ let initialState: IGameState = {
   isTimerOn: false,
   resetTimer: false,
   seconds: 0,
-  minutes: 0
+  minutes: 0,
+  directionOfLastMove: 'none'
 };
 
 const savedGameState = localStorage.getItem('gameState')
@@ -76,6 +95,9 @@ export const gameReducer = (state: IGameState = initialState, action: IGameActio
     case UPDATE_GAME_FIELD:
       localStorage.setItem('gameState', JSON.stringify({ ...state, field: action.field }));
       return { ...state, field: action.field};
+    case UPDATE_MOVES:
+      localStorage.setItem('gameState', JSON.stringify({ ...state, moves: action.moves, directionOfLastMove: action.direction }));
+      return { ...state, moves: action.moves, directionOfLastMove: action.direction};
     case SET_GAME_SIZE:
       localStorage.setItem('gameState', JSON.stringify({ ...state, gameSize: action.gameSize }));
       return { ...state, gameSize: action.gameSize};      
