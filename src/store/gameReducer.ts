@@ -49,7 +49,6 @@ initField.forEach((row, rowIndex) => {
 })
 
 
-
 let initialState: IGameState = {
   isGameStarted: false,
   isFullScreen: false,
@@ -79,13 +78,29 @@ export const gameReducer = (state: IGameState = initialState, action: IGameActio
   switch (action.type) {
     case START_GAME:
       const newGameField = [...generateInitalField(state.gameSize)]
-      localStorage.setItem('gameState', JSON.stringify({ ...state, field: newGameField, isGameStarted: true, currentSum: 0, score: 0, isTimerOn: true, resetTimer: true }));
-      return { ...state, field: [...newGameField], isGameStarted: true, currentSum: 0, score: 0, isTimerOn: true, resetTimer: true };
+      const newMoves = Array(newGameField.length).fill([]).map(() => Array(newGameField.length).fill({kind: 'none', value: 0, dest:[]}));
+      newGameField.forEach((row, rowIndex) => {
+        row.forEach((value, colIndex) => {
+          if (!value) {
+            newMoves[rowIndex][colIndex].value = value;
+          }
+        })
+      })
+      localStorage.setItem('gameState', JSON.stringify({ ...state, moves: newMoves, field: newGameField, isGameStarted: true, currentSum: 0, score: 0, isTimerOn: true, resetTimer: true }));
+      return { ...state, moves: newMoves, field: newGameField, isGameStarted: true, currentSum: 0, score: 0, isTimerOn: true, resetTimer: true };
     case RESTART_GAME:
       //const toggleGameStarted = !state.isGameStarted;
       const newGameField2 = [...generateInitalField(state.gameSize)]
-      localStorage.setItem('gameState', JSON.stringify({ ...state, field: newGameField2, isGameStarted: false, currentSum: 0, score: 0, isTimerOn: false, resetTimer: true }));
-      return { ...state, field: newGameField2, isGameStarted: false, currentSum: 0, score: 0, isTimerOn: false, resetTimer: true };
+      const newMoves2 = Array(newGameField2.length).fill([]).map(() => Array(newGameField2.length).fill({kind: 'none', value: 0, dest:[]}));
+      newGameField2.forEach((row, rowIndex) => {
+        row.forEach((value, colIndex) => {
+          if (!value) {
+            newMoves2[rowIndex][colIndex].value = value;
+          }
+        })
+      })
+      localStorage.setItem('gameState', JSON.stringify({ ...state, moves: newMoves2, field: newGameField2, isGameStarted: false, currentSum: 0, score: 0, isTimerOn: false, resetTimer: true }));
+      return { ...state, moves: newMoves2, field: newGameField2, isGameStarted: false, currentSum: 0, score: 0, isTimerOn: false, resetTimer: true };
     case FINISH_GAME:
       return { ...state, isGameStarted: action.isGameStarted };
     case TOGGLE_FULLSCREEN:

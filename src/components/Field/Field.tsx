@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { For } from 'react-loops'
 
 import { Cell } from '../Cell/Cell';
 import { IndicatorPanel } from '../Indicators/IndicatorPanel';
@@ -11,6 +12,12 @@ import { START_GAME } from '../../store/actionTypes';
 import { RightSideMenu } from '../SideMenu/RightSideMenu';
 import { btnSoundsPlayer } from '../../index'
 import { getI18n, useTranslation } from 'react-i18next';
+
+interface IMoveItem {
+  value: number
+  dest: Array<number>
+  kind: string
+}
 
 export const Field: React.FC = () => {
   const dispatch = useDispatch();
@@ -59,11 +66,39 @@ export const Field: React.FC = () => {
         <LeftSideMenu />
         {/* <TransitionGroup> */}
           <div className={`${fieldClassName} border-color-${theme}`} >  
-            {field.map((row: Array<number>) => {
-              return row.map((value: number) => {
-                return <Cell value={value} key={Math.random()*1000}/>
+          
+
+          <For of={moves} as={(row:Array<IMoveItem>) =>
+            <For of={row} as={(item:IMoveItem) =>
+              <Cell value={item.value} moveClasses={''} key={Math.random()*1000}/>
+            }/>
+          }/>
+
+            {/* {moves.map((row: Array<IMoveItem>) => {
+              return row.map((value: IMoveItem) => {
+                let moveClasses = ''
+                if (value.kind !== 'none') {
+                  switch(direction) {
+                    case 'ArrowUp':
+                      moveClasses = "up"
+                      break
+                    case 'ArrowDown':
+                      moveClasses = "down"
+                      break
+                    case 'ArrowLeft':
+                      moveClasses = "left"
+                      break
+                    case 'ArrowRight':      
+                      moveClasses = "right"
+                      break          
+                    default:
+                      break
+                  }
+                }
+
+                return <Cell value={value.value} moveClasses={moveClasses} key={Math.random()*1000}/>
               })
-            })}
+            })} */}
           </div>
         {/* </TransitionGroup> */}
         <RightSideMenu/>

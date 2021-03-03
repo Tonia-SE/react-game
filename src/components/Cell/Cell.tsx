@@ -4,7 +4,8 @@ import { CSSTransition } from 'react-transition-group';
 import { ApplicationState } from '../../store/rootReducer';
 
 interface CellProps {
-  value: number  
+  value: number
+  moveClasses: string
 }
 
 export const Cell: React.FC<CellProps> = (props: CellProps) => {
@@ -15,18 +16,18 @@ export const Cell: React.FC<CellProps> = (props: CellProps) => {
   const maxClassName = isFullScreen ? "-max": "";
 
   return (
-      <CSSTransition in={true} timeout={200} className={`cell cell-${props.value}-${theme} size-${+gameSize}${maxClassName}`} 
-        classNames="up"
-        onEnter={()=>{
-          console.log('on!!');
-        }}
-        onExited={()=>{
-          console.log('exit!!');
-        }}
-        >
-        <div >
+      // <CSSTransition in={true} timeout={200} } 
+      //   classNames="up"
+      //   onEnter={()=>{
+      //     console.log('on!!');
+      //   }}
+      //   onExited={()=>{
+      //     console.log('exit!!');
+      //   }}
+      //   >
+        <div className={`${props.moveClasses} cell cell-${props.value}-${theme} size-${+gameSize}${maxClassName}`}>
             {props.value}
         </div>
-      </CSSTransition>
+      // </CSSTransition>
   )
 };
