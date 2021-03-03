@@ -6,12 +6,12 @@ import { Button, Form, Modal } from 'react-bootstrap';
 import { loginUser } from '../../store/authReducer';
 import { RESET_FAILED_ATTEMPT } from '../../store/actionTypes';
 
-interface LoginFormProps {
+interface LoginFormProperties {
   show: boolean;
   onHide: () => void;
 }
 
-export const LoginForm: React.FC<LoginFormProps> = (props: LoginFormProps) => {
+export const LoginForm: React.FC<LoginFormProperties> = (properties: LoginFormProperties) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const language = useSelector((state: ApplicationState) => state.settings.language);
@@ -26,10 +26,10 @@ export const LoginForm: React.FC<LoginFormProps> = (props: LoginFormProps) => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      props.onHide();
+      properties.onHide();
     }
   }, [isLoggedIn]);
-  
+
   useEffect(() => {
     getI18n().changeLanguage(language);
   }, [language]);
@@ -37,15 +37,15 @@ export const LoginForm: React.FC<LoginFormProps> = (props: LoginFormProps) => {
   return (
     <Modal
       backdropClassName={modalBackdropClassName}
-      show={props.show}
+      show={properties.show}
       onHide={() => {
         setEmptyUserName(false);
         setEmptyPassword(false);
-        props.onHide();
+        properties.onHide();
       }}
-      onSubmit={(e: FormEvent) => {
+      onSubmit={(event: FormEvent) => {
         if (!isLoggedIn) {
-          e.preventDefault();
+          event.preventDefault();
         }
       }}>
       <Modal.Header closeButton></Modal.Header>

@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import { getI18n, useTranslation } from 'react-i18next';
 import { ApplicationState } from '../../../store/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
-import { RESTART_GAME, SELECT_LANGUAGE, SELECT_THEME, SET_GAME_SIZE, SET_MUSIC_VOLUME, SET_SOUNDS_VOLUME, START_GAME } from '../../../store/actionTypes';
+import { RESTART_GAME, SELECT_LANGUAGE, SELECT_THEME, SET_GAME_SIZE, SET_MUSIC_VOLUME, SET_SOUNDS_VOLUME } from '../../../store/actionTypes';
 import { useHistory } from 'react-router-dom';
 import { getNextDifficulty, getNextLang, getNextTheme } from '../../../store/actions';
 import { Card, Form, ListGroup } from 'react-bootstrap';
-import { btnSoundsPlayer, musicPlayer } from '../../../index';
+import { buttonSoundsPlayer as buttonSoundsPlayer, musicPlayer } from '../../../index';
 import { NavBar } from '../../NavBar/NavBar';
 import { Footer } from '../../Footer/Footer';
 
@@ -21,18 +21,18 @@ export const SettingsPage: React.FC = () => {
   const soundsDefaultVolumeLevel = soundsVolume * 100;
   const musicVolume = useSelector((state: ApplicationState) => state.sounds.musicVolume);
   const musicDefaultVolumeLevel = musicVolume * 100;
-  let settingPageDiv: HTMLElement = null;
-  let soundsVolumeControl: HTMLInputElement = null;
-  let musicVolumeControl: HTMLInputElement = null;
-  let dificultyControl4: HTMLInputElement = null;
-  let dificultyControl5: HTMLInputElement = null;
-  let dificultyControl6: HTMLInputElement = null;
-  let themeControlShadow: HTMLInputElement = null;
-  let themeControlSweet: HTMLInputElement = null;
-  let themeControlDeep: HTMLInputElement = null;
-  let langControlEng: HTMLInputElement = null;
-  let langControlRu: HTMLInputElement = null;
-  let langControlFr: HTMLInputElement = null;
+  let settingPageDiv: HTMLElement;
+  let soundsVolumeControl: HTMLInputElement;
+  let musicVolumeControl: HTMLInputElement;
+  let dificultyControl4: HTMLInputElement;
+  let dificultyControl5: HTMLInputElement;
+  let dificultyControl6: HTMLInputElement;
+  let themeControlShadow: HTMLInputElement;
+  let themeControlSweet: HTMLInputElement;
+  let themeControlDeep: HTMLInputElement;
+  let langControlEng: HTMLInputElement;
+  let langControlRu: HTMLInputElement;
+  let langControlFr: HTMLInputElement;
   let soundOnImgClassName = '';
   let soundOffImgClassName = '';
   let musicOnImgClassName = '';
@@ -61,7 +61,7 @@ export const SettingsPage: React.FC = () => {
     default:
       break;
   }
-  btnSoundsPlayer.volume = soundsVolume;
+  buttonSoundsPlayer.volume = soundsVolume;
   musicPlayer.volume = musicVolume;
   const appClassName = isFullScreen ? 'app-max' : 'app';
   const history = useHistory();
@@ -77,16 +77,16 @@ export const SettingsPage: React.FC = () => {
   function handleKeyPress(keyEvent: React.KeyboardEvent) {
     if (keyEvent.ctrlKey && keyEvent.key === 'm') {
       history.push('/');
-      btnSoundsPlayer.play();
+      buttonSoundsPlayer.play();
     }
     if (keyEvent.ctrlKey && keyEvent.key === 'b') {
       history.push('/best_results');
-      btnSoundsPlayer.play();
+      buttonSoundsPlayer.play();
     }
     if (keyEvent.ctrlKey && keyEvent.key === 'h') {
       keyEvent.preventDefault();
       history.push('/how_to_play');
-      btnSoundsPlayer.play();
+      buttonSoundsPlayer.play();
     }
     if (keyEvent.ctrlKey && keyEvent.key === '8') {
       keyEvent.preventDefault();
@@ -104,7 +104,7 @@ export const SettingsPage: React.FC = () => {
           dificultyControl6.checked = true;
           break;
       }
-      btnSoundsPlayer.play();
+      buttonSoundsPlayer.play();
     }
     if (keyEvent.ctrlKey && keyEvent.key === '9') {
       keyEvent.preventDefault();
@@ -121,7 +121,7 @@ export const SettingsPage: React.FC = () => {
           themeControlShadow.checked = true;
           break;
       }
-      btnSoundsPlayer.play();
+      buttonSoundsPlayer.play();
     }
     if (keyEvent.ctrlKey && keyEvent.key === '0') {
       keyEvent.preventDefault();
@@ -138,7 +138,7 @@ export const SettingsPage: React.FC = () => {
           langControlFr.checked = true;
           break;
       }
-      btnSoundsPlayer.play();
+      buttonSoundsPlayer.play();
     }
   }
 
@@ -158,11 +158,11 @@ export const SettingsPage: React.FC = () => {
             <ListGroup variant="flush">
               <ListGroup.Item
                 onClick={() => {
-                  if (dificultyControl4 !== null) {
+                  if (dificultyControl4 !== undefined) {
                     dificultyControl4.checked = true;
                     dispatch({ type: SET_GAME_SIZE, gameSize: 4 });
                     dispatch({ type: RESTART_GAME });
-                    btnSoundsPlayer.play();
+                    buttonSoundsPlayer.play();
                   }
                 }}>
                 <p>4 x 4</p>
@@ -176,7 +176,7 @@ export const SettingsPage: React.FC = () => {
                   onChange={() => {
                     dispatch({ type: SET_GAME_SIZE, gameSize: 4 });
                     dispatch({ type: RESTART_GAME });
-                    btnSoundsPlayer.play();
+                    buttonSoundsPlayer.play();
                   }}
                   ref={(element: HTMLInputElement) => {
                     dificultyControl4 = element;
@@ -185,11 +185,11 @@ export const SettingsPage: React.FC = () => {
               </ListGroup.Item>
               <ListGroup.Item
                 onClick={() => {
-                  if (dificultyControl5 !== null) {
+                  if (dificultyControl5 !== undefined) {
                     dificultyControl5.checked = true;
                     dispatch({ type: SET_GAME_SIZE, gameSize: 5 });
                     dispatch({ type: RESTART_GAME });
-                    btnSoundsPlayer.play();
+                    buttonSoundsPlayer.play();
                   }
                 }}>
                 <p>5 x 5</p>
@@ -203,7 +203,7 @@ export const SettingsPage: React.FC = () => {
                   onChange={() => {
                     dispatch({ type: SET_GAME_SIZE, gameSize: 5 });
                     dispatch({ type: RESTART_GAME });
-                    btnSoundsPlayer.play();
+                    buttonSoundsPlayer.play();
                   }}
                   ref={(element: HTMLInputElement) => {
                     dificultyControl5 = element;
@@ -212,11 +212,11 @@ export const SettingsPage: React.FC = () => {
               </ListGroup.Item>
               <ListGroup.Item
                 onClick={() => {
-                  if (dificultyControl6 !== null) {
+                  if (dificultyControl6 !== undefined) {
                     dificultyControl6.checked = true;
                     dispatch({ type: SET_GAME_SIZE, gameSize: 6 });
                     dispatch({ type: RESTART_GAME });
-                    btnSoundsPlayer.play();
+                    buttonSoundsPlayer.play();
                   }
                 }}>
                 <p>6 x 6</p>
@@ -230,7 +230,7 @@ export const SettingsPage: React.FC = () => {
                   onChange={() => {
                     dispatch({ type: SET_GAME_SIZE, gameSize: 6 });
                     dispatch({ type: RESTART_GAME });
-                    btnSoundsPlayer.play();
+                    buttonSoundsPlayer.play();
                   }}
                   ref={(element: HTMLInputElement) => {
                     dificultyControl6 = element;
@@ -244,10 +244,10 @@ export const SettingsPage: React.FC = () => {
             <ListGroup variant="flush">
               <ListGroup.Item
                 onClick={() => {
-                  if (themeControlShadow !== null) {
+                  if (themeControlShadow !== undefined) {
                     themeControlShadow.checked = true;
                     dispatch({ type: SELECT_THEME, theme: 'shadow' });
-                    btnSoundsPlayer.play();
+                    buttonSoundsPlayer.play();
                   }
                 }}>
                 <p>{t('settings_page_theme_shadow')}</p>
@@ -260,7 +260,7 @@ export const SettingsPage: React.FC = () => {
                   defaultChecked={theme === 'shadow'}
                   onChange={() => {
                     dispatch({ type: SELECT_THEME, theme: 'shadow' });
-                    btnSoundsPlayer.play();
+                    buttonSoundsPlayer.play();
                   }}
                   ref={(element: HTMLInputElement) => {
                     themeControlShadow = element;
@@ -269,10 +269,10 @@ export const SettingsPage: React.FC = () => {
               </ListGroup.Item>
               <ListGroup.Item
                 onClick={() => {
-                  if (themeControlSweet !== null) {
+                  if (themeControlSweet !== undefined) {
                     themeControlSweet.checked = true;
                     dispatch({ type: SELECT_THEME, theme: 'sweet' });
-                    btnSoundsPlayer.play();
+                    buttonSoundsPlayer.play();
                   }
                 }}>
                 <p>{t('settings_page_theme_sweet')}</p>
@@ -285,7 +285,7 @@ export const SettingsPage: React.FC = () => {
                   defaultChecked={theme === 'sweet'}
                   onChange={() => {
                     dispatch({ type: SELECT_THEME, theme: 'sweet' });
-                    btnSoundsPlayer.play();
+                    buttonSoundsPlayer.play();
                   }}
                   ref={(element: HTMLInputElement) => {
                     themeControlSweet = element;
@@ -294,10 +294,10 @@ export const SettingsPage: React.FC = () => {
               </ListGroup.Item>
               <ListGroup.Item
                 onClick={() => {
-                  if (themeControlDeep !== null) {
+                  if (themeControlDeep !== undefined) {
                     themeControlDeep.checked = true;
                     dispatch({ type: SELECT_THEME, theme: 'deep' });
-                    btnSoundsPlayer.play();
+                    buttonSoundsPlayer.play();
                   }
                 }}>
                 <p>{t('settings_page_theme_deep')}</p>
@@ -310,7 +310,7 @@ export const SettingsPage: React.FC = () => {
                   defaultChecked={theme === 'deep'}
                   onChange={() => {
                     dispatch({ type: SELECT_THEME, theme: 'deep' });
-                    btnSoundsPlayer.play();
+                    buttonSoundsPlayer.play();
                   }}
                   ref={(element: HTMLInputElement) => {
                     themeControlDeep = element;
@@ -324,10 +324,10 @@ export const SettingsPage: React.FC = () => {
             <ListGroup variant="flush">
               <ListGroup.Item
                 onClick={() => {
-                  if (langControlEng !== null) {
+                  if (langControlEng !== undefined) {
                     langControlEng.checked = true;
                     dispatch({ type: SELECT_LANGUAGE, language: 'en' });
-                    btnSoundsPlayer.play();
+                    buttonSoundsPlayer.play();
                   }
                 }}>
                 <p>English</p>
@@ -340,7 +340,7 @@ export const SettingsPage: React.FC = () => {
                   defaultChecked={language === 'en'}
                   onChange={() => {
                     dispatch({ type: SELECT_LANGUAGE, language: 'en' });
-                    btnSoundsPlayer.play();
+                    buttonSoundsPlayer.play();
                   }}
                   ref={(element: HTMLInputElement) => {
                     langControlEng = element;
@@ -349,10 +349,10 @@ export const SettingsPage: React.FC = () => {
               </ListGroup.Item>
               <ListGroup.Item
                 onClick={() => {
-                  if (langControlRu !== null) {
+                  if (langControlRu !== undefined) {
                     langControlRu.checked = true;
                     dispatch({ type: SELECT_LANGUAGE, language: 'ru' });
-                    btnSoundsPlayer.play();
+                    buttonSoundsPlayer.play();
                   }
                 }}>
                 <p>Русский</p>
@@ -365,7 +365,7 @@ export const SettingsPage: React.FC = () => {
                   defaultChecked={language === 'ru'}
                   onChange={() => {
                     dispatch({ type: SELECT_LANGUAGE, language: 'ru' });
-                    btnSoundsPlayer.play();
+                    buttonSoundsPlayer.play();
                   }}
                   ref={(element: HTMLInputElement) => {
                     langControlRu = element;
@@ -374,10 +374,10 @@ export const SettingsPage: React.FC = () => {
               </ListGroup.Item>
               <ListGroup.Item
                 onClick={() => {
-                  if (langControlFr !== null) {
+                  if (langControlFr !== undefined) {
                     langControlFr.checked = true;
                     dispatch({ type: SELECT_LANGUAGE, language: 'fr' });
-                    btnSoundsPlayer.play();
+                    buttonSoundsPlayer.play();
                   }
                 }}>
                 <p>Français</p>
@@ -390,7 +390,7 @@ export const SettingsPage: React.FC = () => {
                   defaultChecked={language === 'fr'}
                   onChange={() => {
                     dispatch({ type: SELECT_LANGUAGE, language: 'fr' });
-                    btnSoundsPlayer.play();
+                    buttonSoundsPlayer.play();
                   }}
                   ref={(element: HTMLInputElement) => {
                     langControlFr = element;
@@ -411,7 +411,7 @@ export const SettingsPage: React.FC = () => {
                     src="./assets/images/sounds_off.ico"
                     alt="sounds off"
                     onClick={() => {
-                      if (soundsVolumeControl !== null) {
+                      if (soundsVolumeControl !== undefined) {
                         soundsVolumeControl.value = '0';
                         dispatch({ type: SET_SOUNDS_VOLUME, soundsVolume: 0 });
                       }
@@ -432,7 +432,7 @@ export const SettingsPage: React.FC = () => {
                     src="./assets/images/sounds_max.ico"
                     alt="sounds max"
                     onClick={() => {
-                      if (soundsVolumeControl !== null) {
+                      if (soundsVolumeControl !== undefined) {
                         soundsVolumeControl.value = '100';
                         dispatch({ type: SET_SOUNDS_VOLUME, soundsVolume: 100 });
                       }
@@ -454,7 +454,7 @@ export const SettingsPage: React.FC = () => {
                     src="./assets/images/music_off.ico"
                     alt="music off"
                     onClick={() => {
-                      if (musicVolumeControl !== null) {
+                      if (musicVolumeControl !== undefined) {
                         musicVolumeControl.value = '0';
                         dispatch({ type: SET_MUSIC_VOLUME, musicVolume: 0 });
                       }
@@ -476,7 +476,7 @@ export const SettingsPage: React.FC = () => {
                     src="./assets/images/music_max.ico"
                     alt="music max"
                     onClick={() => {
-                      if (musicVolumeControl !== null) {
+                      if (musicVolumeControl !== undefined) {
                         musicVolumeControl.value = '100';
                         dispatch({ type: SET_MUSIC_VOLUME, musicVolume: 100 });
                       }

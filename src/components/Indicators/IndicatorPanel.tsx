@@ -39,7 +39,7 @@ export const IndicatorPanel: React.FC = () => {
   }, [resetTimer]);
 
   useEffect(() => {
-    let timer: NodeJS.Timer = null;
+    let timer: NodeJS.Timer;
     if (isTimerOn) {
       timer = setTimeout(() => {
         if (seconds === 59) {

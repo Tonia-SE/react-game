@@ -6,12 +6,12 @@ import { Button, Form, Modal } from 'react-bootstrap';
 import { RESET_FAILED_ATTEMPT } from '../../store/actionTypes';
 import { regUser } from '../../store/authReducer';
 
-interface SignUpFormProps {
+interface SignUpFormProperties {
   show: boolean;
   onHide: () => void;
 }
 
-export const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) => {
+export const SignUpForm: React.FC<SignUpFormProperties> = (properties: SignUpFormProperties) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const language = useSelector((state: ApplicationState) => state.settings.language);
@@ -29,7 +29,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) =>
 
   useEffect(() => {
     if (isRegristred) {
-      props.onHide();
+      properties.onHide();
     }
   }, [isRegristred]);
 
@@ -40,17 +40,17 @@ export const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) =>
   return (
     <Modal
       backdropClassName={modalBackdropClassName}
-      show={props.show}
+      show={properties.show}
       onHide={() => {
         setEmptyUserName(false);
         setPasswordMatch(true);
         setPasswordTooShort(false);
         setUsernameTooLong(false);
-        props.onHide();
+        properties.onHide();
       }}
-      onSubmit={(e: FormEvent) => {
+      onSubmit={(event: FormEvent) => {
         if (!isRegristred) {
-          e.preventDefault();
+          event.preventDefault();
         }
       }}>
       <Modal.Header closeButton></Modal.Header>

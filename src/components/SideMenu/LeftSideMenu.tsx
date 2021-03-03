@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { ApplicationState } from '../../store/rootReducer';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { RESTART_GAME, START_GAME } from '../../store/actionTypes';
-import { btnSoundsPlayer } from '../../index';
+import { buttonSoundsPlayer as buttonSoundsPlayer } from '../../index';
 
 export const LeftSideMenu: React.FC = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ export const LeftSideMenu: React.FC = () => {
   const menuImgClassName = isFullScreen ? 'menu-img-max' : 'menu-img';
   const menuWrapperClassName = isFullScreen ? 'side-menu-wrapper-max' : 'side-menu-wrapper';
   const dispatchHandler = !isGameStarted ? { type: START_GAME } : { type: RESTART_GAME };
-  btnSoundsPlayer.volume = soundsVolume;
+  buttonSoundsPlayer.volume = soundsVolume;
 
   useEffect(() => {
     getI18n().changeLanguage(language);
@@ -40,7 +40,7 @@ export const LeftSideMenu: React.FC = () => {
             alt="game"
             onClick={() => {
               dispatch(dispatchHandler);
-              btnSoundsPlayer.play();
+              buttonSoundsPlayer.play();
             }}
           />
         </Link>
@@ -58,7 +58,7 @@ export const LeftSideMenu: React.FC = () => {
             src={`./assets/images/autoplay_${theme}.ico`}
             alt="autoplay"
             onClick={() => {
-              btnSoundsPlayer.play();
+              buttonSoundsPlayer.play();
             }}
           />
         </Link>
@@ -78,7 +78,7 @@ export const LeftSideMenu: React.FC = () => {
             src={`./assets/images/instructions_${theme}.ico`}
             alt="instructions"
             onClick={() => {
-              btnSoundsPlayer.play();
+              buttonSoundsPlayer.play();
             }}
           />
         </Link>
@@ -96,7 +96,7 @@ export const LeftSideMenu: React.FC = () => {
             src={`./assets/images/settings_${theme}.ico`}
             alt="settings"
             onClick={() => {
-              btnSoundsPlayer.play();
+              buttonSoundsPlayer.play();
             }}
           />
         </Link>
@@ -116,7 +116,7 @@ export const LeftSideMenu: React.FC = () => {
             src={`./assets/images/winners_${theme}.ico`}
             alt="winners"
             onClick={() => {
-              btnSoundsPlayer.play();
+              buttonSoundsPlayer.play();
             }}
           />
         </Link>

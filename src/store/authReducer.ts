@@ -1,7 +1,6 @@
 import { backendServer } from '../consts';
 import { LOGIN_USER, LOGOUT_USER, REGISTER_USER, RESET_FAILED_ATTEMPT, SHOW_LOADER } from './actionTypes';
 
-
 export interface IAuthState {
   isRegristred?: boolean;
   userName: string;
@@ -120,7 +119,6 @@ export function regUser(user: string, password: string) {
           isFailedAttempt: isFailedAttempt,
         },
       });
-    } catch (e) {
-    }
+    } catch (e) {}
   };
 }

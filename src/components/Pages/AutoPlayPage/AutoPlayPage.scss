@@ -2,7 +2,7 @@
 
 .page{
   width: 75%;
-  height: 72%;
+  height: 75%;
   margin: 0 auto;
   @include center();
   flex-direction: column;
@@ -17,4 +17,11 @@
 }
 .table{
   text-align: center;
+}
+.autoplay-player:hover,
+.autoplay-player:focus,
+.autoplay-player:active{
+  box-shadow: none !important;
+  outline: none !important;
+  border: none !important;
 }

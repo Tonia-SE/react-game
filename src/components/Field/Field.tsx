@@ -5,7 +5,7 @@ import { ApplicationState } from '../../store/rootReducer';
 import { Button } from 'react-bootstrap';
 import { START_GAME } from '../../store/actionTypes';
 import { RightSideMenu } from '../SideMenu/RightSideMenu';
-import { btnSoundsPlayer } from '../../index';
+import { buttonSoundsPlayer as buttonSoundsPlayer } from '../../index';
 import { Cell } from '../Cell/Cell';
 import { IndicatorPanel } from '../Indicators/IndicatorPanel';
 import { LeftSideMenu } from '../SideMenu/LeftSideMenu';
@@ -15,13 +15,10 @@ export const Field: React.FC = () => {
   const isGameStarted = useSelector((state: ApplicationState) => state.game.isGameStarted);
   const isFullScreen = useSelector((state: ApplicationState) => state.game.isFullScreen);
   const field = useSelector((state: ApplicationState) => state.game.field);
-  const moves = useSelector((state: ApplicationState) => state.game.moves);
-  const direction = useSelector((state: ApplicationState) => state.game.directionOfLastMove);
-
   const theme = useSelector((state: ApplicationState) => state.settings.theme);
   const soundsVolume = useSelector((state: ApplicationState) => state.sounds.soundsVolume);
   const fieldClassName = isFullScreen ? 'field-max' : 'field';
-  btnSoundsPlayer.volume = soundsVolume;
+  buttonSoundsPlayer.volume = soundsVolume;
   const { t } = useTranslation();
   const language = useSelector((state: ApplicationState) => state.settings.language);
 
@@ -29,44 +26,40 @@ export const Field: React.FC = () => {
     getI18n().changeLanguage(language);
   }, [language]);
 
-  if (!isGameStarted) {
-    return (
-      <div className="game-wrapper">
-        <IndicatorPanel />
-        <div className="field-wrapper">
-          <LeftSideMenu />
-          <div className={`${fieldClassName} bg-dark-${theme} border-color-${theme}`}>
-            <div className="start-game">
-              <Button
-                className={`start-game-btn-${theme}`}
-                onClick={() => {
-                  dispatch({ type: START_GAME });
-                  btnSoundsPlayer.play();
-                }}>
-                {t('start game')}
-              </Button>
-            </div>
+  return !isGameStarted ? (
+    <div className="game-wrapper">
+      <IndicatorPanel />
+      <div className="field-wrapper">
+        <LeftSideMenu />
+        <div className={`${fieldClassName} bg-dark-${theme} border-color-${theme}`}>
+          <div className="start-game">
+            <Button
+              className={`start-game-btn-${theme}`}
+              onClick={() => {
+                dispatch({ type: START_GAME });
+                buttonSoundsPlayer.play();
+              }}>
+              {t('start_game')}
+            </Button>
           </div>
-          <RightSideMenu />
         </div>
+        <RightSideMenu />
       </div>
-    );
-  } else {
-    return (
-      <div className="game-wrapper">
-        <IndicatorPanel />
-        <div className="field-wrapper">
-          <LeftSideMenu />
-          <div className={`${fieldClassName} border-color-${theme}`}>
-            {field.map((row: Array<number>) => {
-              return row.map((value: number) => {
-                return <Cell value={value} key={Math.random() * 1000} />;
-              });
-            })}
-          </div>
-          <RightSideMenu />
+    </div>
+  ) : (
+    <div className="game-wrapper">
+      <IndicatorPanel />
+      <div className="field-wrapper">
+        <LeftSideMenu />
+        <div className={`${fieldClassName} border-color-${theme}`}>
+          {field.map((row: Array<number>) => {
+            return row.map((value: number) => {
+              return <Cell value={value} key={Math.random() * 1000} />;
+            });
+          })}
         </div>
+        <RightSideMenu />
       </div>
-    );
-  }
+    </div>
+  );
 };

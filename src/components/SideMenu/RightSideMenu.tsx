@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ApplicationState } from '../../store/rootReducer';
 import { handleMove } from '../../store/actions';
-import { btnSoundsPlayer } from '../../index';
+import { buttonSoundsPlayer as buttonSoundsPlayer } from '../../index';
 
 export const RightSideMenu: React.FC = () => {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ export const RightSideMenu: React.FC = () => {
   const arrowClassName = isFullScreen ? 'arrow-max' : 'arrow';
   const menuWrapperClassName = isFullScreen ? 'side-menu-wrapper-max' : 'side-menu-wrapper';
   const visibleClassName = isBtnsVisible ? '' : 'none';
-  btnSoundsPlayer.volume = soundsVolume;
+  buttonSoundsPlayer.volume = soundsVolume;
 
   return (
     <div className={`${menuWrapperClassName} ${visibleClassName}`}>
@@ -25,7 +25,7 @@ export const RightSideMenu: React.FC = () => {
         alt="arrow left"
         onClick={() => {
           if (isGameStarted) {
-            dispatch(handleMove(field, 'ArrowLeft', btnSoundsPlayer));
+            dispatch(handleMove(field, 'ArrowLeft', buttonSoundsPlayer));
           }
         }}
       />
@@ -35,7 +35,7 @@ export const RightSideMenu: React.FC = () => {
         alt="arrow up"
         onClick={() => {
           if (isGameStarted) {
-            dispatch(handleMove(field, 'ArrowUp', btnSoundsPlayer));
+            dispatch(handleMove(field, 'ArrowUp', buttonSoundsPlayer));
           }
         }}
       />
@@ -45,7 +45,7 @@ export const RightSideMenu: React.FC = () => {
         alt="arrow down"
         onClick={() => {
           if (isGameStarted) {
-            dispatch(handleMove(field, 'ArrowDown', btnSoundsPlayer));
+            dispatch(handleMove(field, 'ArrowDown', buttonSoundsPlayer));
           }
         }}
       />
@@ -55,7 +55,7 @@ export const RightSideMenu: React.FC = () => {
         alt="arrow right"
         onClick={() => {
           if (isGameStarted) {
-            dispatch(handleMove(field, 'ArrowRight', btnSoundsPlayer));
+            dispatch(handleMove(field, 'ArrowRight', buttonSoundsPlayer));
           }
         }}
       />

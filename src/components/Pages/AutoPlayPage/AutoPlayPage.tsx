@@ -1,7 +1,7 @@
 import React from 'react';
 import { ApplicationState } from '../../../store/rootReducer';
 import { useSelector } from 'react-redux';
-import { Table } from 'react-bootstrap';
+import ReactPlayer from 'react-player';
 import { Footer } from '../../Footer/Footer';
 import { NavBar } from '../../NavBar/NavBar';
 
@@ -9,39 +9,16 @@ export const AutoPlayPage: React.FC = () => {
   const isFullScreen = useSelector((state: ApplicationState) => state.game.isFullScreen);
   const theme = useSelector((state: ApplicationState) => state.settings.theme);
   const appClassName = isFullScreen ? 'app-max' : 'app';
+  const videoHeight = isFullScreen ? '70vh' : '460px';
+
   return (
     <div className={`${appClassName} bg-light-${theme}`}>
       <NavBar />
-      <div className="best-results page mt-3">
-        <h3>
-          <b>BEST RESULTS</b>
+      <div className="best-results page">
+        <h3 className="mb-5">
+          <b>ENJOY THE SHOW</b>
         </h3>
-        <div className="table-wrapper">
-          <Table className="mt-3" bordered hover>
-            <thead className="thead">
-              <tr>
-                <th></th>
-                <th>NICK</th>
-                <th>SCORE</th>
-                <th>TIME</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-            </tbody>
-          </Table>
-        </div>
+        <ReactPlayer className="autoplay-player" controls={true} playing={true} muted={true} url="./assets/video/autoplay.mp4" height={videoHeight} />
       </div>
       <Footer />
     </div>

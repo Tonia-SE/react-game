@@ -6,12 +6,12 @@ import { Button, ButtonGroup, Dropdown, DropdownButton, Nav, Navbar, OverlayTrig
 import { LinkContainer } from 'react-router-bootstrap';
 import { LOGOUT_USER, TOGGLE_BTNS_VISABILITY, TOGGLE_FULLSCREEN } from '../../store/actionTypes';
 
-type NavBarProps = {
+type NavBarProperties = {
   handleShowLoginForm?: () => void;
   handleShowSignUp?: () => void;
 };
 
-export const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
+export const NavBar: React.FC<NavBarProperties> = (properties: NavBarProperties) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const language = useSelector((state: ApplicationState) => state.settings.language);
@@ -21,87 +21,83 @@ export const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
   }, [language]);
   const isFullScreen = useSelector((state: ApplicationState) => state.game.isFullScreen);
   const theme = useSelector((state: ApplicationState) => state.settings.theme);
-  const miximizeImgSrc = isFullScreen ? './assets/images/off_screen.ico' : './assets/images/full_screen.ico';
-  
-  if (window.location.pathname === '/') {
-    return (
-      <Navbar className={`bg-dark-${theme}`} bg="dark" variant="dark">
-        <LinkContainer to="/" activeClassName="brand">
-          <Navbar.Brand>2048</Navbar.Brand>
-        </LinkContainer>
-        <Nav className="ml-auto">
-          <ButtonGroup>
+  const miximizeImgSource = isFullScreen ? './assets/images/off_screen.ico' : './assets/images/full_screen.ico';
+
+  return window.location.pathname === '/' ? (
+    <Navbar className={`bg-dark-${theme}`} bg="dark" variant="dark">
+      <LinkContainer to="/" activeClassName="brand">
+        <Navbar.Brand>2048</Navbar.Brand>
+      </LinkContainer>
+      <Nav className="ml-auto">
+        <ButtonGroup>
+          <OverlayTrigger
+            placement="bottom"
+            overlay={
+              <Tooltip id="tooltip-disabled" className="display-none">
+                {t('navBar_tooltip_first_line')}
+                <br />
+                {t('navBar_tooltip_second_line')}
+              </Tooltip>
+            }>
+            <Button
+              className="nav-btn"
+              onClick={() => {
+                dispatch({ type: TOGGLE_BTNS_VISABILITY });
+              }}>
+              <img className="phone-img" id="full_screen" src="./assets/images/phone.ico" alt="phone" />
+            </Button>
+          </OverlayTrigger>
+          {!isLoggedIn && (
+            <DropdownButton
+              className="navbar-btn"
+              menuAlign="right"
+              id="dropdown-menu-align-responsive-1"
+              title={<img className="auth-img" src="./assets/images/auth.ico" alt="authorization" />}>
+              <Dropdown.Item className="my-dropdown" eventKey="1" id="555" onClick={() => properties.handleShowLoginForm()}>
+                {t('navBar_auth_login')}
+              </Dropdown.Item>
+              <Dropdown.Item eventKey="2" id="666" onClick={() => properties.handleShowSignUp()}>
+                {t('navBar_auth_sign_up')}
+              </Dropdown.Item>
+            </DropdownButton>
+          )}
+          {isLoggedIn && (
             <OverlayTrigger
               placement="bottom"
               overlay={
-                <Tooltip id="tooltip-disabled" className="display-none">
-                  {t('navBar_tooltip_first_line')}
+                <Tooltip id="tooltip-disabled">
+                  {t('navBar_tooltip_logout_first_line')}
                   <br />
-                  {t('navBar_tooltip_second_line')}
+                  {t('navBar_tooltip_logout_second_line')}
                 </Tooltip>
               }>
               <Button
-                className="nav-btn"
+                className="navbar-btn"
                 onClick={() => {
-                  dispatch({ type: TOGGLE_BTNS_VISABILITY });
+                  dispatch({ type: LOGOUT_USER });
                 }}>
-                <img className="phone-img" id="full_screen" src="./assets/images/phone.ico" alt="phone" />
+                <img className="auth-img" src="./assets/images/logout.ico" alt="logout" />
               </Button>
             </OverlayTrigger>
-            {!isLoggedIn && (
-              <DropdownButton
-                className="navbar-btn"
-                menuAlign="right"
-                id="dropdown-menu-align-responsive-1"
-                title={<img className="auth-img" src="./assets/images/auth.ico" alt="authorization" />}>
-                <Dropdown.Item className="my-dropdown" eventKey="1" id="555" onClick={() => props.handleShowLoginForm()}>
-                  {t('navBar_auth_login')}
-                </Dropdown.Item>
-                <Dropdown.Item eventKey="2" id="666" onClick={() => props.handleShowSignUp()}>
-                  {t('navBar_auth_sign_up')}
-                </Dropdown.Item>
-              </DropdownButton>
-            )}
-            {isLoggedIn && (
-              <OverlayTrigger
-                placement="bottom"
-                overlay={
-                  <Tooltip id="tooltip-disabled">
-                    {t('navBar_tooltip_logout_first_line')}
-                    <br />
-                    {t('navBar_tooltip_logout_second_line')}
-                  </Tooltip>
-                }>
-                <Button
-                  className="navbar-btn"
-                  onClick={() => {
-                    dispatch({ type: LOGOUT_USER });
-                  }}>
-                  <img className="auth-img" src="./assets/images/logout.ico" alt="logout" />
-                </Button>
-              </OverlayTrigger>
-            )}
-            <Button className="nav-btn maximize-btn" onClick={() => dispatch({ type: TOGGLE_FULLSCREEN })}>
-              <img className="maximize-img" id="full_screen" src={miximizeImgSrc} alt="full screen" />
-            </Button>
-          </ButtonGroup>
+          )}
+          <Button className="nav-btn maximize-btn" onClick={() => dispatch({ type: TOGGLE_FULLSCREEN })}>
+            <img className="maximize-img" id="full_screen" src={miximizeImgSource} alt="full screen" />
+          </Button>
+        </ButtonGroup>
+      </Nav>
+    </Navbar>
+  ) : (
+    <Navbar className={`bg-dark-${theme}`} bg="dark" variant="dark">
+      <div className="my-navbar">
+        <LinkContainer to="/" activeClassName="brand">
+          <Navbar.Brand className="brand">2048</Navbar.Brand>
+        </LinkContainer>
+        <Nav>
+          <Button className="nav-btn maximize-btn" onClick={() => dispatch({ type: TOGGLE_FULLSCREEN })}>
+            <img className="maximize-img" id="full_screen" src={miximizeImgSource} alt="full screen" />
+          </Button>
         </Nav>
-      </Navbar>
-    );
-  } else {
-    return (
-      <Navbar className={`bg-dark-${theme}`} bg="dark" variant="dark">
-        <div className="my-navbar">
-          <LinkContainer to="/" activeClassName="brand">
-            <Navbar.Brand className="brand">2048</Navbar.Brand>
-          </LinkContainer>
-          <Nav>
-            <Button className="nav-btn maximize-btn" onClick={() => dispatch({ type: TOGGLE_FULLSCREEN })}>
-              <img className="maximize-img" id="full_screen" src={miximizeImgSrc} alt="full screen" />
-            </Button>
-          </Nav>
-        </div>
-      </Navbar>
-    );
-  }
+      </div>
+    </Navbar>
+  );
 };

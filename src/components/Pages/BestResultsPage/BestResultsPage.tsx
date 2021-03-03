@@ -7,7 +7,7 @@ import { Table } from 'react-bootstrap';
 import { getNextDifficulty, getNextLang, getNextTheme } from '../../../store/actions';
 import { RESTART_GAME, SELECT_LANGUAGE, SELECT_THEME, SET_GAME_SIZE, START_GAME } from '../../../store/actionTypes';
 import { getGameResults } from '../../../store/bestResultsReducer';
-import { btnSoundsPlayer, musicPlayer } from '../../../index';
+import { buttonSoundsPlayer as buttonSoundsPlayer, musicPlayer } from '../../../index';
 import { Footer } from '../../Footer/Footer';
 import { NavBar } from '../../NavBar/NavBar';
 
@@ -22,7 +22,7 @@ export const BestResultsPage: React.FC = () => {
   const language = useSelector((state: ApplicationState) => state.settings.language);
   const history = useHistory();
   const results = useSelector((state: ApplicationState) => state.bestResults.results);
-  let rootDiv: HTMLElement = null;
+  let rootDiv: HTMLElement;
   musicPlayer.volume = musicVolume;
 
   useEffect(() => {
@@ -43,29 +43,29 @@ export const BestResultsPage: React.FC = () => {
     }
     if (keyEvent.ctrlKey && keyEvent.key === 'i') {
       history.push('/settings');
-      btnSoundsPlayer.play();
+      buttonSoundsPlayer.play();
     }
     if (keyEvent.ctrlKey && keyEvent.key === 'h') {
       keyEvent.preventDefault();
       history.push('/how_to_play');
-      btnSoundsPlayer.play();
+      buttonSoundsPlayer.play();
     }
     if (keyEvent.ctrlKey && keyEvent.key === '8') {
       keyEvent.preventDefault();
       dispatch({ type: SET_GAME_SIZE, gameSize: getNextDifficulty(gameSize) });
       dispatch({ type: RESTART_GAME });
       dispatch({ type: START_GAME });
-      btnSoundsPlayer.play();
+      buttonSoundsPlayer.play();
     }
     if (keyEvent.ctrlKey && keyEvent.key === '9') {
       keyEvent.preventDefault();
       dispatch({ type: SELECT_THEME, theme: getNextTheme(theme) });
-      btnSoundsPlayer.play();
+      buttonSoundsPlayer.play();
     }
     if (keyEvent.ctrlKey && keyEvent.key === '0') {
       keyEvent.preventDefault();
       dispatch({ type: SELECT_LANGUAGE, language: getNextLang(language) });
-      btnSoundsPlayer.play();
+      buttonSoundsPlayer.play();
     }
   }
 
@@ -82,7 +82,7 @@ export const BestResultsPage: React.FC = () => {
         <h3 className="best-results-page-title">
           <b>{t('best_results_page_table_title')}</b>
         </h3>
-        {!results.length ? (
+        {results.length === 0 ? (
           <div>{t('best_results_page_no_results')}</div>
         ) : (
           <div className="table-wrapper">

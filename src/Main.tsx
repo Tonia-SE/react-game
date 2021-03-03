@@ -13,9 +13,8 @@ import { Field } from './components/Field/Field';
 import { SignUpForm } from './components/RegForms/SignUpForm';
 import { LoginForm } from './components/RegForms/LoginForm';
 import { Footer } from './components/Footer/Footer';
-import { btnSoundsPlayer, musicPlayer } from './index';
+import { buttonSoundsPlayer as buttonSoundsPlayer, musicPlayer } from './index';
 import './styles/index.scss';
-
 
 export const Main: React.FC = () => {
   const dispatch = useDispatch();
@@ -49,7 +48,7 @@ export const Main: React.FC = () => {
     dispatch({ type: RESET_FAILED_ATTEMPT });
   };
   const appClassName = isFullScreen ? 'app-max' : 'app';
-  let rootDiv: HTMLElement = null;
+  let rootDiv: HTMLElement;
   const cellSoundsPlayer: HTMLAudioElement = new Audio('./assets/sounds/cell_sound.mp3');
   const history = useHistory();
 
@@ -70,52 +69,50 @@ export const Main: React.FC = () => {
   cellSoundsPlayer.volume = soundsVolume;
 
   useEffect(() => {
-    if (isLoggedIn) {
-      if (isWin || isFail) {
-        saveGameResult(userName, score, seconds, minutes);
-        dispatch({ type: RESET_TIMER, resetTimer: true });
-      }
+    if (isLoggedIn && (isWin || isFail)) {
+      saveGameResult(userName, score, seconds, minutes);
+      dispatch({ type: RESET_TIMER, resetTimer: true });
     }
   }, [isWin, isFail]);
 
   function handleKeyPress(keyEvent: React.KeyboardEvent) {
     const arrowKeyEvents = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
-    if (arrowKeyEvents.indexOf(keyEvent.key) !== -1) {
+    if (arrowKeyEvents.includes(keyEvent.key)) {
       dispatch(handleMove(field, keyEvent.key, cellSoundsPlayer));
     }
     if (keyEvent.ctrlKey && keyEvent.key === 'b') {
       history.push('/best_results');
-      btnSoundsPlayer.play();
+      buttonSoundsPlayer.play();
     }
     if (keyEvent.ctrlKey && keyEvent.key === 'i') {
       history.push('/settings');
-      btnSoundsPlayer.play();
+      buttonSoundsPlayer.play();
     }
     if (keyEvent.ctrlKey && keyEvent.key === 'h') {
       keyEvent.preventDefault();
       history.push('/how_to_play');
-      btnSoundsPlayer.play();
+      buttonSoundsPlayer.play();
     }
     if (keyEvent.ctrlKey && keyEvent.key === '8') {
       keyEvent.preventDefault();
       dispatch({ type: SET_GAME_SIZE, gameSize: getNextDifficulty(gameSize) });
       dispatch({ type: RESTART_GAME });
       dispatch({ type: START_GAME });
-      btnSoundsPlayer.play();
+      buttonSoundsPlayer.play();
     }
     if (keyEvent.ctrlKey && keyEvent.key === '9') {
       keyEvent.preventDefault();
       dispatch({ type: SELECT_THEME, theme: getNextTheme(theme) });
-      btnSoundsPlayer.play();
+      buttonSoundsPlayer.play();
     }
     if (keyEvent.ctrlKey && keyEvent.key === '0') {
       keyEvent.preventDefault();
       dispatch({ type: SELECT_LANGUAGE, language: getNextLang(language) });
-      btnSoundsPlayer.play();
+      buttonSoundsPlayer.play();
     }
     if (keyEvent.ctrlKey && keyEvent.key === 'q') {
       dispatch(dispatchHandler);
-      btnSoundsPlayer.play();
+      buttonSoundsPlayer.play();
     }
   }
 

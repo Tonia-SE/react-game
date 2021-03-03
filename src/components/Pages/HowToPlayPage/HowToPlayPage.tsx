@@ -7,7 +7,7 @@ import { getNextDifficulty, getNextLang, getNextTheme } from '../../../store/act
 import { RESTART_GAME, SELECT_LANGUAGE, SELECT_THEME, SET_GAME_SIZE, START_GAME } from '../../../store/actionTypes';
 import { Footer } from '../../Footer/Footer';
 import { NavBar } from '../../NavBar/NavBar';
-import { btnSoundsPlayer, musicPlayer } from '../../../index';
+import { buttonSoundsPlayer as buttonSoundsPlayer, musicPlayer } from '../../../index';
 
 export const HowToPlayPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ export const HowToPlayPage: React.FC = () => {
   const { t } = useTranslation();
   const language = useSelector((state: ApplicationState) => state.settings.language);
   const history = useHistory();
-  let rootDiv: HTMLElement = null;
+  let rootDiv: HTMLElement;
   musicPlayer.volume = musicVolume;
 
   useEffect(() => {
@@ -37,28 +37,28 @@ export const HowToPlayPage: React.FC = () => {
     }
     if (keyEvent.ctrlKey && keyEvent.key === 'b') {
       history.push('/best_results');
-      btnSoundsPlayer.play();
+      buttonSoundsPlayer.play();
     }
     if (keyEvent.ctrlKey && keyEvent.key === 'i') {
       history.push('/settings');
-      btnSoundsPlayer.play();
+      buttonSoundsPlayer.play();
     }
     if (keyEvent.ctrlKey && keyEvent.key === '8') {
       keyEvent.preventDefault();
       dispatch({ type: SET_GAME_SIZE, gameSize: getNextDifficulty(gameSize) });
       dispatch({ type: RESTART_GAME });
       dispatch({ type: START_GAME });
-      btnSoundsPlayer.play();
+      buttonSoundsPlayer.play();
     }
     if (keyEvent.ctrlKey && keyEvent.key === '9') {
       keyEvent.preventDefault();
       dispatch({ type: SELECT_THEME, theme: getNextTheme(theme) });
-      btnSoundsPlayer.play();
+      buttonSoundsPlayer.play();
     }
     if (keyEvent.ctrlKey && keyEvent.key === '0') {
       keyEvent.preventDefault();
       dispatch({ type: SELECT_LANGUAGE, language: getNextLang(language) });
-      btnSoundsPlayer.play();
+      buttonSoundsPlayer.play();
     }
   }
 
