@@ -31,13 +31,14 @@
 }
 .pull-right-deep{
   margin-left: 55.5%;
-  background-color: rgb(2, 65, 70);
-  border-color: rgb(2, 65, 70);
+  background-color: rgb(2, 65, 70) !important;
+  border-color: rgb(2, 65, 70) !important;
   opacity: 0.8;
 }
-.pull-right-deep:hover{
-  background-color: rgb(2, 65, 70);
-  border-color: rgb(2, 65, 70);
+.pull-right-deep:hover,
+.pull-right-deep:active{
+  background-color: rgb(2, 65, 70) !important;
+  border-color: rgb(2, 65, 70) !important;
   opacity: 1;
 }
 .modal{

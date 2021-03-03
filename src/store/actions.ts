@@ -70,8 +70,8 @@ export function moveUp(field: Array<Array<number>>, movesArray: Array<Array<{}>>
           movesArray[i][j] = { kind: 'add', value: field[withValue][j], dest: [withValue, j] };
           field[withValue][j] = field[withValue][j] * 2;
           field[i][j] = 0;
-          withValue++;
           currentSum = field[withValue][j];
+          withValue++;
         } else {
           const tmp = field[i][j];
           field[i][j] = 0;
@@ -106,8 +106,8 @@ export function moveDown(field: Array<Array<number>>, movesArray: Array<Array<{}
           movesArray[i][j] = { kind: 'add', value: field[withValue][j], dest: [withValue, j] };
           field[withValue][j] = field[withValue][j] * 2;
           field[i][j] = 0;
-          withValue--;
           currentSum = field[withValue][j];
+          withValue--;
         } else {
           const tmp = field[i][j];
           field[i][j] = 0;
@@ -142,8 +142,8 @@ export function moveLeft(field: Array<Array<number>>, movesArray: Array<Array<{}
           movesArray[i][j] = { kind: 'add', value: field[i][withValue], dest: [i, withValue] };
           field[i][withValue] = field[i][withValue] * 2;
           field[i][j] = 0;
-          withValue++;
           currentSum = field[i][withValue];
+          withValue++;
         } else {
           const tmp = field[i][j];
           field[i][j] = 0;
@@ -178,8 +178,8 @@ export function moveRight(field: Array<Array<number>>, movesArray: Array<Array<{
           movesArray[i][j] = { kind: 'add', value: field[i][withValue], dest: [i, withValue] };
           field[i][withValue] = field[i][withValue] * 2;
           field[i][j] = 0;
-          withValue--;
           currentSum = field[i][withValue];
+          withValue--;
         } else {
           const tmp = field[i][j];
           field[i][j] = 0;

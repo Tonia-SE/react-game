@@ -16,7 +16,7 @@ export const translations = {
       modal_fail_text_logged_in: "But maybe you'll find your name in the leaderboard.",
       modal_win_title_first_line: 'Congratulations!',
       modal_win_title_second_line: 'You are win!',
-      modal_win_text_first_line: 'Please, login to see',
+      modal_win_text_first_line_logged_in: 'Please, login to see',
       modal_win_text_second_line_logged_in: 'in the leaderboard',
       navBar_tooltip_first_line: 'push to play',
       navBar_tooltip_second_line: 'without keyboard',

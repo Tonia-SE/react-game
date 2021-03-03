@@ -21,6 +21,7 @@ export const WinModal: React.FC = () => {
   const modalBackdropClassName = !isFullScreen ? 'my-backdrop' : '';
   const modalWinTextFirstLine = isLoggedIn ? t('modal_win_text_first_line_logged_in') : '';
   const modalWinTextSecondLine = isLoggedIn ? t('modal_win_text_second_line_logged_in') : '';
+  const winner = isLoggedIn ? `${userName}!` : '';
   winPlayer.volume = soundsVolume;
 
   return (
@@ -35,9 +36,9 @@ export const WinModal: React.FC = () => {
       <Modal.Body>
         <Card className="m-auto border-0">
           <Card.Img className="m-auto pb-3 win-img" variant="top" src="./assets/images/win.ico" />
-          <Card.Body className="px-0">
+          <Card.Body className="modal-card-body px-0">
             <Card.Title className="text-center modal-game-title">
-              {`${userName}! ${t('modal_win_title_first_line')}`}
+              {`${winner} ${t('modal_win_title_first_line')}`}
               <br />
               {t('modal_win_title_second_line')}
             </Card.Title>
