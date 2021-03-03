@@ -15,10 +15,12 @@ export const LoginForm: React.FC<LoginFormProperties> = (properties: LoginFormPr
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const language = useSelector((state: ApplicationState) => state.settings.language);
+  const theme = useSelector((state: ApplicationState) => state.settings.theme);
   const isFullScreen = useSelector((state: ApplicationState) => state.game.isFullScreen);
   const isFailedAttempt = useSelector((state: ApplicationState) => state.auth.isFailedAttempt);
   const isLoggedIn = useSelector((state: ApplicationState) => state.auth.isLoggedIn);
   const modalBackdropClassName = !isFullScreen ? 'my-backdrop' : '';
+  const buttonClassName = `pull-right-${theme}`;
   const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [emptyUsername, setEmptyUserName] = useState(false);
@@ -95,7 +97,7 @@ export const LoginForm: React.FC<LoginFormProperties> = (properties: LoginFormPr
           <Button
             variant="danger"
             type="submit"
-            className="pull-right"
+            className={buttonClassName}
             onClick={() => {
               if (username.length === 0) {
                 setEmptyUserName(true);

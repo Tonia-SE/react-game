@@ -15,10 +15,12 @@ export const SignUpForm: React.FC<SignUpFormProperties> = (properties: SignUpFor
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const language = useSelector((state: ApplicationState) => state.settings.language);
+  const theme = useSelector((state: ApplicationState) => state.settings.theme);
   const isFailedAttempt = useSelector((state: ApplicationState) => state.auth.isFailedAttempt);
   const isRegristred = useSelector((state: ApplicationState) => state.auth.isRegristred);
   const isFullScreen = useSelector((state: ApplicationState) => state.game.isFullScreen);
   const modalBackdropClassName = !isFullScreen ? 'my-backdrop' : '';
+  const buttonClassName = `pull-right-${theme}`;
   const [emptyUserName, setEmptyUserName] = useState(false);
   const [usernameTooLong, setUsernameTooLong] = useState(false);
   const [passwordMatch, setPasswordMatch] = useState(true);
@@ -138,7 +140,7 @@ export const SignUpForm: React.FC<SignUpFormProperties> = (properties: SignUpFor
           <Button
             variant="danger"
             type="submit"
-            className="pull-right"
+            className={buttonClassName}
             onClick={() => {
               if (username.length === 0) {
                 setEmptyUserName(true);
