@@ -1,0 +1,59 @@
+@import '../../../styles/variables';
+
+.page-wrapper{
+  height: 83%;
+  width: 80%;
+  margin: 0 auto;
+  @include center();
+  flex-direction: column;
+  justify-content: center;
+  text-align: justify;
+}
+.page-text{
+  font-size: 22px;
+}
+.text-img{
+  width: 28px;
+}
+
+@media (max-height: 650px){
+  .page-wrapper{
+    width: 90%;
+  }
+  .page-text{
+    font-size: 16px;
+  }
+  .text-img{
+    width: 23px;
+  }
+}
+
+@media (max-width: 650px){
+  .page-wrapper{
+    width: 90%;
+  }
+  .page-text{
+    font-size: 16px;
+  }
+  .text-img{
+    width: 23px;
+  }
+}
+
+@media (max-width: 450px){
+  .page-wrapper{
+    width: 90%;
+  }
+  .page-text{
+    font-size: 12px;
+  }
+}
+
+@media (max-height: 450px){
+  .page-wrapper{
+    width: 90%;
+  }
+  .page-text{
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,64 @@
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { ApplicationState } from '../../store/rootReducer';
+import { handleMove } from '../../store/actions';
+import { buttonSoundsPlayer as buttonSoundsPlayer } from '../../index';
+
+export const RightSideMenu: React.FC = () => {
+  const dispatch = useDispatch();
+  const isGameStarted = useSelector((state: ApplicationState) => state.game.isGameStarted);
+  const isFullScreen = useSelector((state: ApplicationState) => state.game.isFullScreen);
+  const isBtnsVisible = useSelector((state: ApplicationState) => state.settings.isGameBtnsVisible);
+  const field = useSelector((state: ApplicationState) => state.game.field);
+  const theme = useSelector((state: ApplicationState) => state.settings.theme);
+  const soundsVolume = useSelector((state: ApplicationState) => state.sounds.soundsVolume);
+  const arrowClassName = isFullScreen ? 'arrow-max' : 'arrow';
+  const menuWrapperClassName = isFullScreen ? 'side-menu-wrapper-max' : 'side-menu-wrapper';
+  const visibleClassName = isBtnsVisible ? '' : 'none';
+  buttonSoundsPlayer.volume = soundsVolume;
+
+  return (
+    <div className={`${menuWrapperClassName} ${visibleClassName}`}>
+      <img
+        className={`${arrowClassName}`}
+        src={`./assets/images/arrow_left_${theme}.ico`}
+        alt="arrow left"
+        onClick={() => {
+          if (isGameStarted) {
+            dispatch(handleMove(field, 'ArrowLeft', buttonSoundsPlayer));
+          }
+        }}
+      />
+      <img
+        className={`${arrowClassName}`}
+        src={`./assets/images/arrow_up_${theme}.ico`}
+        alt="arrow up"
+        onClick={() => {
+          if (isGameStarted) {
+            dispatch(handleMove(field, 'ArrowUp', buttonSoundsPlayer));
+          }
+        }}
+      />
+      <img
+        className={`${arrowClassName}`}
+        src={`./assets/images/arrow_down_${theme}.ico`}
+        alt="arrow down"
+        onClick={() => {
+          if (isGameStarted) {
+            dispatch(handleMove(field, 'ArrowDown', buttonSoundsPlayer));
+          }
+        }}
+      />
+      <img
+        className={`${arrowClassName}`}
+        src={`./assets/images/arrow_right_${theme}.ico`}
+        alt="arrow right"
+        onClick={() => {
+          if (isGameStarted) {
+            dispatch(handleMove(field, 'ArrowRight', buttonSoundsPlayer));
+          }
+        }}
+      />
+    </div>
+  );
+};

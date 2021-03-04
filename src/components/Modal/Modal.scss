@@ -1,0 +1,62 @@
+@import '../../styles/_variables';
+
+.modal-game-title{
+  font-size: 35px;
+}
+.modal-game-text{
+  font-size: 24px;
+  padding: 0 25px
+}
+.card-img-top{
+  width: 50%;
+}
+
+@media (max-width: 768px){
+  .my-backdrop{
+    min-height: 100vh !important;
+    min-width: 100vw !important;
+    top: 0%;
+    left: 0%;
+    transform: none;
+  }
+  .modal-game-title{
+    font-size: 25px !important;
+  }
+  .modal-game-text{
+    font-size: 16px !important;
+    margin: 0 !important;
+  }
+}
+
+@media (max-height: 768px) and (orientation: landscape){
+  .my-backdrop{
+    min-height: 100vh !important;
+    min-width: 100vw !important;
+    top: 0%;
+    left: 0%;
+    transform: none;
+  }
+  .modal-game-title{
+    font-size: 25px !important;
+  }
+  .modal-game-text{
+    font-size: 16px !important;
+    margin: 0 !important;
+  }
+}
+
+@media (max-height: 500px){
+  .card-img-top{
+    width: 150px;
+  }
+  .modal-card-body{
+    width: 300px;
+    padding: 0;
+  }
+  .win-img{
+    width: 80px;
+  }
+  .modal-game-text{
+    padding: 0;
+  }
+}

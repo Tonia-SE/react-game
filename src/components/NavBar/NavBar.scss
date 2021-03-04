@@ -1,0 +1,73 @@
+@import '../../styles/_variables';
+
+.navbar{
+  width: 100%;
+  padding: 0 30px;
+}
+.my-navbar{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between !important;
+  margin: 0 2%;
+}
+.navbar-nav{
+  flex-wrap: wrap;
+  justify-content: flex-end !important;
+}
+.navbar-brand{
+  font-weight: 500;
+  font-size: 25px;
+  padding-left: 12px;
+}
+.btn-primary{
+  background: none !important;
+  border: none;
+}
+.btn-primary:hover,
+.btn-primary:focus{
+  outline: none !important;
+  box-shadow: none !important;
+}
+.phone-img{
+  width: 25px;
+}
+.auth-img{
+  width: 30px;
+}
+.maximize-img{
+  width: 25px;
+}
+.active{
+  color: $font-color-dark !important;
+  background-color: $font-color-light;
+}
+.dropdown-item:hover,
+.dropdown-item:focus,
+.dropdown-item:active{
+  background-color: $font-color-light;
+  color: $font-color-dark;
+}
+
+@media (max-width: 768px) {
+  .navbar{
+    width: 100vw !important;
+    height: 10vh !important;
+  }
+  .maximize-btn{
+    display: none;
+  }
+}
+
+@media (max-height: 768px){
+  .navbar{
+    width: 100vw !important;
+    height: 10vh !important;
+  }
+  .maximize-btn{
+    display: none;
+  }
+}
+
+
+

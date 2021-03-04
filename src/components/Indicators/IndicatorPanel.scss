@@ -1,0 +1,95 @@
+@import '../../styles/variables';
+
+.indicators-wrapper{
+  width: 350px;
+  @include center();
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 0 10px 3vh 0;
+}
+.indicators-wrapper-max{
+  width: 50vw;
+  max-width: 500px;
+  @include center();
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 0 1vw 0 0; 
+}
+.indicator-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.indicator{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.indicator-main{
+  font-weight: bold;
+  font-size: 20px;
+}
+.indicator-main-max{
+  font-weight: bold;
+  font-size: 3vh;
+}
+.current-sum-value{
+  font-weight: 300 !important;
+  font-size: 16px;
+  margin-top: 2px;
+}
+.current-sum-value-max{
+  font-weight: 300 !important;
+  font-size: 2.5vh;
+  margin-top: 0.05vh;
+}
+.score-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-height: 768px){
+  .indicators-wrapper,
+  .indicators-wrapper-max{
+    width: 50vh;
+  }
+  .indicator-main,
+  .indicator-main-max{
+    font-size: 18px;
+  } 
+  .current-sum-value,
+  .current-sum-value-max{
+    font-size: 12px;
+  }
+}
+
+@media(max-width: 768px) and (orientation: portrait){
+  .indicators-wrapper,
+  .indicators-wrapper-max{
+    width: 50vw;
+    padding: 0;
+    margin-bottom: 4vh;
+  }
+}
+
+@media(max-width: 650px) and (orientation: portrait){
+  .indicators-wrapper,
+  .indicators-wrapper-max{
+    margin-bottom: 1vh;
+  }
+}
+
+@media(max-width: 500px) and (orientation: portrait){
+  .indicators-wrapper,
+  .indicators-wrapper-max{
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 768px) and (orientation: landscape){
+  .indicators-wrapper,
+  .indicators-wrapper-max{
+    width: 50vh;
+  }
+} 

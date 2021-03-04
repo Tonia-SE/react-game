@@ -1,0 +1,23 @@
+@import '../../../styles/variables';
+
+.page{
+  width: 75%;
+  height: 72%;
+  margin: 0 auto;
+  @include center();
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.table-wrapper{
+  overflow: auto;
+  width: 100%;
+}
+.table{
+  text-align: center;
+}
+
+@media(max-width: 450px){
+  .best-results-page-title{
+    font-size: 20px;
+  }
+}

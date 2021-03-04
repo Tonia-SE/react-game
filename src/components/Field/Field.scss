@@ -1,0 +1,119 @@
+@import '../../styles/_variables';
+
+.game-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.field-wrapper{
+  @include center();
+  justify-content: center;
+  align-items: center;
+}
+.field{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  height: 350px;
+  width: 350px;
+  background-color: $overlay-light;
+  border: solid 2px $bg-color-dark;
+  margin: 0 20px;
+  padding: 1px;
+}
+.field-max{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  height: 50vw;
+  width: 50vw;
+  max-width: 500px;
+  max-height: 500px;
+  background-color: $overlay-light;
+  border: solid 2px $color-32;
+  margin: 3vw;
+  padding: 1px;
+}
+.start-game{
+  @include center();
+  justify-content: center;
+}
+.start-game-btn-shadow,
+.start-game-btn-sweet,
+.start-game-btn-deep{
+  background-color: none;
+  font-weight: bold;
+  padding: 10px 15px;
+  transition: all 0.5s;
+  color: $font-color-light;
+}
+.start-game-btn-shadow:hover,
+.start-game-btn-shadow:focus{
+  color: $font-color-dark !important;
+  background-color: $bg-color-light;
+  transition: all 1.5s;
+}
+.start-game-btn-sweet:hover,
+.start-game-btn-sweet:focus{
+  color: $bg-dark-sweet;
+  background-color: $bg-color-light;
+  transition: all 1.5s;
+}
+.start-game-btn-deep:hover,
+.start-game-btn-deep:focus{
+  color: $bg-dark-deep;
+  background-color: $bg-color-light;
+  transition: all 1.5s;
+}
+
+@media (max-height: 768px){
+  .game-wrapper{
+    height: 83vh;
+  }
+  .field,
+  .field-max{
+    min-height: 50vh;
+    min-width: 50vh;
+    max-height: 50vh;
+    max-width: 50vh;
+  }
+  .field-wrapper{
+    max-height: 50vh !important;
+  }
+}
+
+@media(max-width: 768px) and (orientation: portrait){
+  .game-wrapper{
+    height: 83vh;
+  }
+  .field-wrapper{
+    @include center();
+    flex-direction: column;
+    justify-content: center !important;
+    align-items: center !important;
+    max-height: 500px !important;
+  }
+  .field,
+  .field-max{
+    min-height: 50vw;
+    min-width: 50vw;
+    max-height: 50vw;
+    max-width: 50vw;
+  }
+}
+
+@media (max-width: 768px) and (orientation: landscape){
+  .game-wrapper{
+    height: 83vh;
+  }
+  .field,
+  .field-max{
+    min-height: 50vh;
+    min-width: 50vh;
+    max-height: 50vh;
+    max-width: 50vh;
+  }
+  .field-wrapper{
+    max-height: 50vh !important;
+  }
+} 

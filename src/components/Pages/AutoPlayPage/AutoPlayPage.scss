@@ -1,0 +1,34 @@
+@import '../../../styles/variables';
+
+@import '../../../styles/variables';
+
+.autoplay-page{
+  height: 90%;
+  width: 90%;
+  margin: 0 auto;
+  @include center();
+  flex-direction: column;
+  justify-content: center;
+  text-align: justify;
+}
+.autoplay-wrapper{
+  margin-top: 2%;
+}
+.autoplay-title{
+  font-weight: 600;
+}
+
+@media (max-width: 450px){
+  .autoplay-title{
+    font-size: 18px;
+  }
+}
+
+@media (max-height: 500px){
+  .autoplay-title{
+    display: none;
+  }
+  .autoplay-wrapper{
+    margin-top: 0;
+  }
+}

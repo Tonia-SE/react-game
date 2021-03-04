@@ -1,0 +1,94 @@
+@import '../../styles/_variables';
+
+.cell{
+  border: solid 0.5px $bg-color-light;
+  border-radius: 7%;
+  @include center();
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+}
+.size-4{
+  width: 25%;
+  height: 25%;
+  font-size: 1.85rem;
+}
+.size-5{
+  min-width: 20%;
+  max-height: 20%;
+  font-size: 1.5rem;
+}
+.size-6{
+  min-width: 16.666%;
+  max-height: 16.666%;
+  font-size: 1.2rem;
+}
+.size-4-max{
+  width: 24.5%;
+  height: 24.5%;
+  font-size: 4vh;
+}
+.size-5-max{
+  min-width: 19.6%;
+  max-height: 19.6%;
+  font-size: 3.5vh;
+}
+.size-6-max{
+  min-width: 16.4%;
+  max-height: 16.4%;
+  font-size: 3vh;
+}
+.cell-0-shadow{
+  opacity: 0;
+}
+.cell-0-sweet{
+  opacity: 0;
+}
+.cell-0-deep{
+  opacity: 0;
+}
+
+@media (max-height: 768px){
+  .size-4,
+  .size-4-max{
+    font-size: 4.5vh;
+  }
+  .size-5,
+  .size-5-max{
+    font-size: 3.5vh;
+  }
+  .size-6,
+  .size-6-max{
+    font-size: 3vh;
+  }
+}
+
+@media(max-width: 768px) and (orientation: portrait){
+  .size-4,
+  .size-4-max{
+    font-size: 4.5vw;
+  }
+  .size-5,
+  .size-5-max{
+    font-size: 3.5vw;
+  }
+  .size-6,
+  .size-6-max{
+    font-size: 3vw;
+  }
+}
+
+@media (max-width: 768px) and (orientation: landscape){
+  .size-4,
+  .size-4-max{
+    font-size: 4.5vh;
+  }
+  .size-5,
+  .size-5-max{
+    font-size: 3.5vh;
+  }
+  .size-6,
+  .size-6-max{
+    font-size: 3vh;
+  }
+} 

@@ -1,0 +1,89 @@
+@import '../../styles/_variables';
+
+.modal-header{
+  border-bottom: 0 none;
+  padding-bottom: 0;
+}
+.modal-body{
+  padding-top: 0;
+}
+.pull-right-shadow{
+  margin-left: 55.5%;
+  background-color: $bg-color-dark;
+  border-color: $bg-color-dark;
+  opacity: 0.8;
+}
+.pull-right-shadow:hover{
+  background-color: $bg-color-dark;
+  border-color: $bg-color-dark;
+  opacity: 1;
+}
+.pull-right-sweet{
+  margin-left: 55.5%;
+  background-color: rgb(209, 86, 106);
+  border-color: rgb(209, 86, 106);
+  opacity: 0.7;
+}
+.pull-right-sweet:hover{
+  background-color: rgb(209, 86, 106);
+  border-color: rgb(209, 86, 106);
+  opacity: 1;
+}
+.pull-right-deep{
+  margin-left: 55.5%;
+  background-color: rgb(2, 65, 70) !important;
+  border-color: rgb(2, 65, 70) !important;
+  opacity: 0.8;
+}
+.pull-right-deep:hover,
+.pull-right-deep:active{
+  background-color: rgb(2, 65, 70) !important;
+  border-color: rgb(2, 65, 70) !important;
+  opacity: 1;
+}
+.modal{
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+.my-backdrop{
+  max-height: 700px !important;
+  max-width: 700px !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.my-danger{
+  color: rgb(194, 3, 3);
+  opacity: 0.7;
+}
+.my-modal-form{
+  width: 248px !important;
+}
+.form-text{
+  height: 19px;
+}
+#confirm-password-form-group,
+#enter-password-form-group{
+  margin-bottom: 0 !important;
+}
+
+@media (max-width: 768px){
+  .my-backdrop{
+    min-height: 100vh !important;
+    min-width: 100vw !important;
+    top: 0%;
+    left: 0%;
+    transform: none;
+  }
+}
+
+@media (max-height: 768px) and (orientation: landscape){
+  .my-backdrop{
+    min-height: 100vh !important;
+    min-width: 100vw !important;
+    top: 0%;
+    left: 0%;
+    transform: none;
+  }
+}

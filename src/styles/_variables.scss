@@ -1,0 +1,85 @@
+$font-color-dark: rgb(33, 37, 41);
+$font-color-light: rgb(255, 255, 255) !important;
+$bg-color-dark: rgb(52, 58, 64) !important;
+$bg-color-light: rgb(250, 248, 239) !important;
+$fc-dark-shadow: rgb(33, 37, 41);
+$fc-dark-sweet: rgb(34, 1, 1);
+$fc-dark-deep: rgb(0, 23, 46);
+$fc-light-shadow: rgb(255, 255, 255) !important;
+$fc-light-sweet: rgb(248, 200, 200) !important;
+$fc-light-deep: rgb(203, 228, 248) !important;
+$bg-dark-shadow: rgb(52, 58, 64) !important;
+$bg-dark-sweet: rgb(105, 0, 40) !important;
+$bg-dark-deep: rgb(0, 45, 90) !important;
+$bg-light-shadow: rgb(250, 248, 239) !important;
+$bg-light-sweet: rgb(236, 197, 248) !important;
+$bg-light-deep: rgb(169, 180, 216) !important;
+$overlay-light:  rgba(0, 0, 0, 0.05);
+$overlay-medium: rgba(0, 0, 0, 0.08); ;
+$border-dark: #432818;
+$border-light: #ddbea9;
+$background-color-5: rgb(250, 248, 239) !important;
+
+$color-6: #343a40 !important;
+$color-7: #343a40 !important;
+$color-8: rgba(0, 0 , 0, 0.3) !important;
+$color-9: rgba(0, 0 , 0, 0.4) !important;
+$color-4: #343a40 !important;
+$color-32: #7d8597 !important;
+
+$shadow-colors: (
+    bg-dark: rgb(52, 58, 64),
+    bg-light: rgb(250, 248, 239),
+    cell-2: #595a5c,
+    cell-4: #656d75 ,
+    cell-8: #838383 ,
+    cell-16: #b5acac  ,
+    cell-32: #7d8597 ,
+    cell-64: #979dac ,
+    cell-128: #9ca3a8,
+    cell-256: #c3cecd ,
+    cell-512: #dbe1e6 ,
+    cell-1024: #d2dad8 ,
+    cell-2048: #d3d3d3 
+);
+
+$sweet-colors: (
+    bg-dark: #d1566a,
+    bg-light: #fdf1f3,
+    cell-2: #ffd6a5,
+    cell-4: #ffadad,
+    cell-8: #95d5b2,
+    cell-16: #caffbf,
+    cell-32: #bdb2ff,
+    cell-64: #9bf6ff,
+    cell-128: #ffc6ff,
+    cell-256: #c0b3df,
+    cell-512: #f0d2f0,
+    cell-1024: #a697fc,
+    cell-2048: #fcb9c9,
+);
+
+$deep-colors: (
+    bg-dark: #025157,
+    bg-light: #e7f1f3,
+    cell-2: #02818a,
+    cell-4: #00a1b6,
+    cell-8: #00bac7,
+    cell-16: #00b4d8,
+    cell-32: #48cae4,
+    cell-64: #90e0ef,
+    cell-128: #ade8f4,
+    cell-256: #1a7d85,
+    cell-512: #439297,
+    cell-1024: #98eeff,
+    cell-2048: #62e5ff,
+);
+
+@mixin center(){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
